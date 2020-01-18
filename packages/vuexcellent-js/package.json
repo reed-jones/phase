@@ -1,11 +1,11 @@
 {
   "name": "phase",
   "version": "0.0.0",
-  "description": "Front end system for phase",
+  "description": "Vuex hydration and auto mutator",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "homepage": "",
   "license": "MIT",
-  "main": "dist/phase.cjs.js",
+  "main": "dist/vuexcellent.cjs.js",
   "module": "dist/phase.esm.js",
   "browser": "dist/phase.umd.js",
   "directories": {
@@ -36,7 +36,6 @@
     "@types/prettier": "^1.19.0",
     "@types/webpack": "^4.41.2",
     "@vuexcellent/vuex": "^2.0.2",
-    "fs-extra": "^8.1.0",
     "jest": "^24.9.0",
     "laravel-mix": "^5.0.1",
     "resolve-url-loader": "^3.1.0",
@@ -47,7 +46,8 @@
     "tslib": "^1.10.0",
     "typescript": "^3.7.5",
     "vue-template-compiler": "^2.6.11",
-    "webpack": "^4.41.5"
+    "webpack": "^4.41.5",
+    "fs-extra": "^8.1.0"
   },
   "dependencies": {
     "lodash.merge": "^4.6.2",
@@ -55,6 +55,7 @@
   },
   "peerDependencies": {
     "laravel-mix": "^5.0.1",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "webpack": "^4.41.5"
   }
 }

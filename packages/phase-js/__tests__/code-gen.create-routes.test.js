@@ -2,20 +2,20 @@ import { createRoutes } from "@/code-gen/createRoutes";
 import prettier from "prettier";
 
 const BasicRoute = {
-    name: "Home",
-    uri: "/",
-    prefix: "",
-    middleware: "web",
-    componentName: "ComponentName",
-    file_path: "resources/js/ComponentName",
-    children: undefined
+  name: "Home",
+  uri: "/",
+  prefix: "",
+  middleware: "web",
+  componentName: "ComponentName",
+  file_path: "resources/js/ComponentName",
+  children: undefined
 };
 
 describe("code-gen creates route definitions", () => {
   it("it creates the basic route definition", () => {
-
-    expect( createRoutes([BasicRoute], { redirects: [] }) ).toBe(
-      prettier.format(`import ComponentName from "../../../resources/js/ComponentName";
+    expect(createRoutes([BasicRoute], { redirects: [] })).toBe(
+      prettier.format(
+        `import ComponentName from "../../../resources/js/ComponentName";
 
  const redirects = [];
 
@@ -58,7 +58,9 @@ export default [{
         beforeEnter: phaseBeforeEnter,
         component: ComponentName,
         meta: { middleware: ["web"] }
-    }];`, { parser: 'babel' })
+    }];`,
+        { parser: "babel" }
+      )
     );
   });
 });

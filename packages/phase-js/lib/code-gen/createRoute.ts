@@ -1,6 +1,6 @@
-import { Route, PhaseConfiguration } from "phase";
+import { Route } from "phase";
 
-export const createRoute = (config: PhaseConfiguration) => {
+export const createRoute = () => {
   return (route: Route): string => {
     // If default child is exists, the route should not have a name.
     const routeName =
@@ -20,7 +20,7 @@ export const createRoute = (config: PhaseConfiguration) => {
 
     const routeChildren = !route.children
       ? ""
-      : `children: [${route.children.map(createRoute(config)).join(",")}]`;
+      : `children: [${route.children.map(createRoute()).join(",")}]`;
 
     return `    {
         ${[

@@ -13,7 +13,7 @@ export default [
       { file: pkg.module, format: "es" }
     ],
     // external: Object.keys(pkg.peerDependencies),
-    external: [ 'webpack', 'laravel-mix', 'fs-extra', 'prettier', 'path', 'fs', 'child_process', 'os', 'assert', 'events', 'util', 'module', 'stream', 'constants'],
+    external: [ 'webpack', 'laravel-mix', 'prettier', 'path', 'fs', 'child_process', 'os', 'assert', 'events', 'util', 'module', 'stream', 'constants'],
     plugins: [
       alias({
         entries: [

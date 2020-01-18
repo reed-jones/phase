@@ -1,10 +1,10 @@
-import { PhaseConfiguration } from "phase";
+import { PHPConfiguration } from "phase";
 import prettier from "prettier";
 
 export const codeGen = (
   imports: string,
   routes: string,
-  config: PhaseConfiguration
+  config: PHPConfiguration
 ) => {
   return prettier.format(
     `${imports}

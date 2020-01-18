@@ -1,21 +1,22 @@
 import * as path from "path";
 import { writeCodeToFile, generateRoutes } from "./utils";
-import { PhaseConfiguration } from "phase";
+import { JSConfiguration } from "phase";
 import { Compiler } from "webpack";
 
 const pluginName = "VueRouterAutoloadPlugin";
 
 export default class VueRouterAutoloadPlugin {
-  private options: PhaseConfiguration;
+  private options: JSConfiguration;
 
-  constructor(options: PhaseConfiguration) {
+  constructor(options: JSConfiguration) {
     this.options = options;
   }
 
   apply(compiler: Compiler) {
     const generate = () => {
       // TODO: output file path is configuration setting (for at least testing)
-      const to = this.options?.output ?? path.resolve(__dirname, "../routes.js");
+      const to =
+        this.options?.output ?? path.resolve(__dirname, "../routes.js");
       const code = generateRoutes(this.options);
       writeCodeToFile(to, code);
     };

@@ -4,7 +4,7 @@ import { outputFileSync } from "fs-extra";
 import { componentSkeleton } from "./code-gen/componentSkeleton";
 import { createRoutes } from "./code-gen/createRoutes";
 import merge from "lodash.merge";
-import { Route, PHPRoute, PhaseConfiguration, PhaseOptions } from "phase";
+import { Route, PHPRoute, PhasePhpOptions, JSConfiguration, PhaseConfiguration, PHPConfiguration } from "phase";
 
 export const fileEqualsCode = (to: string, code: string): boolean => {
   const isEqual = (file: string, code: string): boolean => {
@@ -25,7 +25,7 @@ export const generateRouteFile = (route: Route): void => {
   return outputFileSync(route.file_path, componentSkeleton(route));
 };
 
-export const artisan = (cmd: string, raw: boolean = false): PhaseOptions => {
+export const artisan = (cmd: string, raw: boolean = false): PhasePhpOptions => {
   return raw
     ? execSync(`php artisan ${cmd}`).toString()
     : JSON.parse(execSync(`php artisan ${cmd}`).toString());
@@ -58,12 +58,12 @@ const formatForVue = ({ name, uri, prefix, middleware }: PHPRoute): Route => {
   };
 };
 
-export function generateRoutes(options: PhaseConfiguration): string {
+export function generateRoutes(options: JSConfiguration): string {
   // get the phase:routes JSON output
-  const output = artisan("phase:routes --json --config");
+  const output = options.phpConfig ?? artisan("phase:routes --json --config");
 
-//   merge webpack supplied options with config('phase')
-  const config: any = merge(output.config, options);
+  //   merge webpack supplied options with config('phase')
+  const config: PhaseConfiguration = <PhaseConfiguration>merge(output.config, options);
 
   // format route data
   const routes = output.routes.map(formatForVue);
@@ -71,5 +71,5 @@ export function generateRoutes(options: PhaseConfiguration): string {
   // generates missing .vue page files from template
   createMissingTemplates(routes);
 
-    return createRoutes(routes, config);
+  return createRoutes(routes, config);
 }

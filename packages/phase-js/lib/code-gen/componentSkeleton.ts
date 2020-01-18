@@ -1,7 +1,7 @@
 import { Route } from "phase";
 
 export const componentSkeleton = (route: Route) => {
-    return `<template>
+  return `<template>
   <div>
     <h1>Welcome to: ${route.name}</h1>
   </div>
@@ -13,4 +13,4 @@ export const componentSkeleton = (route: Route) => {
   }
   </script>
   `;
-  };
+};

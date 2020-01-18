@@ -1,21 +1,19 @@
 {
     "compilerOptions": {
-        "module": "ES6",
-        "noImplicitAny": true,
-        "removeComments": true,
-        "preserveConstEnums": true,
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
-        "sourceMap": false,
-        "baseUrl": "./",
-        "typeRoots": [ "./types", "./node_modules/@types"]
+      "module": "ES6",
+      "target": "ESNext",
+      "lib": ["ESNext"],
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "noEmit": true,
+      "strict": true,
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "sourceMap": false,
+      "baseUrl": "./",
+      "typeRoots": ["./types", "./node_modules/@types"]
     },
-    "include": [
-        "lib/**/*"
-    ],
-    "exclude": [
-        "node_modules",
-        "types",
-        "__tests__"
-    ]
-}
+    "include": ["lib"],
+    "exclude": ["node_modules", "types", "__tests__"]
+  }

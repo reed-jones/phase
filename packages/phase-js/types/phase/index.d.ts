@@ -13,7 +13,7 @@ declare module 'phase' {
     middleware: string;
     componentName: string;
     file_path: string;
-    children: Array<Route>;
+    children?: Route[] | null;
   }
 
   interface PhaseAssets {
@@ -21,14 +21,21 @@ declare module 'phase' {
     sass: string[]
   }
 
-  export interface PhaseConfiguration {
-    redirects: object,
-    output?: string,
-    assets: PhaseAssets
-  }
-
-  export interface PhaseOptions {
-    config: PhaseConfiguration;
+  export interface PhasePhpOptions {
+    config: PHPConfiguration;
     routes: PHPRoute[];
   }
+
+  export interface PHPConfiguration {
+    entry: string, //'phase::app' unused in js
+    redirects?: object,
+    assets: PhaseAssets,
+  }
+  export interface JSConfiguration {
+    redirects?: object, // { 404: 'Errors/PageNotFound' }
+    output?: string, // path to routes.js
+    phpConfig?: PhasePhpOptions, //
+  }
+
+  export interface PhaseConfiguration extends JSConfiguration, PHPConfiguration { }
 }
