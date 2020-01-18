@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "module": "ES6",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "sourceMap": false,
+        "baseUrl": "./",
+        "typeRoots": [ "./types", "./node_modules/@types"]
+    },
+    "include": [
+        "lib/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "types",
+        "__tests__"
+    ]
+}
