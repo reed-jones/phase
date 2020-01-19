@@ -1,18 +1,52 @@
-interface VuexStore {
-    state?: object|Function,
-    mutations?: object,
-    actions?: object,
-    getters?: object,
-    modules?: object,
-    plugins?: Function[],
-    strict?: boolean,
-    devtools?: boolean
+import { objectMerge } from "./objectMerge";
+import { mutantGenerator } from "./mutations";
+import { VuexcellentAutoCommitter } from "./committer";
+
+declare global {
+  interface Window {
+    __VUEXCELLENT_STATE__: object;
+    axios: object;
+  }
 }
 
-export const hydrate = (options: VuexStore) => {
-    // merge incoming (store) options with window.__VUEXCELLENT_STATE__
+const defaultOptions = <VuexcellentOptions>{
+  generateMutations: true,
+  axios: null,
+  mutationPrefix: `X_SET`
+};
 
-    // generate mutations
+export const hydrate = (vuexState: VuexStore, options: VuexcellentOptions = defaultOptions) => {
+  // merge incoming (store) options with window.__VUEXCELLENT_STATE__
+  const mergedState = <VuexStore>(
+    objectMerge(vuexState, window.__VUEXCELLENT_STATE__ || {})
+  );
 
-    // inject VuexcellentInterceptorPlugin into store.plugins
-}
+  // generate mutations
+  const { createMutant, getMutation } = mutantGenerator(options);
+  const newState = options.generateMutations
+    ? <VuexStore>createMutant(mergedState)
+    : mergedState;
+
+  // inject VuexcellentAutoCommitter into store.plugins
+  const axios = options.axios || window.axios;
+  if (axios && options.generateMutations) {
+    // prepare plugin
+    const VuexcellentPlugin = VuexcellentAutoCommitter(
+      axios,
+      newState,
+      getMutation
+    );
+
+    // inject plugin
+    newState.plugins = newState.plugins
+      ? [VuexcellentPlugin, ...newState.plugins]
+      : [VuexcellentPlugin];
+
+  } else if (options.generateMutations) {
+    console.error(
+      "[Vuexcellent] It appears that auto-mutate could not be initialized.\nAn instance of axios could not be found."
+    );
+  }
+
+  return newState;
+};

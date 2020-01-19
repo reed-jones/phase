@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "ES6",
     "target": "ESNext",
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "DOM"],
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
@@ -12,8 +12,8 @@
     "esModuleInterop": true,
     "sourceMap": false,
     "baseUrl": "./",
-    "typeRoots": ["./types", "./node_modules/@types"]
+    "typeRoots": ["./types", "./node_modules/@types", "./node_modules/axios"]
   },
   "include": ["lib"],
-  "exclude": ["node_modules", "types", "__tests__"]
+  "exclude": ["node_modules", "types", "__tests__", "dist"]
 }

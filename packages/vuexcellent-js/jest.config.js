@@ -7,5 +7,4 @@ module.exports = {
   },
   transformIgnorePatterns: [],
   testPathIgnorePatterns: ['./__tests__/config'],
-  setupFilesAfterEnv: ["./__tests__/config/jest.setup.js"]
 };

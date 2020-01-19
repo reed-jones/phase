@@ -6,7 +6,7 @@
  *
  * @return {Boolean}
  */
-export const isObject = (item: any) => item && typeof(item) === 'object' && !Array.isArray(item);
+export const isObject = (item: any) => !!item && typeof(item) === 'object' && !Array.isArray(item);
 
 /**
  * Deep merge two objects.
@@ -46,4 +46,10 @@ const recursiveMerge = (target: { [key: string]: any }, ...sources: { [key: stri
  *
  * @return {Object}
  */
-export const objectMerge = (...sources: object[]): object => recursiveMerge({}, ...sources)
+export const objectMerge = (...sources: object[]): object => {
+    if (!sources.every(a => isObject(a))) {
+        throw "Invalid arguments supplied. Could not merge";
+    }
+
+    return recursiveMerge({}, ...sources)
+}
