@@ -1,19 +1,27 @@
 {
-    "compilerOptions": {
-      "module": "ES6",
-      "target": "ESNext",
-      "lib": ["ESNext"],
-      "noImplicitAny": true,
-      "removeComments": true,
-      "preserveConstEnums": true,
-      "noEmit": true,
-      "strict": true,
-      "allowSyntheticDefaultImports": true,
-      "esModuleInterop": true,
-      "sourceMap": false,
-      "baseUrl": "./",
-      "typeRoots": ["./types", "./node_modules/@types"]
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist",
+    "emitDeclarationOnly": true,
+    "module": "ES6",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "noEmit": false,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "sourceMap": false,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["lib/*"],
+      "@typings/*": ["types/*"]
     },
-    "include": ["lib"],
-    "exclude": ["node_modules", "types", "__tests__"]
-  }
+    "typeRoots": ["./types", "./node_modules/@types"]
+  },
+  "include": ["lib"],
+  "exclude": ["node_modules", "types", "__tests__"]
+}

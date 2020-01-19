@@ -1,4 +1,5 @@
 import { AxiosInstance, AxiosResponse } from "axios";
+import { InitializedVuexStore, VuexModule, VuexStore } from "vuexcellent"
 
 export const VuexcellentAutoCommitter = (
   axios: AxiosInstance,

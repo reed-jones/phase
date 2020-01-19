@@ -5,7 +5,7 @@ import { terser } from "rollup-plugin-terser";
 import alias from "@rollup/plugin-alias";
 import pkg from "./package.json";
 
-const production = !process.env.ROLLUP_WATCH;
+const production = !process.env.ROLLUP_WATCH && process.env.NODE_ENV === 'production';
 
 export default [
   {
@@ -36,13 +36,15 @@ export default [
         entries: [
           {
             find: "@",
-            replacement: "./lib"
-          },
-          {
+            replacement: "./lib",
+          }, {
             find: "@typings",
             replacement: "./types"
           }
-        ]
+        ],
+        customResolver: resolve({
+          extensions: ['ts']
+        })
       }),
 
       resolve({
@@ -53,7 +55,7 @@ export default [
       }),
 
       sucrase({
-        exclude: ["node_modules/**", "types/**", "__tests__", "dist"],
+        exclude: ["node_modules/**", "types/**", "__tests__"],
         transforms: ["typescript"]
       }),
 
@@ -66,6 +68,7 @@ export default [
           "fs-extra": ["outputFileSync"]
         }
       }),
+
       production && terser()
     ]
   }

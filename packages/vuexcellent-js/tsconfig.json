@@ -1,17 +1,25 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist",
+    "emitDeclarationOnly": true,
     "module": "ES6",
+    "moduleResolution": "node",
     "target": "ESNext",
     "lib": ["ESNext", "DOM"],
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "noEmit": true,
+    "noEmit": false,
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "sourceMap": false,
     "baseUrl": "./",
+    "paths": {
+      "@/*": ["lib/*"],
+      "@typings/*": ["types/*"]
+    },
     "typeRoots": ["./types", "./node_modules/@types"]
   },
   "include": ["lib"],

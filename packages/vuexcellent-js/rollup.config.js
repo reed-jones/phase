@@ -1,11 +1,12 @@
 import sucrase from "@rollup/plugin-sucrase";
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from "@rollup/plugin-node-resolve";
+
 import { terser } from "rollup-plugin-terser";
 import alias from "@rollup/plugin-alias";
 import pkg from "./package.json";
 
-const production = !process.env.ROLLUP_WATCH;
+const production = !process.env.ROLLUP_WATCH && process.env.NODE_ENV === 'production';
 
 export default [
   {
@@ -25,11 +26,14 @@ export default [
             find: "@typings",
             replacement: "./types"
           }
-        ]
+        ],
+        customResolver: resolve({
+          extensions: ['ts']
+        })
       }),
 
       resolve({
-        extensions: [".js", ".ts"],
+        extensions: [".ts"],
       }),
 
       sucrase({
@@ -40,6 +44,7 @@ export default [
       commonjs({
         //
       }),
+
       production && terser()
     ]
   }

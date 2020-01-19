@@ -1,3 +1,6 @@
+
+import { VuexModule } from 'vuexcellent'
+
 /**
  *
  * @param {Object} options Vuexcellent options

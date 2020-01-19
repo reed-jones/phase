@@ -1,8 +1,5 @@
-
 declare module 'vuexcellent' {
-    import { AxiosInstance } from "axios";
-
-    export interface VuexModule {
+    interface VuexModule {
         namespaced?: boolean,
         state?: object | Function,
         mutations?: object,
@@ -11,19 +8,20 @@ declare module 'vuexcellent' {
         modules?: { [key: string]: VuexModule },
     }
 
-    export interface VuexStore extends VuexModule {
+    interface VuexStore extends VuexModule {
         plugins?: Function[],
         strict?: boolean,
         devtools?: boolean
     }
 
-    export interface InitializedVuexStore {
+    interface InitializedVuexStore {
         commit(mutation: string, data?: any): void
     }
 
-    export interface VuexcellentOptions {
+    interface VuexcellentOptions {
         generateMutations: boolean,
-        axios: AxiosInstance | null,
+        axios: object | null,
         mutationPrefix: string
     }
 }
+// window.MyNamespace = window.MyNamespace || {};

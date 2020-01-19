@@ -4,7 +4,7 @@
   "description": "Front end system for phase",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "homepage": "",
-  "license": "MIT",
+  "license": "ISC",
   "main": "dist/phase.cjs.js",
   "module": "dist/phase.esm.js",
   "browser": "dist/phase.umd.js",
@@ -13,23 +13,25 @@
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "publishConfig": {
     "registry": "https://registry.yarnpkg.com"
   },
   "scripts": {
-    "build": "rollup -c",
+    "compile": "rollup -c",
     "dev": "rollup -c -w",
+    "build": "yarn types && NODE_ENV=production yarn compile",
     "test": "jest",
-    "pretest": "npm run build"
+    "pretest": "yarn compile",
+    "types": "tsc",
+    "check": "tsc --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.0.0",
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "@rollup/plugin-sucrase": "^3.0.0",
-    "@rollup/plugin-typescript": "^2.1.0",
     "@sucrase/jest-plugin": "^2.0.0",
     "@types/fs-extra": "^8.0.1",
     "@types/lodash.merge": "^4.6.6",
