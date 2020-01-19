@@ -37,7 +37,7 @@ export default [
       }),
 
       sucrase({
-        exclude: ["node_modules/**", "types/**", "__tests__"],
+        exclude: ["../../node_modules/**", "types/**", "__tests__"],
         transforms: ["typescript"]
       }),
 

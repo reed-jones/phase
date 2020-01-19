@@ -4,13 +4,21 @@ import axios from "axios";
 import { hydrate } from "..";
 
 jest.mock("axios");
+jest.spyOn(console, 'warn');
 
 Vue.use(Vuex);
 
 let store;
 beforeEach(function() {
   global.window.__VUEXCELLENT_STATE__ = {
-    state: { isTesting: true },
+    state: {
+      isTesting: true,
+      someObject: {},
+      someArray: [],
+      someNumber: 1,
+      someNull: null,
+      someString: 'test'
+    },
     modules: {
       user: {
         state: {
@@ -30,7 +38,14 @@ beforeEach(function() {
   store = new Vuex.Store(
     hydrate(
       {
-        state: { count: 1 },
+        state: {
+          count: 1,
+          someObject: [],
+          someArray: {},
+          someNumber: null,
+          someNull: 57,
+          someString: true
+        },
         mutations: {
           add: state => (state.count = state.count + 1)
         },
@@ -69,7 +84,23 @@ beforeEach(function() {
   );
 });
 
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 describe("testing the default store actions vuexcellent", () => {
+
+  it("It takes the servers state in the event of a type collision", () => {
+    expect(store.state.someObject).toEqual({});
+    expect(store.state.someArray).toEqual([]);
+    expect(store.state.someNumber).toEqual(1);
+    expect(store.state.someNull).toEqual(null);
+    expect(store.state.someString).toEqual('test');
+    expect(console.warn.mock.calls[0][0]).toEqual(
+      expect.stringContaining("The server side data does not match client side expectations")
+    )
+  });
+
   it("regular state mutations still work", () => {
     expect(store.state.count).toBe(1);
     store.commit("add");

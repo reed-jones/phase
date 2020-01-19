@@ -1,7 +1,7 @@
 {
-  "name": "phase",
-  "version": "0.0.0",
-  "description": "Front end system for phase",
+  "name": "@phased/routing",
+  "version": "0.0.1",
+  "description": "Auto SPA configuration focused on Laravel apps",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "homepage": "",
   "license": "ISC",
@@ -15,9 +15,6 @@
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "registry": "https://registry.yarnpkg.com"
-  },
   "scripts": {
     "compile": "rollup -c",
     "dev": "rollup -c -w",

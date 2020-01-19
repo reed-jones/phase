@@ -60,7 +60,6 @@ const commitData = (
             );
 
           const namespace = mod.namespaced ? fullName : null;
-
           store.commit(mutator(key, namespace), value);
         } else {
           store.commit(mutator(key), value);
