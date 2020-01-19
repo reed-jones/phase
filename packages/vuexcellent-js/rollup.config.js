@@ -33,7 +33,7 @@ export default [
       }),
 
       sucrase({
-        exclude: ["node_modules/**", "types/**", "__tests__", "dist"],
+        exclude: ["node_modules/**", "types/**", "__tests__"],
         transforms: ["typescript"]
       }),
 

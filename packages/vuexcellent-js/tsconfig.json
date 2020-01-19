@@ -12,8 +12,8 @@
     "esModuleInterop": true,
     "sourceMap": false,
     "baseUrl": "./",
-    "typeRoots": ["./types", "./node_modules/@types", "./node_modules/axios"]
+    "typeRoots": ["./types", "./node_modules/@types"]
   },
   "include": ["lib"],
-  "exclude": ["node_modules", "types", "__tests__", "dist"]
+  "exclude": ["node_modules", "types", "__tests__"]
 }

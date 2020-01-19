@@ -16,6 +16,10 @@ const defaultOptions = <VuexcellentOptions>{
 };
 
 export const hydrate = (vuexState: VuexStore, options: VuexcellentOptions = defaultOptions) => {
+  options = {
+    ...defaultOptions,
+    ...options
+  }
   // merge incoming (store) options with window.__VUEXCELLENT_STATE__
   const mergedState = <VuexStore>(
     objectMerge(vuexState, window.__VUEXCELLENT_STATE__ || {})
