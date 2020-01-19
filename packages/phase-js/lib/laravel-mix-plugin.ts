@@ -2,6 +2,7 @@ import { JSConfiguration } from "phase";
 import VueRouterAutoloadPlugin from "./webpack-plugin";
 import { artisan } from "./utils";
 import mix from "laravel-mix";
+import path from 'path'
 
 const PluginName = "phase";
 
@@ -48,13 +49,16 @@ export default class PhaseMixPlugin {
       options.phpConfig = artisan("phase:routes --json --config")
     }
     this.options = options;
+    const { resourceDir = 'resources', publicDir = 'public', js:scripts, sass:styles } = options.phpConfig.config.assets
 
-    options.phpConfig.config.assets.js.forEach(script => {
-      mix.js(`${script}`, path.resolve(Mix.paths.root(), "public/js/app.js"));
+    scripts.forEach(script => {
+      const out = path.basename(script, path.extname(script))
+      mix.js(`${resourceDir}/${script}`, path.resolve(Mix.paths.root(), `${publicDir}/js/${out}.js`));
     });
 
-    options.phpConfig.config.assets.sass.forEach(style => {
-      mix.sass(`${style}`, path.resolve(Mix.paths.root(), "public/css/app.css"));
+    styles.forEach(style => {
+      const out = path.basename(style, path.extname(style))
+      mix.sass(`${resourceDir}/${style}`, path.resolve(Mix.paths.root(), `${publicDir}/css/${out}.css`));
     });
   }
 

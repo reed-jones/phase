@@ -14,7 +14,6 @@ export default class VueRouterAutoloadPlugin {
 
   apply(compiler: Compiler) {
     const generate = () => {
-      // TODO: output file path is configuration setting (for at least testing)
       const to =
         this.options?.output ?? path.resolve(__dirname, "../routes.js");
       const code = generateRoutes(this.options);

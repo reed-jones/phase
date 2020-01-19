@@ -6,12 +6,24 @@ mix.phase({
   output: path.resolve(__dirname, "./routes.js"),
 
   phpConfig: {
-    routes: [],
+    routes: [
+      // Disabled For now. In testing, the generated output is placed in the wrong location
+      // {
+      //   name: 'PageController@HomePage',
+      //   uri: '/',
+      //   prefix: '',
+      //   middleware: 'web'
+      // }
+    ],
     config: {
-      redirects: { 400: "Errors/PageNotFound" },
+      redirects: {
+        400: "Errors/PageNotFound"
+      },
       assets: {
-        js: ["__tests__/config/src/app.js"],
-        sass: ["__tests__/config/src/app.scss"]
+        resourceDir: '__tests__/config',
+        publicDir: 'public',
+        js: ["src/app.js"],
+        sass: ["src/app.scss"]
       }
     }
   }

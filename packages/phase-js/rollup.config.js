@@ -14,7 +14,6 @@ export default [
       { file: pkg.main, format: "cjs" },
       { file: pkg.module, format: "es" }
     ],
-    // external: Object.keys(pkg.peerDependencies),
     external: [
       "webpack",
       "laravel-mix",
@@ -49,9 +48,6 @@ export default [
 
       resolve({
         extensions: [".js", ".ts"]
-        // preferBuiltins: true,
-        // jail: '/'
-        // only: ['fs-extra', 'lodash.merge', 'prettier', './lib/index.ts']
       }),
 
       sucrase({
@@ -61,10 +57,6 @@ export default [
 
       commonjs({
         namedExports: {
-          // left-hand side can be an absolute path, a path
-          // relative to the current directory, or the name
-          // of a module in node_modules
-          // 'lodash.merge': ['named']
           "fs-extra": ["outputFileSync"]
         }
       }),

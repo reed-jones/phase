@@ -17,6 +17,8 @@ declare module 'phase' {
   }
 
   interface PhaseAssets {
+    resourceDir?: string,
+    publicDir?: string,
     js: string[],
     sass: string[]
   }
