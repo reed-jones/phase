@@ -10,7 +10,7 @@ Vue.use(Vuex);
 
 let store;
 beforeEach(function() {
-  global.window.__VUEXCELLENT_STATE__ = {
+  global.window.__PHASE_STATE__ = {
     state: {
       isTesting: true,
       someObject: {},

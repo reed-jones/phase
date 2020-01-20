@@ -10,7 +10,7 @@ let store;
 let axios;
 beforeEach(function() {
   axios = rawAxios.create();
-  global.window.__VUEXCELLENT_STATE__ = {
+  global.window.__PHASE_STATE__ = {
     state: { appName: "Testing" },
     modules: {
       user: {

@@ -1,0 +1,21 @@
+{
+    "require": {
+        "php": "^7.1",
+        "symfony/dependency-injection": "^4.1",
+        "symfony/http-kernel": "^4.1"
+    },
+    "require-dev": {
+        "symplify/monorepo-builder": "^7.3",
+        "phpunit/phpunit": "^7.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phased\\Routing\\": "packages/phase-php/src",
+            "Phased\\State\\": "packages/vuexcellent-php/src"
+        }
+    },
+    "replace": {
+        "phased/routing": "self.version",
+        "phased/state": "self.version"
+    }
+}

@@ -6,7 +6,7 @@ import { AxiosInstance } from "axios";
 
 declare global {
   interface Window {
-    __VUEXCELLENT_STATE__: object;
+    __PHASE_STATE__: object;
     axios: object;
   }
 }
@@ -22,9 +22,9 @@ export const hydrate = (vuexState: VuexStore, options: VuexcellentOptions = defa
     ...defaultOptions,
     ...options
   }
-  // merge incoming (store) options with window.__VUEXCELLENT_STATE__
+  // merge incoming (store) options with window.__PHASE_STATE__
   const mergedState = <VuexStore>(
-    objectMerge(vuexState, window.__VUEXCELLENT_STATE__ || {})
+    objectMerge(vuexState, window.__PHASE_STATE__ || {})
   );
 
   // generate mutations
