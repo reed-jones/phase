@@ -12,6 +12,9 @@
     "lib": "lib",
     "test": "__tests__"
   },
+  "publishConfig": {
+    "registry": "https://registry.yarnpkg.com"
+  },
   "files": [
     "dist"
   ],
