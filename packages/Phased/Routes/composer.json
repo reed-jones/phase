@@ -1,0 +1,42 @@
+{
+    "name": "phased/routing",
+    "description": "Transparent Vue <-> Laravel Integration",
+    "type": "library",
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "Reed Jones",
+            "email": "reedjones@reedjones.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Phased\\Routing\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phased\\Routing\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Phased\\Routing\\PhasedRoutingServiceProvider"
+            ],
+            "aliases": {
+                "Phase": "Phased\\Routing\\Facades\\Phase"
+            }
+        },
+        "branch-alias": {
+            "dev-master": "0.x-dev"
+        }
+    },
+    "require": {
+        "phased/state": "^0.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}
