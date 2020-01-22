@@ -2,9 +2,13 @@
   "name": "root",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/Phased",
+    "packages/@phased/*"
   ],
   "devDependencies": {
     "lerna": "^3.20.2"
+  },
+  "scripts": {
+    "test": "lerna run test"
   }
 }

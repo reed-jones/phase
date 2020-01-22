@@ -10,4 +10,5 @@ mix-manifest.json
 
 # PHP
 vendor
+.php_cs.cache
 .phpunit.result.cache

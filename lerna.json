@@ -1,6 +1,7 @@
 {
   "packages": [
-    "packages/*"
+    "packages/Phased",
+    "packages/@phased/*"
   ],
   "npmClient": "yarn",
   "useWorkspaces": true,

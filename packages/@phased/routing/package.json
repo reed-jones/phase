@@ -1,0 +1,62 @@
+{
+  "name": "@phased/routing",
+  "version": "0.0.1",
+  "description": "Auto SPA configuration focused on Laravel apps",
+  "author": "Reed Jones <reedjones@reedjones.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "dist/phased-routing.cjs.js",
+  "module": "dist/phased-routing.esm.js",
+  "browser": "dist/phased-routing.umd.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "compile": "rollup -c",
+    "dev": "rollup -c -w",
+    "build": "yarn types && NODE_ENV=production yarn compile",
+    "test": "jest",
+    "pretest": "yarn compile",
+    "types": "tsc",
+    "check": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "devDependencies": {
+    "@rollup/plugin-alias": "^3.0.0",
+    "@rollup/plugin-commonjs": "^11.0.1",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "@rollup/plugin-sucrase": "^3.0.0",
+    "@sucrase/jest-plugin": "^2.0.0",
+    "@types/fs-extra": "^8.0.1",
+    "@types/lodash.merge": "^4.6.6",
+    "@types/prettier": "^1.19.0",
+    "@types/webpack": "^4.41.2",
+    "fs-extra": "^8.1.0",
+    "jest": "^24.9.0",
+    "laravel-mix": "^5.0.1",
+    "resolve-url-loader": "^3.1.0",
+    "rollup": "^1.29.0",
+    "rollup-plugin-terser": "^5.2.0",
+    "sass": "^1.25.0",
+    "sass-loader": "^8.0.2",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.5",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.41.5"
+  },
+  "publishConfig": {
+    "registry": "https://registry.yarnpkg.com"
+  },
+  "dependencies": {
+    "@phased/state": "^0.0.1",
+    "lodash.merge": "^4.6.2",
+    "prettier": "^1.19.1"
+  },
+  "peerDependencies": {
+    "laravel-mix": "^5.0.1",
+    "prettier": "^1.19.1"
+  }
+}

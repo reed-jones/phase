@@ -1,0 +1,37 @@
+{
+    "name": "phased/state",
+    "description": "Magic Data Loading. Laravel <-> Vuex Syncing",
+    "type": "library",
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "Reed Jones",
+            "email": "reedjones@reedjones.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Phased\\State\\": ""
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Phased\\State\\PhasedStateServiceProvider"
+            ],
+            "aliases": {
+                "Vuex": "Phased\\State\\Facades\\Vuex"
+            }
+        },
+        "branch-alias": {
+            "dev-master": "0.x-dev"
+        }
+    },
+    "require": {
+        "php": "^7.1"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}

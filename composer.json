@@ -1,17 +1,19 @@
 {
     "require": {
-        "php": "^7.1",
-        "symfony/dependency-injection": "^4.1",
-        "symfony/http-kernel": "^4.1"
+        "php": "^7.1"
     },
     "require-dev": {
-        "symplify/monorepo-builder": "^7.3",
-        "phpunit/phpunit": "^7.3"
+        "phpunit/phpunit": "^8.4",
+        "orchestra/testbench": "^4.4"
     },
     "autoload": {
         "psr-4": {
-            "Phased\\Routing\\": "packages/phase-php/src",
-            "Phased\\State\\": "packages/vuexcellent-php/src"
+            "Phased\\": "packages/Phased"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phased\\Tests\\": "tests/"
         }
     },
     "replace": {
