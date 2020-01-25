@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace Phased\State\Factories;
 
 use Closure;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
+use Phased\State\Exceptions\VuexInvalidKeyException;
 use Phased\State\Exceptions\VuexInvalidModuleException;
 use Phased\State\Exceptions\VuexInvalidStateException;
+use Phased\State\Facades\Vuex;
+use ReflectionClass;
 
 class VuexFactory
 {
@@ -38,6 +42,42 @@ class VuexFactory
      * @var array
      */
     private $_lazyModules = [];
+
+    private $registeredMappings = [];
+
+    public function register($mappings)
+    {
+        $this->registeredMappings = collect($mappings)->mapWithKeys(function ($location) {
+
+            $loader = new $location;
+
+            App::singleton($location, function () use ($loader) {
+                return $loader;
+            });
+
+            return [
+                $loader->getNamespace() => [
+                    'class' => $location,
+                    'methods' => get_class_methods($loader)
+                ]
+            ];
+        });
+    }
+
+    public function load($namespace, $key, ...$args)
+    {
+        if (!isset($this->registeredMappings[$namespace])) {
+            throw new VuexInvalidModuleException("VuexLoader '{$namespace}' has not been properly registered.");
+        }
+
+        if (!in_array($key, $this->registeredMappings[$namespace]['methods'])) {
+            throw new VuexInvalidKeyException("Method '{$key}' does not exist on '{$this->registeredMappings[$namespace]['class']}'");
+        }
+
+        Vuex::module($namespace, [
+            $key => App::make($this->registeredMappings[$namespace]['class'])->{$key}(...$args)
+        ]);
+    }
 
     /**
      * Creates a new 'Vuex' class for easy $store access.
@@ -111,6 +151,8 @@ class VuexFactory
     public function toArray()
     {
         $store = [];
+
+        // TODO: generate actions for each namespace/key: App/VuexLoader/Users::users() => users/refreshUsers
 
         if (!empty($this->_state) || !empty($this->_lazyState)) {
             $store['state'] = [];

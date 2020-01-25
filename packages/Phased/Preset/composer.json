@@ -1,0 +1,29 @@
+{
+    "name": "phased/preset",
+    "description": "A laravel preset for Phase",
+    "type": "library",
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "Reed Jones",
+            "email": "reedjones@reedjones.com"
+        }
+    ],
+    "require": {
+        "laravel/ui": "^2.0"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Phased\\Preset\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Phased\\Preset\\PhasedPresetServiceProvider",
+                "Laravel\\Ui\\UiServiceProvider"
+            ]
+        }
+    }
+}

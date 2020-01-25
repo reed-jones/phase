@@ -36,9 +36,6 @@ export default [
           {
             find: "@",
             replacement: "./lib",
-          }, {
-            find: "@typings",
-            replacement: "./types"
           }
         ],
         customResolver: resolve({

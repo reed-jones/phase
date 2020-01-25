@@ -12,7 +12,7 @@
     @endforeach
 </head>
 <body>
-    @app
+    <div id="app"></div>
     {{-- Load all required scripts --}}
     @foreach (config('phase.assets.js') as $script)
     <script src="{{ mix($script) }}"></script>

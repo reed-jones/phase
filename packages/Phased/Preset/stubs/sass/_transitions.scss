@@ -1,0 +1,13 @@
+.fade {
+    &-enter-active,
+    &-leave-active {
+        transition-duration: 0.3s;
+        transition-property: opacity;
+        transition-timing-function: ease;
+    }
+
+    &-enter,
+    &-leave-active {
+        opacity: 0
+    }
+}

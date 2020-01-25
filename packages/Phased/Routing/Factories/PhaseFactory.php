@@ -46,6 +46,7 @@ class PhaseFactory
      */
     public function view(string $blade = null)
     {
+
         $blade = $blade ?? config('phase.entry');
 
         return request()->expectsJson()

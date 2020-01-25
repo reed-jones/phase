@@ -2,6 +2,13 @@
 declare module '@phased/state' {
     import { AxiosInstance } from "axios";
 
+    global {
+        interface Window {
+            __PHASE_STATE__: object;
+            axios: AxiosInstance;
+        }
+    }
+
     export interface VuexModule {
         namespaced?: boolean,
         state?: object | Function,
@@ -26,4 +33,7 @@ declare module '@phased/state' {
         axios: AxiosInstance | null,
         mutationPrefix: string
     }
+
+
+    export const hydrate: (vuexState: VuexStore, options?: VuexcellentOptions) => VuexStore;
 }

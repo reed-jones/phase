@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phased\Routing;
 
 use Exception;
+use Illuminate\Contracts\Foundation\CachesConfiguration;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -16,12 +17,26 @@ use Phased\Routing\Factories\PhaseFactory;
 class PhasedRoutingServiceProvider extends ServiceProvider
 {
     /**
+     * Register services.
+     */
+    public function register(): void
+    {
+        // Bind facade
+        $this->registerPhaseFacade();
+    }
+
+    /**
      * Bootstrap services.
      */
     public function boot(): void
     {
+        $this->recursiveMergeConfigFrom([
+            __DIR__ . '/config.defaults.php',
+            __DIR__ . '/config.stub.php'
+        ], 'phase');
+
         // php artisan vendor:publish --provider="Phased\Routing\PhaseServiceProvider" --tag="config"
-        $this->publishes([__DIR__.'/config.stub.php' => config_path('phase.php')], 'config');
+        $this->publishes([__DIR__ . '/config.stub.php' => config_path('phase.php')], 'config');
 
         // Route macros Route::phase('/test', 'TestController@testing')
         $this->registerRouterMacro();
@@ -31,17 +46,31 @@ class PhasedRoutingServiceProvider extends ServiceProvider
 
         // register custom blade namespace.  allows to specify phase::bladeFile
         $this->registerBlades();
+    }
+    protected function recursiveMergeConfigFrom($paths, $key)
+    {
+        $config = collect($paths)->reduce(function ($config, $path) {
+            return $this->array_merge_recursive_distinct($config, require $path);
+        }, []);
 
-        // Bind facade
-        $this->registerPhaseFacade();
+        if (!($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
+            $this->app['config']->set($key, $config);
+        }
     }
 
-    /**
-     * Register services.
-     */
-    public function register(): void
+    protected function array_merge_recursive_distinct(array $array1, array $array2)
     {
-        $this->mergeConfigFrom(__DIR__.'/config.stub.php', 'phase');
+        $merged = $array1;
+
+        foreach ($array2 as $key => &$value) {
+            if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
+                $merged[$key] = $this->array_merge_recursive_distinct($merged[$key], $value);
+            } else {
+                $merged[$key] = $value;
+            }
+        }
+
+        return $merged;
     }
 
     /**
@@ -60,8 +89,8 @@ class PhasedRoutingServiceProvider extends ServiceProvider
                 Phase::addRoute($route->uri, $route->action);
             } else {
                 throw new Exception("Route::phase is not compatible with closures.\n"
-                    ."Please use the controller@method syntax.\n"
-                    ."Failed on '{$route->uri}' route.");
+                    . "Please use the controller@method syntax.\n"
+                    . "Failed on '{$route->uri}' route.");
             }
 
             return $route;
@@ -80,12 +109,12 @@ class PhasedRoutingServiceProvider extends ServiceProvider
 
     public function registerBlades(): void
     {
-        view()->addNamespace('phase', base_path('vendor/reed-jones/phase/src/views'));
+        view()->addNamespace('phase', base_path('vendor/phased/routing/views'));
     }
 
     public function registerPhaseFacade(): void
     {
-        App::bind(PhaseFactory::class, function () {
+        App::singleton(PhaseFactory::class, function () {
             return new PhaseFactory;
         });
     }

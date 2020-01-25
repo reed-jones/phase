@@ -5,59 +5,80 @@ import { terser } from "rollup-plugin-terser";
 import alias from "@rollup/plugin-alias";
 import pkg from "./package.json";
 
-const production =
-  !process.env.ROLLUP_WATCH && process.env.NODE_ENV === "production";
+const { ROLLUP_WATCH = false, NODE_ENV = 'development' } = process.env;
+const production = !ROLLUP_WATCH && NODE_ENV === "production";
+
+const outputs = {
+  cjs: pkg => ({ file: pkg.main, format: "cjs" }),
+  esm: pkg => ({ file: pkg.module, format: "es" })
+}
+
+const externals = {
+  node: [
+    "path",
+    "fs",
+    "child_process",
+    "@phased/routing",
+    "os",
+    "assert",
+    "events",
+    "util",
+    "module",
+    "stream",
+    "constants"
+  ]
+}
+
+const plugins = {
+  alias: alias({
+    entries: [
+      {
+        find: "@",
+        replacement: "./lib"
+      }
+    ],
+    customResolver: resolve({
+      extensions: ["ts"]
+    })
+  }),
+
+  resolve: resolve({
+    extensions: [".ts"]
+  }),
+
+  sucrase: sucrase({
+    exclude: ["node_modules/**", "types/**", "__tests__"],
+    transforms: ["typescript"]
+  }),
+
+  commonjs: commonjs({
+    namedExports: {
+      "fs-extra": ["outputFileSync"]
+    }
+  }),
+
+  terser: production && terser({
+    //
+  })
+}
 
 export default [
   {
     input: "lib/index",
     output: [
-      { file: pkg.main, format: "cjs" },
-      { file: pkg.module, format: "es" }
+      outputs.cjs(pkg),
+      outputs.esm(pkg)
     ],
     external: [
-      "webpack",
-      "laravel-mix",
-      "fs-extra",
-      "prettier",
-      "path",
-      "fs",
-      "child_process",
-      "os",
-      "assert",
-      "events",
-      "util",
-      "module",
-      "stream",
-      "constants"
+      ...Object.keys(pkg.peerDependencies),
+      ...externals.node
     ],
     plugins: [
-      alias({
-        entries: [
-          {
-            find: "@",
-            replacement: "./lib"
-          }
-        ],
-        customResolver: resolve({
-          extensions: ["ts"]
-        })
-      }),
-
-      resolve({
-        extensions: [".ts"]
-      }),
-
-      sucrase({
-        exclude: ["../../node_modules/**", "types/**", "__tests__"],
-        transforms: ["typescript"]
-      }),
-
-      commonjs({
-        //
-      }),
-
-      production && terser()
+      plugins.alias,
+      plugins.resolve,
+      plugins.sucrase,
+      plugins.commonjs,
+      // plugins.terser
     ]
   }
 ];

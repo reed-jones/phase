@@ -11,10 +11,15 @@ const production =
 export default [
   {
     input: "lib/index",
-    output: [{ file: pkg.main, format: "cjs" }],
+    output: [
+      { file: pkg.main, format: "cjs" },
+      { file: pkg.module, format: "es" }
+    ],
     external: [
       "webpack",
       "laravel-mix",
+      "@phased/routing",
+      "@phased/webpack-plugin",
       "fs-extra",
       "prettier",
       "path",

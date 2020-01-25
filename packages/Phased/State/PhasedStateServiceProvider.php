@@ -18,16 +18,22 @@ use Phased\State\Mixins\VuexResponseMixin;
 class PhasedStateServiceProvider extends ServiceProvider
 {
     /**
+     * Register services.
+     */
+    public function register(): void
+    {
+        App::singleton(VuexFactory::class, function () {
+            return new VuexFactory;
+        });
+    }
+
+    /**
      * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
-        App::bind(VuexFactory::class, function () {
-            return new VuexFactory;
-        });
-
         // apply response & collection mixins
         $this->applyMixins();
 

@@ -1,51 +1,20 @@
-import sucrase from "@rollup/plugin-sucrase";
-import commonjs from '@rollup/plugin-commonjs'
-import resolve from "@rollup/plugin-node-resolve";
-
-import { terser } from "rollup-plugin-terser";
-import alias from "@rollup/plugin-alias";
 import pkg from "./package.json";
-
-const production = !process.env.ROLLUP_WATCH && process.env.NODE_ENV === 'production';
+import { outputs, plugins } from '../../../build/rollup'
 
 export default [
   {
     input: "lib/index",
     output: [
-      { file: pkg.main, format: "cjs" },
-      { file: pkg.module, format: "es" }
+      outputs.cjs(pkg),
+      outputs.esm(pkg)
     ],
-    external: [ 'vue', 'vuex', 'axios' ],
+    external: Object.keys(pkg.peerDependencies),
     plugins: [
-      alias({
-        entries: [
-          {
-            find: "@",
-            replacement: "./lib",
-          }, {
-            find: "@typings",
-            replacement: "./types"
-          }
-        ],
-        customResolver: resolve({
-          extensions: ['ts']
-        })
-      }),
-
-      resolve({
-        extensions: [".ts"],
-      }),
-
-      sucrase({
-        exclude: ["../../node_modules/**", "node_modules/**", "types/**", "__tests__"],
-        transforms: ["typescript"]
-      }),
-
-      commonjs({
-        //
-      }),
-
-      production && terser()
+      plugins.alias,
+      plugins.resolve,
+      plugins.sucrase,
+      plugins.commonjs,
+      plugins.terser
     ]
   }
 ];

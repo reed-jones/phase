@@ -13,8 +13,10 @@ const redirects = ${JSON.stringify(config.redirects)}
 
 const phaseBeforeEnter = async (to, from, next) => {
   try {
-    // retrieve data from controller
-    const { request } = await axios.get(to.fullPath)
+    if (from) {
+      // retrieve only data from controller
+      const { request } = await axios.get(to.fullPath)
+    }
 
     // check for server side redirects
     const finalUrl = new URL(request.responseURL).pathname

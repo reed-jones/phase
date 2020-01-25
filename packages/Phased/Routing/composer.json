@@ -11,12 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Phased\\Routing\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Phased\\Routing\\Tests\\": "tests/"
+            "Phased\\Routing\\": ""
         }
     },
     "extra": {
@@ -33,7 +28,7 @@
         }
     },
     "require": {
-        "phased/state": "^0.0"
+        "phased/state": "*"
     },
     "config": {
         "sort-packages": true

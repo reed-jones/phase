@@ -30,9 +30,7 @@ export default class PhaseMixPlugin {
    */
   dependencies(): string[] {
     return [
-      "@phased/state",
-      // "@phased/routing",
-      // "@phased/webpack-plugin"
+      //
     ];
   }
 
