@@ -44,13 +44,15 @@ class PhaseFactory
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
-    public function view(string $blade = null)
+    public function view($blade = null)
     {
 
         $blade = $blade ?? config('phase.entry');
 
+        $jsonResponse = config('phase.state') ? 'phase' : 'json';
+
         return request()->expectsJson()
-            ? response()->phase()
+            ? response()->{$jsonResponse}()
             : view($blade);
     }
 }

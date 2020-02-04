@@ -13,7 +13,7 @@ class VuexFacadeStateModuleTest extends TestCase
         Vuex::state($data);
 
         $this->assertSame(
-            Vuex::asArray(),
+            Vuex::toArray(),
             ['state' => $data]
         );
     }
@@ -26,7 +26,7 @@ class VuexFacadeStateModuleTest extends TestCase
         Vuex::module($namespace, $data);
 
         $this->assertSame(
-            Vuex::asArray(),
+            Vuex::toArray(),
             ['modules' => [
                 $namespace => [
                     'state' => $data
@@ -46,7 +46,7 @@ class VuexFacadeStateModuleTest extends TestCase
         Vuex::module($namespace, ['numbers' => 5]);
 
         $this->assertSame(
-            Vuex::asArray(),
+            Vuex::toArray(),
             ['modules' => [
                 $namespace => [
                     'state' => ['numbers' => 5]
@@ -62,7 +62,7 @@ class VuexFacadeStateModuleTest extends TestCase
         Vuex::module($namespace, $data);
 
         $this->assertSame(
-            Vuex::asArray(),
+            Vuex::toArray(),
             ['modules' => [
                 'app' => [
                     'modules' => [
@@ -78,27 +78,28 @@ class VuexFacadeStateModuleTest extends TestCase
 
     public function test_vuex_nested_modules_merge_properly() {
         $namespace = 'app/tests';
-        $data_1 = ['works' => 'true'];
+        $data_1 = ['works' => 'false'];
         $data_2 = ['hooray' => true];
-        $data_3 = ['works' => 'yup'];
+        $data_3 = ['works' => 'true'];
+        $base = ['base' => 'yup'];
 
-        Vuex::module('app', $data_3);
+        Vuex::module('app', $base);
 
         Vuex::module($namespace, $data_1);
-
         Vuex::module($namespace, $data_2);
+        Vuex::module($namespace, $data_3);
 
         $this->assertSame(
-            Vuex::asArray(),
+            Vuex::toArray(),
             ['modules' => [
                 'app' => [
-                    'state' => $data_3,
+                    'state' => $base,
                     'modules' => [
                         'tests' => [
-                            'state' => array_merge(
-                                $data_1,
-                                $data_2,
-                            )
+                            'state' => [
+                                'works' => 'true',
+                                'hooray' => true
+                            ]
                         ]
                     ]
                 ]
@@ -115,7 +116,7 @@ class VuexFacadeStateModuleTest extends TestCase
         Vuex::module($namespace, ['success' => 'confirmed']);
 
         $this->assertSame(
-            Vuex::asArray(),
+            Vuex::toArray(),
             ['modules' => [
                 $namespace => [
                     'state' => [

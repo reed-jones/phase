@@ -203,7 +203,7 @@ class VuexFactory
      */
     public function toJson()
     {
-        return json_encode($this->asArray());
+        return json_encode($this->toArray());
     }
 
     /**
@@ -211,7 +211,7 @@ class VuexFactory
      */
     public function asJson()
     {
-        return json_encode($this->asArray());
+        return json_encode($this->toArray());
     }
 
     /**
@@ -222,7 +222,7 @@ class VuexFactory
      */
     public function toResponse()
     {
-        return response()->json(['$vuex' => $this->asArray()]);
+        return response()->json(['$vuex' => $this->toArray()]);
     }
 
     /**
