@@ -5,7 +5,7 @@ set -e
 VERSION=$1
 VERSION_REGEX="^v[0-9]+\.[0-9]+\.[0-9]+$"
 
-if [[ $VERSION =~ $VERSION_REGEX ]]
+if [[ ! $VERSION =~ $VERSION_REGEX ]]
 then
     echo "Version must match the format vX.X.X"
 
