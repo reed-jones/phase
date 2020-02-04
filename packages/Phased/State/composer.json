@@ -12,7 +12,10 @@
     "autoload": {
         "psr-4": {
             "Phased\\State\\": ""
-        }
+        },
+        "files": [
+            "helpers.php"
+        ]
     },
     "extra": {
         "laravel": {
@@ -28,7 +31,7 @@
         }
     },
     "require": {
-        "php": "^7.1"
+        "php": "^7.2"
     },
     "config": {
         "sort-packages": true

@@ -44,33 +44,18 @@ class PhasedRoutingServiceProvider extends ServiceProvider
         // Hidden Route generation command
         $this->registerCommands();
 
-        // register custom blade namespace.  allows to specify phase::bladeFile
+        // register custom blade namespace. allows to specify phase::bladeFile
         $this->registerBlades();
     }
     protected function recursiveMergeConfigFrom($paths, $key)
     {
         $config = collect($paths)->reduce(function ($config, $path) {
-            return $this->array_merge_recursive_distinct($config, require $path);
+            return array_merge_phase($config, require $path);
         }, []);
 
         if (!($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
             $this->app['config']->set($key, $config);
         }
-    }
-
-    protected function array_merge_recursive_distinct(array $array1, array $array2)
-    {
-        $merged = $array1;
-
-        foreach ($array2 as $key => &$value) {
-            if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
-                $merged[$key] = $this->array_merge_recursive_distinct($merged[$key], $value);
-            } else {
-                $merged[$key] = $value;
-            }
-        }
-
-        return $merged;
     }
 
     /**

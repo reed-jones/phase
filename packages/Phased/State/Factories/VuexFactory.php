@@ -164,25 +164,25 @@ class VuexFactory
 
         if (!empty($this->_state)) {
             foreach ($this->_state as $state) {
-                $store['state'] = array_merge_recursive($store['state'], $this->generateState($state));
+                $store['state'] = array_merge_phase($store['state'], $this->generateState($state));
             }
         }
 
         if (!empty($this->_modules)) {
             foreach ($this->_modules as $module) {
-                $store['modules'] = array_merge_recursive($store['modules'], $this->generateNamespacedModules($module));
+                $store['modules'] = array_merge_phase($store['modules'], $this->generateNamespacedModules($module));
             }
         }
 
         if (!empty($this->_lazyState)) {
             foreach ($this->_lazyState as $state) {
-                $store['state'] = array_merge_recursive($store['state'], $this->generateLazyState($state));
+                $store['state'] = array_merge_phase($store['state'], $this->generateLazyState($state));
             }
         }
 
         if (!empty($this->_lazyModules)) {
             foreach ($this->_lazyModules as $module) {
-                $store['modules'] = array_merge_recursive($store['modules'], $this->generateLazyNamespacedModules($module));
+                $store['modules'] = array_merge_phase($store['modules'], $this->generateLazyNamespacedModules($module));
             }
         }
 

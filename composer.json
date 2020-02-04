@@ -1,7 +1,7 @@
 {
     "name": "phased/phase",
     "require": {
-        "php": "^7.1"
+        "php": "^7.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.4",
@@ -10,7 +10,11 @@
     "autoload": {
         "psr-4": {
             "Phased\\": "packages/Phased"
-        }
+        },
+        "files": [
+            "packages/Phased/Routing/helpers.php",
+            "packages/Phased/State/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -27,7 +31,7 @@
                 "Phase": "Phased\\Routing\\Facades\\Phase",
                 "Vuex": "Phased\\State\\Facades\\Vuex"
             }
-        },
+        }
     },
     "replace": {
         "phased/routing": "self.version",

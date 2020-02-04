@@ -39,7 +39,11 @@ class ConsoleTest extends TestCase
         $resultAsText = Artisan::output();
 
         $this->assertSame(
-            '{"config":{"entry":"phase::app","redirects":{"401":"Auth.LoginPage","403":"Auth.LoginPage","404":"Errors.MissingPage","500":"Errors.ServerError"},"ssr":false,"assets":{"js":["js\/app.js"],"sass":["sass\/app.scss"]}},"routes":[{"prefix":null,"uri":"\/","name":"TestController@HelloWorld","middleware":""}]}'."\n",
+            '{"config":{"entry":"phase::app","state":true,"redirects":{"401":"Auth.LoginPage","403":"Auth.LoginPage","404":"Errors.MissingPage","500":"Errors.ServerError"},"ssr":false,"assets":{"resources":'
+                . json_encode(resource_path())
+                . ',"public":'
+                . json_encode(public_path())
+                . ',"js":["js\/app.js"],"sass":["sass\/app.scss"]}},"routes":[{"prefix":null,"uri":"\/","name":"TestController@HelloWorld","middleware":""}]}'."\n",
             $resultAsText);
     }
 }

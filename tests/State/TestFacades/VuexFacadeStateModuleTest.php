@@ -35,6 +35,26 @@ class VuexFacadeStateModuleTest extends TestCase
         );
     }
 
+    public function test_duplicated_vuex_module_get_updated_to_the_last_value()
+    {
+        $namespace = 'app';
+
+        Vuex::module($namespace, ['numbers' => 1]);
+        Vuex::module($namespace, ['numbers' => 2]);
+        Vuex::module($namespace, ['numbers' => 3]);
+        Vuex::module($namespace, ['numbers' => 4]);
+        Vuex::module($namespace, ['numbers' => 5]);
+
+        $this->assertSame(
+            Vuex::asArray(),
+            ['modules' => [
+                $namespace => [
+                    'state' => ['numbers' => 5]
+                ]
+            ]]
+        );
+    }
+
     public function test_vuex_nested_modules() {
         $namespace = 'app/tests';
         $data = ['works' => 'true'];
