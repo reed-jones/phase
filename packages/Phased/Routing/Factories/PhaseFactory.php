@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Phased\Routing\Factories;
 
+use Illuminate\Http\JsonResponse;
+
 class PhaseFactory
 {
     /** @var array $routes */
@@ -40,19 +42,21 @@ class PhaseFactory
      * Automatically switches between JSON api response &
      * Blade views for SPA's.
      *
-     * @param string [$blade=null]
+     * @param mixed $blade string (blade view) | array (json data)
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
-    public function view($blade = null)
+    public function view(string $blade = null, ...$jsonArgs)
     {
+        return request()->expectsJson()
+            ? $this->api(...$jsonArgs)
+            : view($blade ?? config('phase.entry'));
+    }
 
-        $blade = $blade ?? config('phase.entry');
-
+    public function api(array $data = [], int $status = 200, array $headers = [], int $options = 0): JsonResponse
+    {
         $jsonResponse = config('phase.state') ? 'phase' : 'json';
 
-        return request()->expectsJson()
-            ? response()->{$jsonResponse}()
-            : view($blade);
+        return response()->{$jsonResponse}($data, $status, $headers, $options);
     }
 }

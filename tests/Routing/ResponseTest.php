@@ -13,7 +13,17 @@ class ResponseTest extends TestCase
         $view = $response->getOriginalContent();
 
         $this->assertInstanceOf(View::class, $view);
-        $this->assertSame("<h1>Hello World</h1>\n", $view->render());
+        $this->assertSame("<script id='phase-state'>window.__PHASE_STATE__=[]</script>", $view->render());
+    }
+
+    public function test_page_view_with_state_response()
+    {
+        $response = $this->get('/');
+        $view = $response->getOriginalContent();
+        Vuex::state(['operation' => 'successful']);
+
+        $this->assertInstanceOf(View::class, $view);
+        $this->assertSame("<script id='phase-state'>window.__PHASE_STATE__={\"state\":{\"operation\":\"successful\"}}</script>", $view->render());
     }
 
     public function test_xhr_response()

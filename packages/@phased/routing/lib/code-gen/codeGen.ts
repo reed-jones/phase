@@ -13,20 +13,19 @@ const redirects = ${JSON.stringify(config.redirects)}
 
 const phaseBeforeEnter = async (to, from, next) => {
   try {
-    if (from) {
+    if (from.name) {
       // retrieve only data from controller
       const { request } = await axios.get(to.fullPath)
-    }
 
-    // check for server side redirects
-    const finalUrl = new URL(request.responseURL).pathname
+      // check for server side redirects
+      const finalUrl = new URL(request.responseURL).pathname
 
-    // follow redirects (if any)
-    if (to.path !== finalUrl) {
-      return next({
-        path: finalUrl,
-        query: { redirect: to.fullPath }
-      })
+      // follow redirects (if any)
+      if (to.path !== finalUrl) {
+        return next({
+          path: finalUrl
+        })
+      }
     }
 
     // proceed to next page as usual
@@ -39,6 +38,11 @@ const phaseBeforeEnter = async (to, from, next) => {
         query: { redirect: to.fullPath }
       })
     }
+
+    if (process.env.NODE_ENV !== 'production') {
+      console.error(err)
+    }
+    return next()
   }
 }
 

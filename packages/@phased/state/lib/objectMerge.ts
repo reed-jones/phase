@@ -60,7 +60,9 @@ Client: ${JSON.stringify(target)}`
  */
 export const objectMerge = (...sources: object[]): object => {
   if (!sources.every(a => isObject(a))) {
-    throw "Invalid arguments supplied. Could not merge";
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn("Invalid arguments supplied. Could not properly merge");
+    }
   }
 
   return recursiveMerge({}, ...sources);

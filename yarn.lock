@@ -1901,28 +1901,6 @@
   dependencies:
     "@types/node" ">= 8"
 
-"@phased/routing@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@phased/routing/-/routing-0.0.1.tgz#9199257174417856d03c8c4b1a33f9d0c9f5d0e6"
-  integrity sha512-5ciM+dkzWxpYTZjo40yn26CzamirIeOKL3TczmmVdqpi//qeGg6IeKqPb32gj8nZ3dibX3oY6xOJ3gmXcztHKg==
-  dependencies:
-    lodash.merge "^4.6.2"
-    prettier "^1.19.1"
-
-"@phased/state@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@phased/state/-/state-0.0.1.tgz#9cc28dec27532de8ebe99ba9adae5876e05f582a"
-  integrity sha512-++QeOa3/Pj9xqojOe5OEY1rCIrC2knAIli9gTh3GbM+2VzFM1y6R0MzlnWZVvOP/MfPqzS19fK5UJDfC37/t3w==
-  dependencies:
-    axios "^0.19.1"
-
-"@phased/webpack-plugin@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@phased/webpack-plugin/-/webpack-plugin-0.0.1.tgz#530176606b213568881ff89f76ae9cf68202d7de"
-  integrity sha512-GJhM2cRCP2U0a2iPc4OWzR3MHlDKr2n3EnPLbW6oOl6YYayLUBFpJFJujJhHijy67MiTNv2D7mvfbETf5hqhmQ==
-  dependencies:
-    "@phased/routing" "^0.0.1"
-
 "@rollup/plugin-alias@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-alias/-/plugin-alias-3.0.0.tgz#3ac4952d05d5a700b0d918b18f312db0aa2b006f"

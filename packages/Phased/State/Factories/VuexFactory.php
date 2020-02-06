@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Phased\State\Factories;
 
 use Closure;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Phased\State\Exceptions\VuexInvalidKeyException;
@@ -13,7 +15,7 @@ use Phased\State\Exceptions\VuexInvalidStateException;
 use Phased\State\Facades\Vuex;
 use ReflectionClass;
 
-class VuexFactory
+class VuexFactory implements Arrayable, Jsonable
 {
     /**
      * Base (non-namespaced) vuex state.
@@ -43,40 +45,67 @@ class VuexFactory
      */
     private $_lazyModules = [];
 
+    /**
+     * Registered Classes for vuex ModuleLoaders.
+     */
     private $registeredMappings = [];
 
     public function register($mappings)
     {
-        $this->registeredMappings = collect($mappings)->mapWithKeys(function ($location) {
+        $this->registeredMappings = array_merge(
+            $this->registeredMappings,
+            collect($mappings)
+                ->mapWithKeys(function ($location) {
+                    $loader = new $location;
 
-            $loader = new $location;
+                    App::singleton($location, function () use ($loader) {
+                        return $loader;
+                    });
 
-            App::singleton($location, function () use ($loader) {
-                return $loader;
-            });
-
-            return [
-                $loader->getNamespace() => [
-                    'class' => $location,
-                    'methods' => get_class_methods($loader)
-                ]
-            ];
-        });
+                    return [
+                        $loader->getNamespace() => [
+                            'class' => $location,
+                            'methods' => get_class_methods($loader),
+                        ],
+                    ];
+                })
+                ->toArray()
+        );
     }
 
-    public function load($namespace, $key, ...$args)
+    public function load($namespace, $keys, ...$args)
     {
-        if (!isset($this->registeredMappings[$namespace])) {
+        if (is_string($keys)) {
+            $keys = [$keys => $args];
+        }
+
+        if (! isset($this->registeredMappings[$namespace])) {
             throw new VuexInvalidModuleException("VuexLoader '{$namespace}' has not been properly registered.");
         }
 
-        if (!in_array($key, $this->registeredMappings[$namespace]['methods'])) {
-            throw new VuexInvalidKeyException("Method '{$key}' does not exist on '{$this->registeredMappings[$namespace]['class']}'");
+        if (! is_array($keys)) {
+            throw new VuexInvalidKeyException('Invalid keys were passed to Vuex::load.');
         }
 
-        Vuex::module($namespace, [
-            $key => App::make($this->registeredMappings[$namespace]['class'])->{$key}(...$args)
-        ]);
+        $moduleLoader = App::make($this->registeredMappings[$namespace]['class']);
+
+        collect($keys)
+            ->mapWithKeys(function ($value, $key) {
+                return is_int($key) ? [$value => null] : [$key => $value];
+            })
+            ->each(function ($args, $key) use ($namespace, $moduleLoader) {
+                if (! in_array($key, $this->registeredMappings[$namespace]['methods'])) {
+                    throw new VuexInvalidKeyException("Method '{$key}' does not exist on '{$this->registeredMappings[$namespace]['class']}'");
+                }
+
+                if (! is_array($args)) {
+                    $args = [$args];
+                }
+
+                $data = $moduleLoader->{$key}(...$args);
+
+                Vuex::module($namespace, [$key => $data]);
+            });
     }
 
     /**
@@ -128,7 +157,7 @@ class VuexFactory
      */
     public function module(string $namespace, $state)
     {
-        if (!is_string($namespace) || empty($namespace)) {
+        if (! is_string($namespace) || empty($namespace)) {
             throw new VuexInvalidModuleException('$namespace must be a string.');
         }
 
@@ -154,33 +183,33 @@ class VuexFactory
 
         // TODO: generate actions for each namespace/key: App/VuexLoader/Users::users() => users/refreshUsers
 
-        if (!empty($this->_state) || !empty($this->_lazyState)) {
+        if (! empty($this->_state) || ! empty($this->_lazyState)) {
             $store['state'] = [];
         }
 
-        if (!empty($this->_modules) || !empty($this->_lazyModules)) {
+        if (! empty($this->_modules) || ! empty($this->_lazyModules)) {
             $store['modules'] = [];
         }
 
-        if (!empty($this->_state)) {
+        if (! empty($this->_state)) {
             foreach ($this->_state as $state) {
                 $store['state'] = array_merge_phase($store['state'], $this->generateState($state));
             }
         }
 
-        if (!empty($this->_modules)) {
+        if (! empty($this->_modules)) {
             foreach ($this->_modules as $module) {
                 $store['modules'] = array_merge_phase($store['modules'], $this->generateNamespacedModules($module));
             }
         }
 
-        if (!empty($this->_lazyState)) {
+        if (! empty($this->_lazyState)) {
             foreach ($this->_lazyState as $state) {
                 $store['state'] = array_merge_phase($store['state'], $this->generateLazyState($state));
             }
         }
 
-        if (!empty($this->_lazyModules)) {
+        if (! empty($this->_lazyModules)) {
             foreach ($this->_lazyModules as $module) {
                 $store['modules'] = array_merge_phase($store['modules'], $this->generateLazyNamespacedModules($module));
             }
@@ -188,8 +217,9 @@ class VuexFactory
 
         return $store;
     }
+
     /**
-     * Alias for toArray
+     * Alias for toArray.
      */
     public function asArray()
     {
@@ -201,17 +231,17 @@ class VuexFactory
      *
      * @return string|false
      */
-    public function toJson()
+    public function toJson($options = 0)
     {
-        return json_encode($this->toArray());
+        return json_encode($this->toArray(), $options);
     }
 
     /**
-     * Alias for toJson
+     * Alias for toJson.
      */
-    public function asJson()
+    public function asJson($options = 0)
     {
-        return json_encode($this->toArray());
+        return json_encode($this->toArray(), $options);
     }
 
     /**
@@ -226,19 +256,20 @@ class VuexFactory
     }
 
     /**
-     * Alias for toResponse
+     * Alias for toResponse.
      */
     public function asResponse()
     {
         return $this->toResponse();
     }
 
-    protected function verifyState($state) {
+    protected function verifyState($state)
+    {
         if (method_exists($state, 'toArray')) {
             $state = $state->toArray();
         } elseif (is_array($state)) {
             $state = collect($state)->toArray();
-        } else if (!is_callable($state)) {
+        } elseif (! is_callable($state)) {
             throw new VuexInvalidStateException('$state must be an array or a Collection.');
         }
 
@@ -255,7 +286,6 @@ class VuexFactory
         } else {
             return [false, $state];
         }
-
     }
 
     protected function array_some($arr, callable $callback)
@@ -283,14 +313,15 @@ class VuexFactory
                 $state[$key] = $value();
             }
         }
+
         return $state;
     }
 
     protected function generateNamespacedModules($module)
     {
         foreach ($module as $namespace => $state) {
-            if (!Str::contains($namespace, '/')) { // simple module namespace
-                return [$namespace => ['state' => $state] ];
+            if (! Str::contains($namespace, '/')) { // simple module namespace
+                return [$namespace => ['state' => $state]];
             } else { // complex nested modules namespace
                 $namespaces = array_reverse(collect(explode('/', $namespace))->toArray());
                 // final state is starting value
@@ -306,22 +337,21 @@ class VuexFactory
         }
     }
 
-
     protected function generateLazyNamespacedModules($module)
     {
         foreach ($module as $namespace => $state) {
-            if (!Str::contains($namespace, '/')) { // simple module namespace
+            if (! Str::contains($namespace, '/')) { // simple module namespace
                 if (is_callable($state)) {
                     $state = $state();
                 }
 
-                foreach($state as $key => $value) {
+                foreach ($state as $key => $value) {
                     if (is_callable($value)) {
                         $state[$key] = $value();
                     }
                 }
 
-                return [$namespace => ['state' => $state] ];
+                return [$namespace => ['state' => $state]];
             } else { // complex nested modules namespace
                 $namespaces = array_reverse(collect(explode('/', $namespace))->toArray());
 
@@ -329,12 +359,11 @@ class VuexFactory
                 $arr = $state;
                 // build array in reverse
                 foreach ($namespaces as $idx => $key) {
-
                     if (is_callable($arr)) {
                         $arr = $arr();
                     }
 
-                    foreach($arr as $arrKey => $arrValue) {
+                    foreach ($arr as $arrKey => $arrValue) {
                         if (is_callable($arrValue)) {
                             $arr[$arrKey] = $arrValue();
                         }

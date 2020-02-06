@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Phased\State;
 
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\ServiceProvider;
-
-/** Macros */
-use Illuminate\Support\Facades\Response;
+use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Blade;
+/* Macros */
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Phased\State\Facades\Vuex;
 use Phased\State\Factories\VuexFactory;
 use Phased\State\Mixins\VuexCollectionMixin;
 use Phased\State\Mixins\VuexResponseMixin;
@@ -34,6 +36,17 @@ class PhasedStateServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // dd();
+        // dd(get_declared_classes());
+        $automatic = collect(glob(app_path().'/VuexLoaders/*ModuleLoader.php'))
+            ->map(function ($file) {
+                return str_replace('/', '\\', \Str::replaceLast('.php', '', \Str::replaceFirst(app_path().'/', Container::getInstance()->getNamespace(), $file)));
+            })
+            ->toArray();
+        // dd($automatic);
+
+        Vuex::register($automatic);
+
         // apply response & collection mixins
         $this->applyMixins();
 
@@ -42,7 +55,7 @@ class PhasedStateServiceProvider extends ServiceProvider
     }
 
     /**
-     * Sets up the utility mixins
+     * Sets up the utility mixins.
      */
     public function applyMixins()
     {
@@ -54,12 +67,15 @@ class PhasedStateServiceProvider extends ServiceProvider
     }
 
     /**
-     * Sets up the blade directives
+     * Sets up the blade directives.
      */
     public function setDirectives()
     {
         Blade::directive('vuex', function () {
-            return "<?='<script id=\'initial-state\'>window.__PHASED_STATE__='.Phased\State\Facades\Vuex::toJson().'</script>';?>";
+            return "<?='<script id=\'"
+                .config('phase.initial_state_id', 'phase-state')."\'>window."
+                .config('phase.initial_state_key', '__PHASE_STATE__')
+                ."='.Phased\State\Facades\Vuex::toJson().'</script>';?>";
         });
     }
 }

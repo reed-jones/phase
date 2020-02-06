@@ -19,10 +19,10 @@ return [
     | Page redirection for Server side errors
     */
     'redirects' => [
-        401 => 'Auth.LoginPage',
-        403 => 'Auth.LoginPage',
-        404 => 'Errors.MissingPage',
-        500 => 'Errors.ServerError',
+        // 401 => 'Auth.LoginPage',
+        // 403 => 'Auth.LoginPage',
+        // 404 => 'Errors.MissingPage',
+        // 500 => 'Errors.ServerError',
     ],
 
     /*

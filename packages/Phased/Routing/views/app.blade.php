@@ -8,14 +8,12 @@
     @if(config('phase.state'))
     @vuex
     @endif
-
     @foreach (config('phase.assets.sass') as $styles)
     <link rel="stylesheet" type="text/css" href="{{ mix(str_replace('sass', 'css', str_replace('scss', 'css', $styles))) }}">
     @endforeach
 </head>
 <body>
     <div id="app"></div>
-    {{-- Load all required scripts --}}
     @foreach (config('phase.assets.js') as $script)
     <script src="{{ mix($script) }}"></script>
     @endforeach

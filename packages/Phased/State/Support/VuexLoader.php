@@ -5,18 +5,24 @@ namespace Phased\State\Support;
 use Illuminate\Support\Str;
 use ReflectionClass;
 
-class VuexLoader {
+class VuexLoader
+{
     /**
-     * Retrieves or guesses the desired namespace for this vuex module
+     * Retrieves or guesses the desired namespace for this vuex module.
      *
      * @return string
      */
-    public function getNamespace() {
+    public function getNamespace()
+    {
         if (isset($this->namespace)) {
             return $this->namespace;
         }
 
-        // default to lowercased class name
-        return Str::camel((new ReflectionClass($this))->getShortName());
+        // default to lowercased class name (without ModuleLoader)
+        return str_replace(
+            'ModuleLoader',
+            '',
+            Str::camel((new ReflectionClass($this))->getShortName())
+        );
     }
 }

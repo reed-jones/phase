@@ -7,7 +7,7 @@ import { AxiosInstance } from "axios";
 declare global {
   interface Window {
     __PHASE_STATE__: object;
-    axios: object;
+    axios: AxiosInstance;
   }
 }
 
@@ -22,9 +22,15 @@ export const hydrate = (vuexState: VuexStore, options: VuexcellentOptions = defa
     ...defaultOptions,
     ...options
   }
+  // PHP Converts the empty array to a... empty array, booo
+  let phaseState = window.__PHASE_STATE__ || {}
+  if (Array.isArray(phaseState) && !phaseState.length) {
+    phaseState = {}
+  }
+
   // merge incoming (store) options with window.__PHASE_STATE__
   const mergedState = <VuexStore>(
-    objectMerge(vuexState, window.__PHASE_STATE__ || {})
+    objectMerge(vuexState, phaseState)
   );
 
   // generate mutations
