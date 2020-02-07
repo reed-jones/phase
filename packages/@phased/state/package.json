@@ -1,6 +1,6 @@
 {
   "name": "@phased/state",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Vuex hydration and auto mutator for Laravel Apps",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "homepage": "",
@@ -25,16 +25,16 @@
     "check": "tsc --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
-    "@phased/types": "^0.0.3",
+    "@phased/types": "^0.0.4",
     "vue": "^2.6.11",
     "vuex": "^3.1.2"
   },
   "peerDependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.19.2",
     "vue": "^2.6.11",
     "vuex": "^3.1.2"
   },
   "dependencies": {
-    "axios": "^0.19.1"
+    "axios": "^0.19.2"
   }
 }

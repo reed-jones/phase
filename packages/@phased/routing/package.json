@@ -1,6 +1,6 @@
 {
   "name": "@phased/routing",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Auto SPA configuration focused on Laravel apps",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "homepage": "",

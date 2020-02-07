@@ -59,8 +59,8 @@ Client: ${JSON.stringify(target)}`
  * @return {Object}
  */
 export const objectMerge = (...sources: object[]): object => {
-  if (!sources.every(a => isObject(a))) {
-    if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== "production") {
+    if (!sources.every(a => isObject(a))) {
       console.warn("Invalid arguments supplied. Could not properly merge");
     }
   }

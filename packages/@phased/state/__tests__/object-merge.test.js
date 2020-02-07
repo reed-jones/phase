@@ -26,8 +26,4 @@ describe("many objects can be merged together", () => {
   it("it creates an empty object when no valid arguments are passed", () => {
     expect(objectMerge()).toEqual({});
   });
-
-  it("it throws if a non-object is passed", () => {
-    expect(_ => objectMerge([])).toThrow('Invalid arguments supplied. Could not merge');
-  });
 });

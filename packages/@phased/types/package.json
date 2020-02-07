@@ -1,7 +1,7 @@
 {
   "name": "@phased/types",
-  "version": "0.0.3",
-  "description": "Auto SPA configuration focused on Laravel apps",
+  "version": "0.0.4",
+  "description": "Typescript types for @phased packages",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "homepage": "",
   "license": "ISC",
@@ -24,6 +24,7 @@
     "check": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@types/webpack": "^4.41.3"
+    "@types/webpack": "^4.41.3",
+    "axios": "^0.19.2"
   }
 }

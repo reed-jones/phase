@@ -14,7 +14,7 @@ const redirects = ${JSON.stringify(config.redirects)}
 const phaseBeforeEnter = async (to, from, next) => {
   try {
     if (from.name) {
-      // retrieve only data from controller
+      // retrieve data from controller
       const { request } = await axios.get(to.fullPath)
 
       // check for server side redirects
@@ -32,9 +32,10 @@ const phaseBeforeEnter = async (to, from, next) => {
     return next()
 
   } catch (err) {
-    if (err && err.response && err.response.status && redirects[err.response.status]) {
+    const status = err?.response?.status
+    if (status && redirects[status]) {
       return next({
-        name: redirects[err.response.status],
+        name: redirects[status],
         query: { redirect: to.fullPath }
       })
     }

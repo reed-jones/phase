@@ -1,7 +1,7 @@
 {
   "name": "@phased/webpack-plugin",
-  "version": "0.0.3",
-  "description": "Laravel Mix Plugin for Phased",
+  "version": "0.0.4",
+  "description": "Webpack Route Generation Plugin for Phased",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "homepage": "",
   "license": "ISC",
@@ -25,23 +25,23 @@
     "types:check": "tsc --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
+    "@phased/types": "^0.0.4",
     "@rollup/plugin-alias": "^3.0.0",
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "@rollup/plugin-sucrase": "^3.0.0",
     "@sucrase/jest-plugin": "^2.0.0",
-    "jest": "^24.9.0",
+    "jest": "^25.1.0",
     "rollup": "^1.29.0",
     "rollup-plugin-terser": "^5.2.0",
     "tslib": "^1.10.0",
-    "typescript": "^3.7.5",
-    "@phased/types": "^0.0.3"
+    "typescript": "^3.7.5"
   },
   "dependencies": {
-    "@phased/routing": "^0.0.3"
+    "@phased/routing": "^0.0.4"
   },
   "peerDependencies": {
-    "webpack": "^4.41.5",
-    "@phased/routing": "^0.0.3"
+    "@phased/routing": "^0.0.4",
+    "webpack": "^4.41.5"
   }
 }
