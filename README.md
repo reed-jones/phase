@@ -59,6 +59,7 @@ export default new VueRouter({
 Finally if using Laravel-mix add
 ```js
 // webpack.mix.js
+const mix = require('laravel-mix')
 require('@phased/phase')
 mix.phase()
 ```
@@ -84,29 +85,157 @@ mix
 ```
 ## Server Setup (Back End)
 
-> Coming Soon
-
-## Usage
-
-> Coming Soon
+After installing both routing & state components with composer. Phase is ready to roll.
 
 ## Routing
-  - Web Routes
-    - `routes/web.php` -> `Route::phase('/url/to/page', 'YourController@method');`
-    - -> in your controller, `return Phase::view();`
-    - Now benefit from preloaded vuex data on page initial page load, and automatic updated vuex store on page changes!
-    - For pure API calls that just want to update vuex store automatically you can use `return response()->vuex()` with any additional data passed as if it was `->json`, `->vuex($extraData)`
-  - Folder structure...
+
+SPA Routing starts with by defining your page routes as 'phase' routes. Traditionally these are placed in `routes/web.php`. In a regular app these would be 'Route::get' routes whose controller returns a view(). In a Phase app, just change it to `Route::phase`, and change your controller so that it returns `Phase::view()`. Modifying the [basic controller laravel example](https://laravel.com/docs/6.x/controllers#basic-controllers):
+```diff
+<?php
+
+namespace App\Http\Controllers;
+
++ use Phased\Routing\Facades\Phase;
++ use Phased\State\Facades\Vuex;
+use App\Http\Controllers\Controller;
+use App\User;
+
+class UserController extends Controller
+{
+    /**
+     * Show the profile for the given user.
+     *
+     * @param  int  $id
+     * @return View
+     */
+-    public function show($id)
++    public function UserProfile($id)
+    {
+-        return view('user.profile', ['user' => User::findOrFail($id)]);
++        Vuex::state([ 'user' => User::findOrFail($id) ]);
++        return Phase::view();
+    }
+}
+```
+
+And defining the route:
+```diff
+-Route::get('user/{id}', 'UserController@show');
++Route::phase('user/{id}', 'UserController@UserProfile');
+```
+
+Now navigating to `/user/{id}` will display `resources/js/pages/UserController/UserProfile.vue`, and the user with id `$id`, will be loaded into your vuex store at `this.$store.state.user`. Creating a second page and navigating between the two using [<router-link>](https://router.vuejs.org/api/#router-link) will automatically handle vuex store updating based on the data loaded in the controller, while using nice SPA page transitions.
+
+To get a list of all registered phase routes, the command `php artisan phase:routes` will list a table similar to `route:list`.
 
 ## State Management
-  - Api
-    - `Vuex::module($namespace, $state);`
-    - `Vuex::state($state);`
-  - Collections
-    - `->toVuex($namespace, $key)`
-  - Models
-    - Vuexable Trait
-    - `->toVuex($namespace, $key)` (same as collections)
+State Management from a Phase app is used through the `Vuex` facade provided, as well as the Collection, and Model Helpers. The Facade contains two primary data loading functions.
+
+### State
+
+```php
+Vuex::state($state);
+```
+`state` accepts an array of values, which will be merged in/set as the base vuex state object.
+```js
+// Basic Vuex store.
+export default new Store(hydrate({
+  state: {
+    count: 0,
+    app: ''
+  }
+}))
+console.log(this.$store.state.count) // 0
+```
+All or some of the keys can be updated at the same time.
+```php
+// From a controller or model
+Vuex::state([ 'count' => 1 ]);
+```
+
+```js
+console.log(this.$store.state.count) // 1
+```
+
+### Module
+
+The other and perhaps more used variant is `Vuex::module($namespace, $data);`. This updates a [vuex module](https://vuex.vuejs.org/guide/modules.html) with the given data, much like how `::state` works.
+
+```js
+// Basic Vuex store.
+export default new Store(hydrate({
+  modules: {
+    user: {
+      state: {
+        name: '',
+      }
+    },
+    app: {
+      modules: {
+        options: {
+          state: {
+            version: '0.0.0'
+          }
+        }
+      }
+    }
+  }
+}))
+
+console.log(this.$store.state.user.name) // ''
+console.log(this.$store.state.app.options.version) // '0.0.0'
+```
+
+```php
+Vuex::module('user', [ 'name' => 'Reed' ]);
+
+// Nested Modules
+Vuex::module('app/options', [ 'version' => '0.0.4' ]);
+```
+```js
+console.log(this.$store.state.user.name) // 'Reed'
+console.log(this.$store.state.app.options.version) // '0.0.4'
+```
+
+### Collections
+
+Out of the box, Collections have been extended so that they now have a `->toVuex` method. This takes two arguments, the vuex namespace, and the key in which to save the data. Take the following example.
+```js
+export default new Store(hydrate({
+  modules: {
+    flights: {
+      state: {
+        selected: null,
+        in_flight: []
+      }
+    }
+  }
+}));
+```
+```php
+App\Flight::query()
+  ->where('in_flight', true)
+  ->get()
+  ->toVuex('flights', 'in_flight');
+```
+
+### Models
+
+Much like Collections, Models can have a ->toVuex method, this however is applied via a trait, and not available out of the box.
+```php
+// Flight Model
+use Phased\State\Traits\Vuexable;
+
+class Flight extends Model
+{
+    use Vuexable;
+}
+
+// Elsewhere...
+App\Flight::find(5)->toVuex('flights', 'selected');
+```
+
+
   - Lazy Loading
   - Module Loaders/Module Definitions
     - `Vuex::register([ UserModuleDefinition::class ]);` Put this into AppServiceProvider
@@ -115,3 +244,37 @@ mix
 ## Troubleshooting
   - `dd(Vuex::toArray());` will dump all the currently saved vuex state
   - For Api calls, the mutation will be visible from within the Vue DevTools mutations tab
+
+
+## Example
+
+To kick things off with a basic example, lets create a simple controller and load the first page of our new app.
+```sh
+php artisan make:controller PhaseController
+```
+
+Now go to your `routes/web.php` and add your first route
+```php
+//routes/web.php
+Route::phase('/', 'PhaseController@HomePage');
+```
+
+Now open up the controller and create the `HomePage` method. Notice the return statement. `Phase::view()` handle syncing the correct data flow for the page routes. It will automatically switch between loading the page, and just updating your vuex state with the appropriate data. If the method is strictly for API calls, then returning only the updated vuex state with `return response()->vuex();` will suffice, however for now, its a page load so `Phase::view();` it is.
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Phased\Routing\Facades\Phase;
+use Phased\State\Facades\Vuex;
+
+class PhaseController extends Controller
+{
+    public function HomePage()
+    {
+        return Phase::view();
+    }
+}
+```
+
+Now run laravel-mix and load the page. If all went well, The required .vue files have been generated if they didn't already exist, and the page should load up.
