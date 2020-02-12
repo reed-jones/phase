@@ -10,7 +10,7 @@ use Phased\State\Facades\Vuex;
 trait Vuexable
 {
     /**
-     * Formats the current model & stores to local vuex state
+     * Formats the current model & stores to local vuex state.
      *
      * @param string|null [$namespace=null]
      * @param string|null [$key=null]
@@ -19,13 +19,9 @@ trait Vuexable
      */
     public function toVuex($namespace, $key = null)
     {
-        if (!$namespace) {
-            throw new VuexInvalidKeyException("Could not determine where to store the data");
-        }
-
         // if only one key is provided, it will get saved
         // to the base state (non-module)
-        if (!$key) {
+        if (! $key) {
             $key = $namespace;
             $namespace = null;
         }

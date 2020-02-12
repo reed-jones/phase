@@ -31,12 +31,12 @@ class PhasedRoutingServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->recursiveMergeConfigFrom([
-            __DIR__ . '/config.defaults.php',
-            __DIR__ . '/config.stub.php'
+            __DIR__.'/config.defaults.php',
+            __DIR__.'/config.stub.php',
         ], 'phase');
 
         // php artisan vendor:publish --provider="Phased\Routing\PhaseServiceProvider" --tag="config"
-        $this->publishes([__DIR__ . '/config.stub.php' => config_path('phase.php')], 'config');
+        $this->publishes([__DIR__.'/config.stub.php' => config_path('phase.php')], 'config');
 
         // Route macros Route::phase('/test', 'TestController@testing')
         $this->registerRouterMacro();
@@ -47,14 +47,17 @@ class PhasedRoutingServiceProvider extends ServiceProvider
         // register custom blade namespace. allows to specify phase::bladeFile
         $this->registerBlades();
     }
+
     protected function recursiveMergeConfigFrom($paths, $key)
     {
         $config = collect($paths)->reduce(function ($config, $path) {
             return array_merge_phase($config, require $path);
         }, []);
 
-        if (!($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
-            $this->app['config']->set($key, $config);
+        if (! ($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
+            $this->app['config']->set($key, array_merge_phase(
+                $config, $this->app['config']->get($key, [])
+            ));
         }
     }
 
@@ -63,23 +66,25 @@ class PhasedRoutingServiceProvider extends ServiceProvider
      */
     public function registerRouterMacro(): void
     {
-        Route::macro('phase', function (...$args) {
-            $route = $this->match(['GET', 'HEAD'], ...$args);
+        foreach (['phase', 'vuex'] as $macro) {
+            Route::macro($macro, function (...$args) {
+                $route = $this->match(['GET', 'HEAD'], ...$args);
 
-            $controller = $route->action['controller'] ?? null;
+                $controller = $route->action['controller'] ?? null;
 
-            // make sure its not a closure
-            // & make sure its controller@method
-            if (is_string($controller) && Str::is('*@*', $controller)) {
-                Phase::addRoute($route->uri, $route->action);
-            } else {
-                throw new Exception("Route::phase is not compatible with closures.\n"
-                    . "Please use the controller@method syntax.\n"
-                    . "Failed on '{$route->uri}' route.");
-            }
+                // make sure its not a closure
+                // & make sure its controller@method
+                if (is_string($controller) && Str::is('*@*', $controller)) {
+                    Phase::addRoute($route->uri, $route->action);
+                } else {
+                    throw new Exception("Route::phase is not compatible with closures.\n"
+                        ."Please use the controller@method syntax.\n"
+                        ."Failed on '{$route->uri}' route.");
+                }
 
-            return $route;
-        });
+                return $route;
+            });
+        }
     }
 
     /**

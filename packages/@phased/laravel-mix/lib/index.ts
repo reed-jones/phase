@@ -47,11 +47,11 @@ export default class PhaseMixPlugin {
       output: ""
     }
   ): void {
-    if (!options.phpConfig) {
-      options.phpConfig = artisan("phase:routes --json --config")
-    }
+    const phpConfig = options.phpConfig ?? artisan("phase:routes --json --config")
+
     this.options = options;
-    const { resourceDir = 'resources', publicDir = 'public', js:scripts, sass:styles } = options.phpConfig.config.assets
+
+    const { resourceDir = 'resources', publicDir = 'public', js:scripts, sass:styles } = phpConfig.config.assets
 
     scripts.forEach(script => {
       const out = path.basename(script, path.extname(script))

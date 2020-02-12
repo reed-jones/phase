@@ -32,7 +32,7 @@ const phaseBeforeEnter = async (to, from, next) => {
     return next()
 
   } catch (err) {
-    const status = err?.response?.status
+    const status = err && err.response && err.response.status
     if (status && redirects[status]) {
       return next({
         name: redirects[status],

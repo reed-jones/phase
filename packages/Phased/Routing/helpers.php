@@ -1,8 +1,8 @@
 <?php
 
-if (!function_exists('array_merge_phase')) {
+if (! function_exists('array_merge_phase')) {
     /**
-     * Recursively merge two or more assoc arrays
+     * Recursively merge two or more assoc arrays.
      *
      * @param array $merged base merged array
      * @param array[] $rest the rest of the assoc arrays to be merged in
@@ -16,9 +16,9 @@ if (!function_exists('array_merge_phase')) {
             return $merged;
         }
 
-        foreach($rest as $array) {
-            if (!is_array($array)) {
-                $array = [ $array ];
+        foreach ($rest as $array) {
+            if (! is_array($array)) {
+                $array = [$array];
             }
             foreach ($array as $key => $value) {
                 if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {

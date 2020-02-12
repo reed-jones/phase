@@ -12,13 +12,9 @@ class VuexCollectionMixin
     public function toVuex()
     {
         return function ($namespace, $key = null) {
-            if (!$namespace) {
-                throw new VuexInvalidKeyException("Could not determine where to store the data");
-            }
-
             // if only one key is provided, it will get saved
             // to the base state (non-module)
-            if (!$key) {
+            if (! $key) {
                 $key = $namespace;
                 $namespace = null;
             }
