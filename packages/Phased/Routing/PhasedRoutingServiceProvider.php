@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phased\Routing;
 
 use Exception;
-use Illuminate\Contracts\Foundation\CachesConfiguration;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -54,7 +53,7 @@ class PhasedRoutingServiceProvider extends ServiceProvider
             return array_merge_phase($config, require $path);
         }, []);
 
-        if (! ($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
+        if (! ($this->app->configurationIsCached())) {
             $this->app['config']->set($key, array_merge_phase(
                 $config, $this->app['config']->get($key, [])
             ));

@@ -36,14 +36,11 @@ class PhasedStateServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // dd();
-        // dd(get_declared_classes());
         $automatic = collect(glob(app_path().'/VuexLoaders/*ModuleLoader.php'))
             ->map(function ($file) {
-                return str_replace('/', '\\', \Str::replaceLast('.php', '', \Str::replaceFirst(app_path().'/', Container::getInstance()->getNamespace(), $file)));
+                return str_replace('/', '\\', Str::replaceLast('.php', '', Str::replaceFirst(app_path().'/', Container::getInstance()->getNamespace(), $file)));
             })
             ->toArray();
-        // dd($automatic);
 
         Vuex::register($automatic);
 
