@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosResponse } from "axios";
-import { InitializedVuexStore, VuexModule, VuexStore } from "@phased/state"
+import { InitializedVuexStore, VuexModule, VuexStore } from "@phased/state";
 
 export const VuexcellentAutoCommitter = (
   axios: AxiosInstance,
@@ -23,7 +23,7 @@ export const VuexcellentAutoCommitter = (
  *
  * @param {Object} data_2 server supplied state for mutations
  */
-const commitData = (
+const autoCommitData = (
   {
     store,
     _state,
@@ -102,12 +102,22 @@ const autoMutateInterceptor = (
   (response: AxiosResponse) => {
     if (response.data.$vuex) {
       try {
-        // grab state & modules, if existing
-        commitData({ store, _state, mutator }, response.data.$vuex);
+        // grab state & modules, if existing & auto-commit
+        autoCommitData({ store, _state, mutator }, response.data.$vuex);
+
+        // user specified mutations
+        (response.data.$vuex.mutations || []).forEach(
+          ([mutation, value]: [string, any?]) => store.commit(mutation, value)
+        );
+
+        // user specified actions
+        (response.data.$vuex.actions || []).forEach(
+          ([action, value]: [string, any?]) => store.dispatch(action, value)
+        );
       } catch (err) {
         console.error(err);
         console.error(
-          `[Vuexcellent] An error occurred during the auto commit process.\nYour vuex state may not be what you expected.`
+          `[@phased/state] An error occurred during the auto commit process.\nYour vuex state may not be what you expected.`
         );
       }
     }

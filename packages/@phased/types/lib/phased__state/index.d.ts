@@ -25,7 +25,8 @@ declare module '@phased/state' {
     }
 
     export interface InitializedVuexStore {
-        commit(mutation: string, data?: any): void
+        commit(mutation: string, data?: any): void,
+        dispatch(action: string, data?: any): void
     }
 
     export interface VuexcellentOptions {

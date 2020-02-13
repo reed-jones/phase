@@ -9,8 +9,9 @@ and starting with version v0.1.0, this project adheres to [Semantic Versioning](
 ### Added
 - response()->vuex() and response()->phase() now behave the same. `->phase()` is preferred.
 - `Vuex::lazyLoad($namespace, $key)` has been introduced so now ModuleLoaders can easily be lazy loaded without modification
-- `Vuex::commit($mutation, $value)` has been added, however it is not yet included in the response to the front end
-- `Vuex::dispatch($action, $value)` has been added, however it is not yet included in the response to the front end
+- `Vuex::commit($mutation, $value)` has been added
+- `Vuex::dispatch($action, $value)` has been added
+- Added actions/mutations to axios interceptors
 
 ### Deprecated
 - `response()->vuex()` is deprecated, and response()->phase() is the preferred, however there are currently no plans to remove it.

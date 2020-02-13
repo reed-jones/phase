@@ -39,7 +39,7 @@ const recursiveMerge = (
     });
   } else {
     console.warn(
-      `[Vuexcellent] The server side data does not match client side expectations.
+      `[@phased/state] The server side data does not match client side expectations.
 Server: ${JSON.stringify(source)}.
 Client: ${JSON.stringify(target)}`
     );
