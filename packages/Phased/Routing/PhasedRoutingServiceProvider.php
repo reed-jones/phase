@@ -66,25 +66,23 @@ class PhasedRoutingServiceProvider extends ServiceProvider
      */
     public function registerRouterMacro(): void
     {
-        foreach (['phase', 'vuex'] as $macro) {
-            Route::macro($macro, function (...$args) {
-                $route = $this->match(['GET', 'HEAD'], ...$args);
+        Route::macro('phase', function (...$args) {
+            $route = $this->match(['GET', 'HEAD'], ...$args);
 
-                $controller = $route->action['controller'] ?? null;
+            $controller = $route->action['controller'] ?? null;
 
-                // make sure its not a closure
-                // & make sure its controller@method
-                if (is_string($controller) && Str::is('*@*', $controller)) {
-                    Phase::addRoute($route->uri, $route->action);
-                } else {
-                    throw new Exception("Route::phase is not compatible with closures.\n"
-                        ."Please use the controller@method syntax.\n"
-                        ."Failed on '{$route->uri}' route.");
-                }
+            // make sure its not a closure
+            // & make sure its controller@method
+            if (is_string($controller) && Str::is('*@*', $controller)) {
+                Phase::addRoute($route->uri, $route->action);
+            } else {
+                throw new Exception("Route::phase is not compatible with closures.\n"
+                    ."Please use the controller@method syntax.\n"
+                    ."Failed on '{$route->uri}' route.");
+            }
 
-                return $route;
-            });
-        }
+            return $route;
+        });
     }
 
     /**

@@ -23,10 +23,11 @@ export const hydrate = (vuexState: VuexStore, options: VuexcellentOptions = defa
     ...options
   }
   // PHP Converts the empty array to a... empty array, booo
-  let phaseState = window.__PHASE_STATE__ || {}
-  if (Array.isArray(phaseState) && !phaseState.length) {
-    phaseState = {}
+  let INITIAL = window.__PHASE_STATE__ || {};
+  if (Array.isArray(INITIAL) && !INITIAL.length) {
+    INITIAL = {}
   }
+  let { mutations, actions, ...phaseState } = INITIAL
 
   // merge incoming (store) options with window.__PHASE_STATE__
   const mergedState = <VuexStore>(
@@ -51,8 +52,12 @@ export const hydrate = (vuexState: VuexStore, options: VuexcellentOptions = defa
 
     // inject plugin
     newState.plugins = newState.plugins
-      ? [VuexcellentPlugin, ...newState.plugins]
-      : [VuexcellentPlugin];
+      ? [
+        VuexcellentPlugin,
+        ...newState.plugins
+      ] : [
+        VuexcellentPlugin
+      ];
 
   } else if (options.generateMutations) {
     console.error(
