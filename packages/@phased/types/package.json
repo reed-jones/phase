@@ -1,6 +1,6 @@
 {
   "name": "@phased/types",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Typescript types for @phased packages",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "homepage": "",

@@ -27,7 +27,7 @@ export const hydrate = (vuexState: VuexStore, options: VuexcellentOptions = defa
   if (Array.isArray(INITIAL) && !INITIAL.length) {
     INITIAL = {}
   }
-  let { mutations, actions, ...phaseState } = INITIAL
+  let { mutations, actions, ...phaseState } = <VuexStore>INITIAL
 
   // merge incoming (store) options with window.__PHASE_STATE__
   const mergedState = <VuexStore>(
