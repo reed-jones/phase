@@ -31,8 +31,8 @@ class VuexFacadeStoreTest extends TestCase
         $this->assertVuex(
             ['modules' => [
                 $namespace => [
-                    'state' => $data
-                ]
+                    'state' => $data,
+                ],
             ]]
         );
     }
@@ -55,8 +55,8 @@ class VuexFacadeStoreTest extends TestCase
                     'state' => [
                         'works' => true,
                         'success' => 'confirmed',
-                    ]
-                ]
+                    ],
+                ],
             ]]
         );
     }
@@ -76,15 +76,15 @@ class VuexFacadeStoreTest extends TestCase
         $this->assertVuex(
             [
                 'state' => [
-                    'works' => true
+                    'works' => true,
                 ],
                 'modules' => [
                     $namespace => [
                         'state' => [
                             'success' => 'confirmed',
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ]
         );
     }

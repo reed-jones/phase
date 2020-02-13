@@ -25,14 +25,14 @@ class CreateTestbenchUsersTable extends Migration
 
         DB::table('users')->insert([
             'email' => 'reed@example.com',
-            'name' => "Reed Jones",
+            'name' => 'Reed Jones',
             'created_at' => $now,
             'updated_at' => $now,
         ]);
 
         DB::table('users')->insert([
             'email' => 'test@example.com',
-            'name' => "Test User",
+            'name' => 'Test User',
             'created_at' => $now,
             'updated_at' => $now,
         ]);

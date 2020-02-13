@@ -15,7 +15,7 @@ class VuexFacadeLazyEvaluationTest extends TestCase
         [$state, $expected] = $args;
         Vuex::state($state);
 
-        $this->assertVuex([ 'state' => $expected ]);
+        $this->assertVuex(['state' => $expected]);
     }
 
     /**
@@ -38,25 +38,25 @@ class VuexFacadeLazyEvaluationTest extends TestCase
                 function () {
                     return [
                         'numbers' => [1, 2, 3, 4, 5],
-                        'string' => 'hello world'
+                        'string' => 'hello world',
                     ];
                 },
                 [
                     'numbers' => [1, 2, 3, 4, 5],
-                    'string' => 'hello world'
-                ]
+                    'string' => 'hello world',
+                ],
             ],
             [
                 [
                     'numbers' => [1, 2, 3, 4, 5],
                     'string' => function () {
                         return 'hello world';
-                    }
+                    },
                 ],
                 [
                     'numbers' => [1, 2, 3, 4, 5],
-                    'string' => 'hello world'
-                ]
+                    'string' => 'hello world',
+                ],
             ],
             [
                 [
@@ -65,13 +65,13 @@ class VuexFacadeLazyEvaluationTest extends TestCase
                     },
                     'string' => function () {
                         return 'hello world';
-                    }
+                    },
                 ],
                 [
                     'numbers' => [1, 2, 3, 4, 5],
-                    'string' => 'hello world'
-                ]
-            ]
+                    'string' => 'hello world',
+                ],
+            ],
         ];
     }
 
@@ -83,7 +83,7 @@ class VuexFacadeLazyEvaluationTest extends TestCase
                 function () {
                     return [
                         'test' => 5,
-                        'great' => ['your', 'telling', 'me']
+                        'great' => ['your', 'telling', 'me'],
                     ];
                 },
                 [
@@ -91,17 +91,17 @@ class VuexFacadeLazyEvaluationTest extends TestCase
                         'numbers' => [
                             'state' => [
                                 'test' => 5,
-                                'great' => ['your', 'telling', 'me']
-                            ]
-                        ]
-                    ]
-                ]
+                                'great' => ['your', 'telling', 'me'],
+                            ],
+                        ],
+                    ],
+                ],
             ],
             [
                 'numbers/testing', function () {
                     return [
                         'test' => 5,
-                        'great' => ['your', 'telling', 'me']
+                        'great' => ['your', 'telling', 'me'],
                     ];
                 },
                 [
@@ -111,38 +111,38 @@ class VuexFacadeLazyEvaluationTest extends TestCase
                                 'testing' => [
                                     'state' => [
                                         'test' => 5,
-                                        'great' => ['your', 'telling', 'me']
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
+                                        'great' => ['your', 'telling', 'me'],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
             ],
             [
                 'numbers', [
                     'test' => 5,
                     'great' => function () {
                         return ['your', 'telling', 'me'];
-                    }
+                    },
                 ],
                 [
                     'modules' => [
                         'numbers' => [
                             'state' => [
                                 'test' => 5,
-                                'great' => ['your', 'telling', 'me']
-                            ]
-                        ]
-                    ]
-                ]
+                                'great' => ['your', 'telling', 'me'],
+                            ],
+                        ],
+                    ],
+                ],
             ],
             [
                 'numbers/testing', [
                     'test' => 5,
                     'great' => function () {
                         return ['your', 'telling', 'me'];
-                    }
+                    },
                 ],
                 [
                     'modules' => [
@@ -151,14 +151,14 @@ class VuexFacadeLazyEvaluationTest extends TestCase
                                 'testing' => [
                                     'state' => [
                                         'test' => 5,
-                                        'great' => ['your', 'telling', 'me']
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                        'great' => ['your', 'telling', 'me'],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 }

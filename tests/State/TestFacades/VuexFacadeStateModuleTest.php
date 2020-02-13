@@ -29,8 +29,8 @@ class VuexFacadeStateModuleTest extends TestCase
             Vuex::toArray(),
             ['modules' => [
                 $namespace => [
-                    'state' => $data
-                ]
+                    'state' => $data,
+                ],
             ]]
         );
     }
@@ -49,13 +49,14 @@ class VuexFacadeStateModuleTest extends TestCase
             Vuex::toArray(),
             ['modules' => [
                 $namespace => [
-                    'state' => ['numbers' => 5]
-                ]
+                    'state' => ['numbers' => 5],
+                ],
             ]]
         );
     }
 
-    public function test_vuex_nested_modules() {
+    public function test_vuex_nested_modules()
+    {
         $namespace = 'app/tests';
         $data = ['works' => 'true'];
 
@@ -67,16 +68,16 @@ class VuexFacadeStateModuleTest extends TestCase
                 'app' => [
                     'modules' => [
                         'tests' => [
-                            'state' => $data
-                        ]
-                    ]
-                ]
+                            'state' => $data,
+                        ],
+                    ],
+                ],
             ]]
         );
     }
 
-
-    public function test_vuex_nested_modules_merge_properly() {
+    public function test_vuex_nested_modules_merge_properly()
+    {
         $namespace = 'app/tests';
         $data_1 = ['works' => 'false'];
         $data_2 = ['hooray' => true];
@@ -98,11 +99,11 @@ class VuexFacadeStateModuleTest extends TestCase
                         'tests' => [
                             'state' => [
                                 'works' => 'true',
-                                'hooray' => true
-                            ]
-                        ]
-                    ]
-                ]
+                                'hooray' => true,
+                            ],
+                        ],
+                    ],
+                ],
             ]]
         );
     }
@@ -122,8 +123,8 @@ class VuexFacadeStateModuleTest extends TestCase
                     'state' => [
                         'works' => true,
                         'success' => 'confirmed',
-                    ]
-                ]
+                    ],
+                ],
             ]]
         );
     }
@@ -139,13 +140,13 @@ class VuexFacadeStateModuleTest extends TestCase
         $this->assertVuex(
             [
                 'state' => [
-                    'works' => true
+                    'works' => true,
                 ],
                 'modules' => [
                     $namespace => [
-                        'state' => [ 'success' => 'confirmed' ]
-                    ]
-                ]
+                        'state' => ['success' => 'confirmed'],
+                    ],
+                ],
             ]
         );
     }

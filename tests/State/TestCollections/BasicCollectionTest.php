@@ -14,9 +14,9 @@ class BasicCollectionTest extends TestCase
             [
                 'modules' => [
                     'numbers' => [
-                        'state' => [ 'digits' => [1,2,3,4,5] ]
-                    ]
-                ]
+                        'state' => ['digits' => [1, 2, 3, 4, 5]],
+                    ],
+                ],
             ]
         );
     }

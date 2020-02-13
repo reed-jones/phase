@@ -9,12 +9,13 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
+use JsonSerializable;
 use Phased\State\Exceptions\VuexInvalidKeyException;
 use Phased\State\Exceptions\VuexInvalidModuleException;
 use Phased\State\Exceptions\VuexInvalidStateException;
 use Phased\State\Facades\Vuex;
 
-class VuexFactory implements Arrayable, Jsonable
+class VuexFactory implements Arrayable, Jsonable, JsonSerializable
 {
     /**
      * Base (non-namespaced) vuex state.
@@ -228,8 +229,6 @@ class VuexFactory implements Arrayable, Jsonable
     {
         $store = [];
 
-        // TODO: generate actions for each namespace/key: App/VuexLoader/Users::users() => users/refreshUsers
-
         if (! empty($this->_state) || ! empty($this->_lazyState)) {
             $store['state'] = [];
         }
@@ -271,29 +270,22 @@ class VuexFactory implements Arrayable, Jsonable
         }
 
         if (! empty($this->_mutations)) {
-            // Don't want to merge since we want each mutation to run sequentially
             $store['mutations'] = $this->_mutations;
-            // foreach ($this->_mutations as $mutation) {
-            //     $store['mutations'] = array_merge_phase($store['mutations'], $this->generateMutations($mutation));
-            // }
         }
 
         if (! empty($this->_lazyMutations)) {
-            foreach ($this->_lazyMutations as $mutation) {
-                $store['mutations'] = array_merge_phase($store['mutations'], $this->generateLazyMutations($mutation));
+            foreach ($this->_lazyMutations as $mutation => $value) {
+                array_push($store['mutations'], [$mutation, $value()]);
             }
         }
 
         if (! empty($this->_actions)) {
-            $store['mutations'] = $this->_mutations;
-            // foreach ($this->_actions as $action) {
-            //     $store['actions'] = array_merge_phase($store['actions'], $this->generateActions($action));
-            // }
+            $store['actions'] = $this->_actions;
         }
 
         if (! empty($this->_lazyActions)) {
-            foreach ($this->_lazyActions as $action) {
-                $store['actions'] = array_merge_phase($store['actions'], $this->generateLazyAction($action));
+            foreach ($this->_lazyActions as $action => $value) {
+                array_push($store['actions'], [$action, $value()]);
             }
         }
 
@@ -309,21 +301,39 @@ class VuexFactory implements Arrayable, Jsonable
     }
 
     /**
+     * Alias for toJson.
+     */
+    public function asJson($options = 0)
+    {
+        return $this->toJson($options);
+    }
+
+    /**
+     * Alias for toResponse.
+     */
+    public function asResponse()
+    {
+        return $this->toResponse();
+    }
+
+    /**
+     * Convert the object into something JSON serializable.
+     *
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
+    }
+
+    /**
      * Returns the currently saved data as a json string.
      *
      * @return string|false
      */
     public function toJson($options = 0)
     {
-        return json_encode($this->toArray(), $options);
-    }
-
-    /**
-     * Alias for toJson.
-     */
-    public function asJson($options = 0)
-    {
-        return json_encode($this->toArray(), $options);
+        return json_encode($this->jsonSerialize(), $options);
     }
 
     /**
@@ -335,14 +345,6 @@ class VuexFactory implements Arrayable, Jsonable
     public function toResponse()
     {
         return response()->json(['$vuex' => $this->toArray()]);
-    }
-
-    /**
-     * Alias for toResponse.
-     */
-    public function asResponse()
-    {
-        return $this->toResponse();
     }
 
     /**
@@ -502,20 +504,22 @@ class VuexFactory implements Arrayable, Jsonable
     /**
      * Dispatch an action on the front end.
      */
-    public function dispatch($action, $value)
+    public function dispatch($action, $value = null)
     {
         if (! is_string($action) || empty($action)) {
             throw new VuexInvalidModuleException('$mutation must be a string.');
         }
 
-        if (is_string($value) || is_bool($value) || is_numeric($value)) {
-            array_push($this->_actions, [$action => $value]);
+        if (! isset($value)) {
+            array_push($this->_actions, [$action]);
+        } elseif (is_string($value) || is_bool($value) || is_numeric($value)) {
+            array_push($this->_actions, [$action, $value]);
         } else {
             [$isLazy, $newValue] = $this->verifyState($value);
             if ($isLazy) {
-                array_push($this->_lazyActions, [$action => $newValue]);
+                array_push($this->_lazyActions, [$action, $newValue]);
             } else {
-                array_push($this->_actions, [$action => $newValue]);
+                array_push($this->_actions, [$action, $newValue]);
             }
         }
 
@@ -525,20 +529,22 @@ class VuexFactory implements Arrayable, Jsonable
     /**
      * Commits a mutation on the front end.
      */
-    public function commit($mutation, $value)
+    public function commit($mutation, $value = null)
     {
         if (! is_string($mutation) || empty($mutation)) {
             throw new VuexInvalidModuleException('$mutation must be a string.');
         }
 
-        if (is_string($value) || is_bool($value) || is_numeric($value)) {
-            array_push($this->_mutations, [$mutation => $value]);
+        if (! isset($value)) {
+            array_push($this->_mutations, [$mutation]);
+        } elseif (is_string($value) || is_bool($value) || is_numeric($value)) {
+            array_push($this->_mutations, [$mutation, $value]);
         } else {
             [$isLazy, $newValue] = $this->verifyState($value);
             if ($isLazy) {
-                array_push($this->_lazyMutations, [$mutation => $newValue]);
+                array_push($this->_lazyMutations, [$mutation, $newValue]);
             } else {
-                array_push($this->_mutations, [$mutation => $newValue]);
+                array_push($this->_mutations, [$mutation, $newValue]);
             }
         }
 

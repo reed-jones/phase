@@ -2,8 +2,8 @@
 
 namespace Phased\Tests\State;
 
-use Phased\State\Facades\Vuex;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
+use Phased\State\Facades\Vuex;
 use Phased\State\PhasedStateServiceProvider;
 
 class TestCase extends OrchestraTestCase
@@ -19,7 +19,6 @@ class TestCase extends OrchestraTestCase
         $this->loadMigrationsFrom(realpath(__DIR__.'/migrations'));
     }
 
-
     /**
      * Define environment setup.
      *
@@ -33,7 +32,7 @@ class TestCase extends OrchestraTestCase
     }
 
     /**
-     * Load package service provider
+     * Load package service provider.
      *
      * @param \Illuminate\Foundation\Application $app
      *
@@ -42,12 +41,12 @@ class TestCase extends OrchestraTestCase
     protected function getPackageProviders($app)
     {
         return [
-            PhasedStateServiceProvider::class
+            PhasedStateServiceProvider::class,
         ];
     }
 
     /**
-     * Load package alias
+     * Load package alias.
      *
      * @param \Illuminate\Foundation\Application $app
      *
