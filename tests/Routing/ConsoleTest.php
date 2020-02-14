@@ -42,13 +42,13 @@ class ConsoleTest extends TestCase
 
         $this->assertSame(
             [
-                "entry",
-                "state",
-                "initial_state_key",
-                "initial_state_id",
-                "redirects",
-                "ssr",
-                "assets"
+                'entry',
+                'state',
+                'initial_state_key',
+                'initial_state_id',
+                'redirects',
+                'ssr',
+                'assets',
             ],
             $configKeys
         );

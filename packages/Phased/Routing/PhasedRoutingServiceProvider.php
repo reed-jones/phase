@@ -84,9 +84,6 @@ class PhasedRoutingServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Registers route generation cli command.
-     */
     public function registerCommands(): void
     {
         if ($this->app->runningInConsole()) {
@@ -94,6 +91,9 @@ class PhasedRoutingServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * Registers phase:: namespace for views.
+     */
     public function registerBlades(): void
     {
         view()->addNamespace('phase', base_path('vendor/phased/routing/views'));

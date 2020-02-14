@@ -2,10 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and starting with version v0.1.0, this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+As of version v0.1.0, this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Planned]
 - add `--model=Users\User --keys=all,active` options to `artisan make:loader` command.
+- laravel-mix watch/hot to recompile on changes to `routes/web.php`
 
 ## [Unreleased]
 - `php artisan make:loader` Generate empty Module Loader stubs
