@@ -83,6 +83,7 @@ mix
     })
     .phase()
 ```
+
 ## Server Setup (Back End)
 
 After installing both routing & state components with composer. Phase is ready to roll.
@@ -210,7 +211,7 @@ export default new Store(hydrate({
       }
     }
   }
-}));
+}))
 ```
 ```php
 App\Flight::query()
@@ -235,19 +236,154 @@ class Flight extends Model
 App\Flight::find(5)->toVuex('flights', 'selected');
 ```
 
+### Mutations
+Although the above approaches cover a wide range of use cases, sometimes a bit more finesse may be required. For a bit more control, the `Vuex::commit($mutation, $value);` is provided. This allows full control for calling your vuex mutations from your controllers. These mutations will be called _after_ all the 'automatic' mutations above (`toVuex`, `::module`, `::state`), however the order in which the mutations are called cannot be relied upon.
+```php
+use Phased\State\Facades\Vuex;
 
-  - Lazy Loading
-  - Module Loaders/Module Definitions
-    - `Vuex::register([ UserModuleDefinition::class ]);` Put this into AppServiceProvider
-    - `Vuex::load($namespace, $key);` will load the data from the module definition above. If not specified, the namespace will attempt to be pulled from the class name, but can be overridden using `protected $namespace = 'users'` for example. The `$key` will both be the where in the front end the data will be saved, and the name of the function on the class to be called.
+Vuex::commit('SET_COUNT', 5);
+Vuex::commit('user/SET_USER', Auth::user());
+```
+
+### Actions
+Much like mutations above, Actions can be called using the `dispatch` method.
+```php
+use Phased\State\Facades\Vuex;
+
+Vuex::dispatch('increment', 5);
+Vuex::dispatch('user/setActive', Auth::user());
+```
+
+### Module Loaders
+Very often you will want your vuex modules to be loaded in the same way. Phase provides the concept of Module Loaders for this purpose. A Module Loader is associated with a vuex module on the front end, and a method can be created for each root level key in that modules state. All Module Loaders following the naming convention of `app/VuexLoaders/{namespace}ModuleLoader.php` will get automatically discovered, however you can register any class manually in the `boot` method of your application's `AppServiceProvider`.
+
+```php
+use Phased\State\Facades\Vuex;
+
+// Custom module registration
+Vuex::register([
+  MyVuexModuleLoader::class,
+]);
+```
+
+The Vuex namespace will be guessed based on the class name, and naming conventions, however if needed, the namespace can be specified by adding `protected $namespace = 'app/users';`
+
+A Module Loader is likely best explained through examples. Given the following `users` vuex module:
+```js
+// 'users' Vuex Module
+const state = {
+  all: [],
+  active: null,
+  count: 0
+}
+```
+A matching Module Loader could be written as
+```php
+// app/VuexLoaders/UsersModuleLoader.php
+namespace App\VuexLoaders;
+
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use Phased\State\Support\VuexLoader as ModuleLoader;
+
+class AppModuleLoader extends ModuleLoader
+{
+  /**
+   * Gets a list of all available users
+   *
+   * @return \Illuminate\Support\Collection
+   */
+  public function all()
+  {
+    return User::select('id', 'name')->get();
+  }
+
+  /**
+   * Gets the details for the requested user
+   *
+   * @return App\User
+   */
+  public function active($id)
+  {
+    return User::find($id);
+  }
+
+  /**
+   * Gets the total count of all the users in the system
+   *
+   * @return int
+   */
+  public function count()
+  {
+    return User::count();
+  }
+}
+```
+
+Now anytime you need to fetch this data, it can be called using the `load` or `lazyLoad` methods.
+```php
+use Phased\State\Facades\Vuex;
+
+// Loads all users into users module at $store.state.users.all
+Vuex::load('users', 'all');
+// Loads user 1 into users.active
+Vuex::load('users', 'active', 1);
+// Load multiple keys at once
+Vuex::load('users', [
+  'all',
+  'active' => 1,
+  'count'
+]);
+```
+
+In some cases you may need to lazy load the data. A common use case for this is attaching key user details on page load. You might try to accomplish this by adding something like the following in `AppServiceProvider`.
+```php
+// AppServiceProvider
+public function boot()
+{
+  if (!request()->expectsJson()) {
+    Vuex::load('auth', 'user');
+  }
+}
+
+// AuthModuleLoader.php
+public function user()
+{
+  return Auth::user();
+}
+```
+However since this runs before the auth middleware, `Auth::user()` will always return null. This is easily fixed using 'lazy loading'. Normally data is eagerly loaded when the function is called, with Lazy Loading however the data is put in queue and not loaded until the final response is being formed.
+```php
+Vuex::lazyLoad('auth', 'user');
+```
+
+### Lazy Loading
+In addition to the Module Loader `::lazyLoad` convenience method, any data can be lazy loaded by providing a function which returns the data instead of the data itself.
+
+```php
+// Lazy load the entire object
+Vuex::module('user', fn() => ['active' => Auth::user() ] );
+
+// Lazy Load a single key
+Vuex::module('user', [
+  'active' => function () {
+    return Auth::user();
+  }
+]);
+
+// These work with state too
+Vuex::state(['number' => fn() => 5]);
+Vuex::state(function () {
+  return ['number' => 5]
+});
+```
+
 
 ## Troubleshooting
-  - `dd(Vuex::toArray());` will dump all the currently saved vuex state
-  - For Api calls, the mutation will be visible from within the Vue DevTools mutations tab
-
+  - `Vuex::dd();` or `dd(Vuex::toArray());` will dump all the currently saved vuex state
+  - For Api calls, any mutations will (should) be visible from within the Vue DevTools mutations tab
 
 ## Example
-
 To kick things off with a basic example, lets create a simple controller and load the first page of our new app.
 ```sh
 php artisan make:controller PhaseController
