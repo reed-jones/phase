@@ -293,6 +293,14 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
     }
 
     /**
+     * dd the current state.
+     */
+    public function dd()
+    {
+        dd($this->toArray());
+    }
+
+    /**
      * Alias for toArray.
      */
     public function asArray()
