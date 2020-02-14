@@ -1,0 +1,10 @@
+<?php
+
+namespace {{namespace}}VuexLoaders;
+
+use Phased\State\Support\VuexLoader;
+
+class {{module}}ModuleLoader extends VuexLoader
+{
+    //
+}

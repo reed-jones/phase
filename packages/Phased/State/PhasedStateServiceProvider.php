@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Phased\State\Commands\MakeModuleLoader;
 use Phased\State\Facades\Vuex;
 use Phased\State\Factories\VuexFactory;
 use Phased\State\Mixins\VuexCollectionMixin;
@@ -36,19 +37,39 @@ class PhasedStateServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $automatic = collect(glob(app_path().'/VuexLoaders/*ModuleLoader.php'))
-            ->map(function ($file) {
-                return str_replace('/', '\\', Str::replaceLast('.php', '', Str::replaceFirst(app_path().'/', Container::getInstance()->getNamespace(), $file)));
-            })
-            ->toArray();
+        $this->autoDiscoverModuleLoaders();
 
-        Vuex::register($automatic);
+        $this->registerCommands();
 
         // apply response & collection mixins
         $this->applyMixins();
 
-        // blade directives @app @vuex
+        // blade directives @vuex
         $this->setDirectives();
+    }
+
+    protected function autoDiscoverModuleLoaders()
+    {
+        $automatic = collect(glob(app_path().'/VuexLoaders/*ModuleLoader.php'))
+            ->map(function ($file) {
+                $dropPath = Str::replaceFirst(app_path().'/', Container::getInstance()->getNamespace(), $file);
+                $dropExtension = Str::replaceLast('.php', '', $dropPath);
+
+                return str_replace('/', '\\', $dropExtension);
+            })
+            ->toArray();
+
+        Vuex::register($automatic);
+    }
+
+    /**
+     * Registers ModuleLoader generation cli command.
+     */
+    public function registerCommands(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([MakeModuleLoader::class]);
+        }
     }
 
     /**
