@@ -34,7 +34,7 @@ Route::middleware(['auth', 'load:users,active|posts,all'])->group(function () {
 - `Phased\State\Factories\VuexFactory::store(...)` is deprecated however there are no current plans for removal
 
 ### Fixed
-- @phased/laravel-mix plugin should better track changes to `routes/web.php`
+- @phased/laravel-mix plugin should better track updates to `routes/web.php` during npm run hot/watch
 - config('phase') should pick up a project `config/phase.php` overrides again
 - phpunit phased/routing tests were fixed
 - `->toVuex()` with only one argument again saves to base state i.e. `->toVuex('user')` => `$store.state.user`
