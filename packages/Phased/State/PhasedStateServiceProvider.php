@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 /* Macros */
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Router;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Phased\State\Commands\MakeModuleLoader;
