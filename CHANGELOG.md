@@ -6,9 +6,11 @@ As of version v0.1.0, this project as a whole adheres to [Semantic Versioning](h
 
 ## [Planned]
 - add `--model=Users\User --keys=all,active` options to `artisan make:loader` command.
-- laravel-mix watch/hot to recompile on changes to `routes/web.php`
 
 ## [Unreleased]
+- laravel-mix plugin has fixed (removed) default options
+- moved PhaseRoutes import from `@phased/webpack-plugin/routes` to `@phased/phase/routes`
+- recompile `npm run hot` & `npm run watch` when changes to `routes/web.php` occur
 - `php artisan make:loader` Generate empty Module Loader stubs
 - `Phased\State\Facades\Vuex::dd()` dd's the current store data
 - `Phased\State\Middleware\ModuleLoaderMiddleware::class` module loading middleware

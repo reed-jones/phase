@@ -25,9 +25,9 @@
     "check": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@phased/state": "^0.1.0",
-    "@phased/routing": "^0.1.0",
     "@phased/laravel-mix": "^0.1.0",
+    "@phased/routing": "^0.1.0",
+    "@phased/state": "^0.1.0",
     "@phased/webpack-plugin": "^0.1.0"
   },
   "devDependencies": {

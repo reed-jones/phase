@@ -41,12 +41,7 @@ export default class PhaseMixPlugin {
    *
    * @return {void}
    */
-  register(
-    options: JSConfiguration = {
-      redirects: {},
-      output: ""
-    }
-  ): void {
+  register(options: JSConfiguration = {}): void {
     const phpConfig = options.phpConfig ?? artisan("phase:routes --json --config")
 
     this.options = options;

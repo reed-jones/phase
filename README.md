@@ -4,11 +4,11 @@
 Phase aims to integrate Laravel, Vuex, & Vue Router as seamlessly as possible. All phase routes specified in your `routes/web.php` are automatically configured for slick SPA navigation. All configured api calls will automatically be committed into your vuex store. Data loaded through your view controllers is immediately available in the vuex store. No waiting for separate api calls, No `mutation` boilerplate: `state.count = count`. No chance of your vue-router configuration getting out of sync with your web routes. No reason to give up the nice Route -> Controller -> Page view flow.
 
 ## Installation
-  - `npm i -D @phased/phase` (meta package)
+  - `npm install --save-dev @phased/phase`
   - `composer require phased/routing`
   - `composer require phased/state`
 
-  - * Note Currently routing depends on state being installed, but further decoupling is planned so that the two packages may be used independently. State however is standalone at this point and can be used by itself if no SPA routing is required. just install `@phased/state` instead of the `@phased/phase` meta package.
+  - * Note Currently routing depends on state being installed, but further decoupling is planned so that the two packages may be used independently. State however is standalone at this point and can be used by itself if no SPA routing is required. For this configuration only `npm install @phased/state` & `composer require phased/state` are needed.
 
 ## Client Setup (Front End)
 
@@ -41,12 +41,12 @@ export default new Store(hydrate({
 ```
 
 ### Vue Router/Route Management
-Front end Vue Router integration falls into two steps. Configuring Laravel Mix (or Webpack), and setting up the router. Router setup is regular vue-router setup, so feel free to refer to the [docs.](https://router.vuejs.org/guide/). Phased however makes it much simpler as it supplies the route definitions. Below is a simple, yet complete example of the router configuration.
+Front end Vue Router integration falls into two steps. Configuring Laravel Mix (or Webpack), and setting up the router. Router setup is regular vue-router setup, so feel free to refer to the [docs.](https://router.vuejs.org/guide/). Phased however makes it much simpler as it supplies the route definitions. Below is a simple, yet complete example of the router configuration. For many use cases, this is all that will be required.
 ```js
 // router.js
 import Vue from 'vue'
 import VueRouter from 'vue-router';
-import PhaseRoutes from '@phased/webpack-plugin/routes'
+import PhaseRoutes from '@phased/phase/routes'
 
 Vue.use(VueRouter)
 
@@ -64,6 +64,15 @@ require('@phased/phase')
 mix.phase()
 ```
 
+Alternatively the webpack plugin is exposed, and can be used directly
+```js
+const VueRouterAutoloadPlugin = require("@phased/webpack-plugin")
+//...
+  plugins: [
+    new VueRouterAutoloadPlugin({})
+  ]
+```
+
 Phase configuration pulls the required assets (js/scss files) from the phase config,
 A slightly more complex/realistic configuration with tailwind setup would look along the lines of
 ```js
@@ -71,6 +80,7 @@ A slightly more complex/realistic configuration with tailwind setup would look a
 const mix = require('laravel-mix')
 const path = require('path')
 const tailwindcss = require('tailwindcss')
+require('laravel-mix-purgecss');
 require('@phased/phase')
 
 mix
@@ -81,12 +91,13 @@ mix
         processCssUrls: false,
         postCss: [ tailwindcss('./tailwind.config.js') ],
     })
+    .purgeCss()
     .phase()
 ```
 
 ## Server Setup (Back End)
 
-After installing both routing & state components with composer. Phase is ready to roll.
+After installing both routing & state components with composer, Phase is ready to roll. No really. Thats all the required setup. For more customization options, a 'phased' config is exposed and can be published. `php artisan vendor:publish --provider="Phased\Routing\PhaseServiceProvider" --tag="config"`
 
 ## Routing
 

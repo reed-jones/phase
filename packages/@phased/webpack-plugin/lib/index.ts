@@ -19,7 +19,19 @@ export default class VueRouterAutoloadPlugin {
       writeCodeToFile(to, code);
     };
 
+    // Run Route Generation
     compiler.hooks.run.tap(pluginName, generate);
     compiler.hooks.watchRun.tap(pluginName, generate);
+
+    // Recompile for web.php changes
+    compiler.hooks.afterCompile.tap(pluginName, compilation => {
+      const file = path.resolve('./routes/web.php')
+
+      if (Array.isArray(compilation.fileDependencies)) {
+        compilation.fileDependencies.push(file)
+      } else {
+        compilation.fileDependencies.add(file)
+      }
+    })
   }
 }
