@@ -32,4 +32,14 @@ class PhaseController
     {
         return Phase::view();
     }
+
+    /**
+     * Api call to retrieve a random number from the server.
+     */
+    public function getRandomNumber()
+    {
+        Vuex::state(['number' => random_int(0, 100)]);
+
+        return response()->vuex();
+    }
 }

@@ -1,2 +1,0 @@
-Route::phase('/count/{count}', 'PhaseController@CounterPage');
-Route::post('/count', 'PhaseController@SetCount');

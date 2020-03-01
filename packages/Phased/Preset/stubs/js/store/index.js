@@ -5,11 +5,9 @@ Vue.use(Vuex)
 
 // modules
 import app from './modules/app'
-import todo from './modules/todo'
 
 export default new Store({
     modules: {
-        app,
-        todo
+        app
     }
 })
