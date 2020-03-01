@@ -22,6 +22,9 @@
     "bump": "node -r esm build/version.js"
   },
   "dependencies": {
-    "esm": "^3.2.25"
+    "chalk": "^3.0.0",
+    "esm": "^3.2.25",
+    "minimist": "^1.2.0",
+    "prettier": "^1.19.1"
   }
 }
