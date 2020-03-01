@@ -18,6 +18,10 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "bump": "node -r esm build/version.js"
+  },
+  "dependencies": {
+    "esm": "^3.2.25"
   }
 }
