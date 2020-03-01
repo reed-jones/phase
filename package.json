@@ -23,7 +23,9 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
-    "test": "jest",
+    "test:js": "jest",
+    "test:php": "vendor/bin/phpunit",
+    "test": "yarn test:js && yarn test:php",
     "bump": "node -r esm build/version.js"
   },
   "dependencies": {}
