@@ -1,6 +1,6 @@
 {
   "name": "@phased/phase",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Auto SPA configuration focused on Laravel apps",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "homepage": "",
@@ -20,10 +20,10 @@
     "check": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@phased/laravel-mix": "^0.1.0",
-    "@phased/routing": "^0.1.0",
-    "@phased/state": "^0.1.0",
-    "@phased/webpack-plugin": "^0.1.0"
+    "@phased/laravel-mix": "^0.2.0",
+    "@phased/routing": "^0.2.0",
+    "@phased/state": "^0.2.0",
+    "@phased/webpack-plugin": "^0.2.0"
   },
-  "devDependencies": { "@phased/types": "^0.1.0" }
+  "devDependencies": { "@phased/types": "^0.2.0" }
 }
