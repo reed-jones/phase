@@ -51,6 +51,7 @@ class PhasedStateServiceProvider extends ServiceProvider
 
     protected function autoDiscoverModuleLoaders()
     {
+        // TODO: Register folders as namespaced modules
         $automatic = collect(glob(app_path().'/VuexLoaders/*ModuleLoader.php'))
             ->map(function ($file) {
                 $dropPath = Str::replaceFirst(app_path().'/', Container::getInstance()->getNamespace(), $file);

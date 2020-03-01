@@ -22,40 +22,63 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
      *
      * @var array
      */
-    private $_state = [];
+    protected $_state = [];
 
     /**
      * Base (non-namespaced) lazily evaluated vuex state.
      *
      * @var array
      */
-    private $_lazyState = [];
+    protected $_lazyState = [];
 
     /**
      * Vuex modules.
      *
      * @var array
      */
-    private $_modules = [];
+    protected $_modules = [];
 
     /**
      * Lazily evaluated Vuex modules.
      *
      * @var array
      */
-    private $_lazyModules = [];
+    protected $_lazyModules = [];
 
-    private $_mutations = [];
-    private $_lazyMutations = [];
-    private $_actions = [];
-    private $_lazyActions = [];
+    /**
+     * Mutations to be committed.
+     *
+     * @var array
+     */
+    protected $_mutations = [];
+
+    /**
+     * Lazy Evaluated mutations to be committed.
+     *
+     * @var array
+     */
+    protected $_lazyMutations = [];
+
+    /**
+     * Actions to be dispatched.
+     *
+     * @var array
+     */
+    protected $_actions = [];
+
+    /**
+     * Lazily Evaluated actions to be dispatched.
+     *
+     * @var array
+     */
+    protected $_lazyActions = [];
 
     /**
      * Registered Classes for vuex ModuleLoaders.
      *
      * @var array
      */
-    private $registeredMappings = [];
+    protected $registeredMappings = [];
 
     /**
      * ModuleLoader Manual Registration.
@@ -106,7 +129,7 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
     /**
      * Internal Module Loader Function.
      */
-    private function loadModule($namespace, $lazy, $keys, $args)
+    protected function loadModule($namespace, $lazy, $keys, $args)
     {
         if (is_string($keys)) {
             $keys = [$keys => $args];
