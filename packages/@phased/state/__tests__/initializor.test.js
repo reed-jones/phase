@@ -4,7 +4,9 @@ import axios from "axios";
 import { hydrate } from "..";
 
 jest.mock("axios");
+console.warn = jest.fn()
 jest.spyOn(console, 'warn');
+
 
 Vue.use(Vuex);
 

@@ -7,24 +7,8 @@
   "license": "ISC",
   "main": "dist/index.js",
   "types": "",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
-  "scripts": {
-    "compile": "rollup -c",
-    "dev": "rollup -c -w",
-    "build": "yarn types && NODE_ENV=production yarn compile",
-    "test": "jest",
-    "pretest": "yarn compile",
-    "types": "tsc",
-    "check": "tsc --noEmit --emitDeclarationOnly false"
-  },
-  "dependencies": {
-    "@types/webpack": "^4.41.3",
-    "axios": "^0.19.2"
-  }
+  "directories": { "lib": "lib", "test": "__tests__" },
+  "files": ["lib"],
+  "scripts": {},
+  "dependencies": { "@types/webpack": "^4.41.3", "axios": "^0.19.2" }
 }

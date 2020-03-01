@@ -10,22 +10,21 @@
     "@rollup/plugin-node-resolve": "^7.0.0",
     "@rollup/plugin-sucrase": "^3.0.0",
     "@sucrase/jest-plugin": "^2.0.0",
+    "chalk": "^3.0.0",
+    "esm": "^3.2.25",
+    "execa": "^4.0.0",
     "jest": "^25.1.0",
     "lerna": "^3.20.2",
+    "minimist": "^1.2.0",
+    "prettier": "^1.19.1",
     "rollup": "^1.29.0",
     "rollup-plugin-terser": "^5.2.0",
     "tslib": "^1.10.0",
     "typescript": "^3.7.5"
   },
   "scripts": {
-    "test": "lerna run test",
+    "test": "jest",
     "bump": "node -r esm build/version.js"
   },
-  "dependencies": {
-    "chalk": "^3.0.0",
-    "esm": "^3.2.25",
-    "execa": "^4.0.0",
-    "minimist": "^1.2.0",
-    "prettier": "^1.19.1"
-  }
+  "dependencies": {}
 }
