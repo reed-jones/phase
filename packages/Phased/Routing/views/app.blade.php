@@ -6,23 +6,24 @@
     <title>{{ config('app.name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @foreach (config('phase.assets.sass') as $styles)
-    <link rel="stylesheet" type="text/css" href="{{ mix(str_replace('sass', 'css', str_replace('scss', 'css', $styles))) }}">
+        <link rel="stylesheet" type="text/css" href="{{ mix(str_replace('sass', 'css', str_replace('scss', 'css', $styles))) }}">
     @endforeach
-
-
 </head>
  <body>
-    {!! ssr('js/app-server.js')
-            ->context('phased', Vuex::toArray())
+     @if(config('phase.ssr'))
+        {!! ssr('js/app-server.js')
+            ->context('__PHASE_STATE__', Vuex::toArray())
             // If ssr fails, we need a container to render the app client-side
             ->fallback('<div id="app"></div>')
-            ->render() !!}
-    {{-- @foreach (config('phase.assets.js') as $script)
-    <script src="{{ mix($script) }}"></script>
-    @endforeach --}}
-    @if(config('phase.state'))
-    @vuex
+            ->render(); !!}
+        @if(config('phase.hydrate'))
+        @if(config('phase.state')) @vuex @endif
+        <script defer src="{{ mix('js/app-client.js') }}"></script>
+        @endif
+    @else
+        <div id="app"></div>{{-- App --}}
+        @if(config('phase.state')) @vuex @endif {{-- Phased State --}}
+        <script src="{{ mix('js/app-client.js') }}"></script>{{-- Javascript --}}
     @endif
-    <script defer src="{{ mix('js/app-client.js') }}"></script>
 </body>
 </html>

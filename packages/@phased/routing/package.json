@@ -8,8 +8,13 @@
   "main": "dist/phased-routing.cjs.js",
   "module": "dist/phased-routing.esm.js",
   "browser": "dist/phased-routing.umd.js",
-  "directories": { "lib": "lib", "test": "__tests__" },
-  "files": ["dist"],
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "compile": "rollup -c",
     "dev": "rollup -c -w",
@@ -32,6 +37,12 @@
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.41.5"
   },
-  "dependencies": { "lodash.merge": "^4.6.2", "prettier": "^1.19.1" },
-  "peerDependencies": { "laravel-mix": "^5.0.1", "prettier": "^1.19.1" }
+  "dependencies": {
+    "lodash.merge": "^4.6.2",
+    "prettier": "^1.19.1"
+  },
+  "peerDependencies": {
+    "laravel-mix": "^5.0.1",
+    "prettier": "^1.19.1"
+  }
 }

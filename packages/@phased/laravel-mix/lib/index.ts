@@ -12,7 +12,9 @@ export default class PhaseMixPlugin {
       config: {
         assets: { js: [], sass: [] },
         redirects: {},
-        entry: ''
+        entry: '',
+        ssr: false,
+        hydrate: false
       },
       routes: []
     }
@@ -48,10 +50,15 @@ export default class PhaseMixPlugin {
 
     const { resourceDir = 'resources', publicDir = 'public', js:scripts, sass:styles } = phpConfig.config.assets
 
-    scripts.forEach(script => {
-      const out = path.basename(script, path.extname(script))
-      mix.js(`${resourceDir}/${script}`, path.resolve(Mix.paths.root(), `${publicDir}/js/${out}.js`));
-    });
+    // SSR Configuration
+    if (phpConfig.config.ssr) {
+      mix.js(path.resolve(__dirname, '../', 'app-server.js'), path.resolve(Mix.paths.root(), `${publicDir}/js/app-server.js`));
+    }
+
+    // Hydration & Client rendering
+    if (!phpConfig.config.ssr || phpConfig.config.hydrate) {
+      mix.js(path.resolve(__dirname, '../', 'app-client.js'), path.resolve(Mix.paths.root(), `${publicDir}/js/app-client.js`));
+    }
 
     styles.forEach(style => {
       const out = path.basename(style, path.extname(style))

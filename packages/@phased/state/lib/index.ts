@@ -4,7 +4,7 @@ import { mutantGenerator } from "./mutations";
 import { VuexcellentAutoCommitter } from "./committer";
 import { AxiosInstance } from "axios";
 declare var context: {
-  phased: object,
+  __PHASE_STATE__: object,
   axios: AxiosInstance
 };
 
@@ -14,18 +14,27 @@ const defaultOptions = <VuexcellentOptions>{
   mutationPrefix: `X_SET`
 };
 
+const isBrowser = typeof window !== 'undefined'
+const isServer = typeof window === 'undefined' && typeof context !== 'undefined'
+
 export const hydrate = (vuexState: VuexStore, options: VuexcellentOptions = defaultOptions) => {
   options = {
     ...defaultOptions,
     ...options
   }
+
+  let INITIAL = isBrowser
+    ? (window.__PHASE_STATE__ || {})
+    : isServer
+      ? (context.__PHASE_STATE__ || {})
+        : {}
+
   // PHP Converts the empty array to a... empty array, booo
-  let INITIAL = typeof window !== 'undefined'
-    ? window.__PHASE_STATE__ || {}
-    : context.phased;
   if (Array.isArray(INITIAL) && !INITIAL.length) {
     INITIAL = {}
   }
+
+  // Currently not running actions/mutations on page load
   let { mutations, actions, ...phaseState } = <VuexStore>INITIAL
 
   // merge incoming (store) options with window.__PHASE_STATE__
@@ -40,8 +49,10 @@ export const hydrate = (vuexState: VuexStore, options: VuexcellentOptions = defa
     : mergedState;
 
   // inject VuexcellentAutoCommitter into store.plugins
-  const axios: AxiosInstance | null = options.axios || <AxiosInstance | null>(typeof window !== 'undefined' ? window.axios : context.axios);
-  if (axios && options.generateMutations) {
+  const axios: AxiosInstance | null = options.axios
+    || <AxiosInstance | null>(isBrowser ? (window.axios || null) : (context.axios || null));
+
+  if (axios && options.generateMutations && isBrowser) {
     // prepare plugin
     const VuexcellentPlugin = VuexcellentAutoCommitter(
       axios,
@@ -60,7 +71,7 @@ export const hydrate = (vuexState: VuexStore, options: VuexcellentOptions = defa
 
   } else if (options.generateMutations) {
     console.error(
-      "[Vuexcellent] It appears that auto-mutate could not be initialized.\nAn instance of axios could not be found."
+      "[Phase] It appears that auto-mutate could not be initialized.\nAn instance of axios could not be found. Make sure window.axios is available"
     );
   }
 

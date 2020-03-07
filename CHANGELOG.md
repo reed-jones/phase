@@ -9,6 +9,18 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 - add `files: []` watch option for webpack plugin
 
 ## [Unreleased]
+### Added
+- Server Side Rendering option available in `config('phase.ssr')` (true/false)
+- Client Hydration via `config('phase.hydrate')` (SSR & no JS bundle)
+### Changed
+- main vue app should now `export default new Vue` and not mount the app (no `el: '#app'`). This allows for SSR to be toggled on/off.
+- It is now mandatory & non-configurable that the main entry is `app.js`.
+### Deprecated
+### Removed
+- `js` option in assets configuration is no longer used since SSR option has been added, and has been removed
+### Fixed
+- `@phased/state` no longer relies on `window` making it usable for other environments (primarily SSR, potentially NativeScript-vue)
+### Security
 
 
 ## [0.2.0] - 2020-03-01

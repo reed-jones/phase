@@ -32,6 +32,8 @@ declare module '@phased/routing' {
     entry: string, //'phase::app' unused in js
     redirects?: object,
     assets: PhaseAssets,
+    ssr: Boolean,
+    hydrate: Boolean
   }
 
   export interface JSConfiguration {
