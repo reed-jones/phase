@@ -31,10 +31,7 @@
     "@rollup/plugin-node-resolve": "^7.0.0",
     "@rollup/plugin-sucrase": "^3.0.0",
     "laravel-mix": "^5.0.1",
-    "rollup": "^1.29.0",
-    "rollup-plugin-terser": "^5.2.0",
-    "tslib": "^1.10.0",
-    "typescript": "^3.7.5"
+    "rollup-plugin-terser": "^5.2.0"
   },
   "dependencies": {
     "@phased/routing": "^0.2.0",
