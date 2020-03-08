@@ -97,7 +97,7 @@ mix
 
 ## Server Setup (Back End)
 
-After installing both routing & state components with composer, Phase is ready to roll. No really. Thats all the required setup. For more customization options, a 'phased' config is exposed and can be published. `php artisan vendor:publish --provider="Phased\Routing\PhaseServiceProvider" --tag="config"`
+After installing both routing & state components with composer, Phase is ready to roll. No really. Thats all the required setup. For more customization options, a 'phased' config is exposed and can be published. `php artisan vendor:publish --provider="Phased\Routing\PhasedRoutingServiceProvider" --tag="config"`
 
 ## Routing
 
