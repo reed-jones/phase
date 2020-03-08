@@ -48,6 +48,7 @@ class ConsoleTest extends TestCase
                 'initial_state_id',
                 'redirects',
                 'ssr',
+                'hydrate',
                 'assets',
             ],
             $configKeys
