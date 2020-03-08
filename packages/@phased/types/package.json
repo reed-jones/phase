@@ -1,22 +1,14 @@
 {
   "name": "@phased/types",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "description": "Typescript types for @phased packages",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "homepage": "",
   "license": "ISC",
   "main": "dist/index.js",
   "types": "",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
+  "directories": { "lib": "lib", "test": "__tests__" },
+  "files": ["lib"],
   "scripts": {},
-  "dependencies": {
-    "@types/webpack": "^4.41.3",
-    "axios": "^0.19.2"
-  }
+  "dependencies": { "@types/webpack": "^4.41.3", "axios": "^0.19.2" }
 }

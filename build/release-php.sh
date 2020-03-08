@@ -15,7 +15,7 @@ fi
 git tag $VERSION
 git push origin --tags
 
-for REMOTE in routing state
+for REMOTE in routing state phase
 do
     echo ""
     echo ""

@@ -8,7 +8,9 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 - add `--model=Users\User --keys=all,active` options to `artisan make:loader` command for increased stub generation usability.
 - add `files: []` watch option for webpack plugin
 
-## [Unreleased]
+## [Unreleased](https://github.com/reed-jones/phase/compare/v0.3.0...master)
+
+## [v0.3.0](https://github.com/reed-jones/phase/compare/v0.2.0...v0.3.0) - 2020-03-07
 ### Added
 - Server Side Rendering option available in `config('phase.ssr')` (true/false)
 - Client Hydration via `config('phase.hydrate')` (SSR & no JS bundle)
@@ -22,7 +24,7 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 - `@phased/state` no longer relies on `window` making it usable for other environments (primarily SSR, potentially NativeScript-vue)
 
 
-## [0.2.0] - 2020-03-01
+## [v0.2.0](https://github.com/reed-jones/phase/compare/v0.1.0...v0.2.0) - 2020-03-01
 
 ### Added
 - webpack watch mode now watches for changes to `routes/web.php`
@@ -38,7 +40,7 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 - laravel-mix plugin no longer requires an empty object passed as a minimum options configuration... (`.phase()` works again)
 
 
-## [0.1.0] - 2020-02-13
+## [0.1.0](https://github.com/reed-jones/phase/compare/v0.0.3...v0.1.0) - 2020-02-13
 
 ### Added
 - `response()->vuex()` and `response()->phase()` now behave the same. `response()->phase()` is preferred.

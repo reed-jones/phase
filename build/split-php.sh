@@ -20,7 +20,9 @@ git pull origin master
 # remote preset git@github.com:reed-jones/phase-preset-php.git
 remote routing git@github.com:reed-jones/phase-routing-php.git
 remote state git@github.com:reed-jones/phase-state-php.git
+remote phase git@github.com:reed-jones/phase-phase-php.git
 
 # split 'src/Phased/Preset' preset
 split 'packages/Phased/Routing' routing
 split 'packages/Phased/State' state
+split 'packages/Phased/Phase' phase
