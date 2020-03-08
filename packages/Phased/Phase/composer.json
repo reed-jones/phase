@@ -1,0 +1,32 @@
+{
+    "name": "phased/phase",
+    "description": "Phase meta package",
+    "type": "library",
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "Reed Jones",
+            "email": "reedjones@reedjones.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Phased\\Phase\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.x-dev"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "spatie/laravel-server-side-rendering": "^1.3",
+        "phased/routing": "@dev",
+        "phased/state": "@dev"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}

@@ -8,8 +8,15 @@
   "main": "dist/phase.cjs.js",
   "module": "dist/phase.esm.js",
   "browser": "dist/phase.umd.js",
-  "directories": { "lib": "lib", "test": "__tests__" },
-  "files": ["dist"],
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist",
+    "app-client.js",
+    "app-server.js"
+  ],
   "scripts": {
     "compile": "rollup -c",
     "dev": "rollup -c -w",
@@ -25,5 +32,7 @@
     "@phased/state": "^0.2.0",
     "@phased/webpack-plugin": "^0.2.0"
   },
-  "devDependencies": { "@phased/types": "^0.2.0" }
+  "devDependencies": {
+    "@phased/types": "^0.2.0"
+  }
 }

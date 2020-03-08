@@ -389,6 +389,8 @@ Vuex::state(function () {
 });
 ```
 
+## Server Side Rendering
+Server side rendering (SSR) is disabled out of the box, due to the fact that writing "universal" or "isomorphic" javascript can be a little more complex than standard Javascript, however there are great resources out there if you are curious: https://ssr.vuejs.org/guide/universal.html . To enable SSR in your Phase app, first add `NODE_PATH=` to your .env with the path to your node binary. Then simply update your `ssr` option in your config to be true. Now when you 'view source' & refresh the page you should see the raw html instead of the standard `<div id="app"></div>`. The other option available is `hydrate`. With this set to true, your vue app will be 'hydrated' with all the interactive elements & components you would expect from a vue app. When set to false, no Javascript is loaded on your page which depending on your goals may or may not be what you are looking for. Although a little out of date, and example of a non-hydrated app (albeit not built with phase) is [Netflix circa 2017](https://jakearchibald.com/2017/netflix-and-react/). Phase attempts to remove the barrier and make SSR easy, however there are a few rules you still need to follow in order to successfully write a universal app. The most important and easy to forget is you can no longer rely on the browser global api to be available. That means when the app is run on the server, there is no `window` or `document`,
 
 ## Troubleshooting
   - `Vuex::dd();` or `dd(Vuex::toArray());` will dump all the currently saved vuex state

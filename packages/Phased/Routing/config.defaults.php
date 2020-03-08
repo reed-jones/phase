@@ -55,13 +55,18 @@ return [
     | Server Side Rendering
     |--------------------------------------------------------------------------
     |
-    | https://github.com/spatie/laravel-server-side-rendering
+    | Turn SSR On/Off
     */
     'ssr' => false,
-    // 'ssr' => [
-    //     'client' => 'js/app-client.js',
-    //     'server' => 'js/app-server.js'
-    // ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Client Hydration
+    |--------------------------------------------------------------------------
+    |
+    | Enable or Disable Client side hydration for SSR enabled apps
+    */
+    'hydrate' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -71,7 +76,5 @@ return [
     'assets' => [
         'resources' => resource_path(),
         'public' => public_path(),
-        'js' => [],
-        'sass' => [],
     ],
 ];
