@@ -30,8 +30,7 @@
     "@phased/laravel-mix": "^0.3.1",
     "@phased/routing": "^0.3.1",
     "@phased/state": "^0.3.1",
-    "@phased/webpack-plugin": "^0.3.1",
-    "yarn": "^1.22.4"
+    "@phased/webpack-plugin": "^0.3.1"
   },
   "devDependencies": {
     "@phased/types": "^0.3.1"
