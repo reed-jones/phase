@@ -35,8 +35,8 @@ const phaseBeforeEnter = async (to, from, next) => {
       }
     }
 
+    // proceed to next page as usual
     return next()
-
   } catch (err) {
     const status = err && err.response && err.response.status
     if (status && redirects[status]) {

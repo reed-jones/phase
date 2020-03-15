@@ -1,6 +1,6 @@
 {
   "name": "@phased/webpack-plugin",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Webpack Route Generation Plugin for Phased",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "homepage": "",
@@ -20,13 +20,13 @@
     "types:check": "tsc --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
-    "@phased/types": "^0.3.1",
+    "@phased/types": "^0.4.0",
     "@rollup/plugin-alias": "^3.0.0",
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "@rollup/plugin-sucrase": "^3.0.0",
     "rollup-plugin-terser": "^5.2.0"
   },
-  "dependencies": { "@phased/routing": "^0.3.1" },
-  "peerDependencies": { "@phased/routing": "^0.3.1", "webpack": "^4.41.5" }
+  "dependencies": { "@phased/routing": "^0.4.0" },
+  "peerDependencies": { "@phased/routing": "^0.4.0", "webpack": "^4.41.5" }
 }

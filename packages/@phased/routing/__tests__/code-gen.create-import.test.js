@@ -50,7 +50,7 @@ describe("code-gen creates imports", () => {
     const importGenerator = createImport(true);
 
     expect(importGenerator(BasicRoute)).toBe(
-      `const ComponentName = () => import('../../../resources/js/ComponentName')`
+      `const ComponentName = () => import(/* webpackChunkName: "name" */ '../../../resources/js/ComponentName')`
     );
   });
 
@@ -84,9 +84,9 @@ describe("code-gen creates imports", () => {
     const importGenerator = createImport(true);
 
     expect(importGenerator(BasicRouteWithChildren)).toBe(
-      `const ComponentName = () => import('../../../resources/js/ComponentName')` +
+      `const ComponentName = () => import(/* webpackChunkName: "name" */ '../../../resources/js/ComponentName')` +
         "\n" +
-        `const ChildComponentName = () => import('../../../resources/js/ChildComponentName')`
+        `const ChildComponentName = () => import(/* webpackChunkName: "child" */ '../../../resources/js/ChildComponentName')`
     );
   });
 
