@@ -8,17 +8,20 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 - add `--model=Users\User --keys=all,active` options to `artisan make:loader` command for increased stub generation usability.
 - add `files: []` watch option for webpack plugin
 
-## [Unreleased](https://github.com/reed-jones/phase/compare/v0.3.0...master)
+## [Unreleased](https://github.com/reed-jones/phase/compare/v0.4.0...master)
+
+
+## [v0.4.0](https://github.com/reed-jones/phase/compare/v0.3.0...v0.4.0) - 2020-03-15
 ### Added
 - Now follows any axios redirects (with page transition, enabled by default)
 - Customizable `<head>` section (meta tags, etc) using optional `parts/head.blade.php`
-- route code splitting now available using the option `codeSplit: true` in `webpack.mix.js`
+- Route code splitting now available using the option `codeSplit: true` in `webpack.mix.js`
 
 ### Changed
-- all automated ajax requests append `phase=true` to the query string.
+- All automated ajax requests append `phase=true` to the query string.
 
 ### Fixed
-- after using vue-router, then navigating to an external site, pressing 'back' no longer displays json
+- After using vue-router, then navigating to an external site, pressing 'back' no longer displays json
 
 ## [v0.3.0](https://github.com/reed-jones/phase/compare/v0.2.0...v0.3.0) - 2020-03-07
 ### Added
