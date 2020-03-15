@@ -37,8 +37,9 @@ declare module '@phased/routing' {
   }
 
   export interface JSConfiguration {
-    redirects?: object, // { 404: 'Errors/PageNotFound' }
+    // redirects?: object, // { 404: 'Errors/PageNotFound' }
     output?: string, // path to routes.js
+    codeSplit?: boolean, // dynamic vs static imports for routes
     phpConfig?: PhasePhpOptions, //
   }
 

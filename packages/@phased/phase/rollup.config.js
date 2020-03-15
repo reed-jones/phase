@@ -34,6 +34,7 @@ export default [
       "axios",
       "vue",
       "vuex",
+      "@phased/state",
 
       // Routing
       "fs-extra",

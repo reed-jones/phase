@@ -23,6 +23,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Determines whether to use the vue-router integration
+    |--------------------------------------------------------------------------
+    |
+    | By default vue-router will be integrated if the Phased\Routing package
+    | has been installed
+    */
+    'routing' => class_exists('\Phased\Routing\Facades\Phase'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Window key to save the initial state
     |--------------------------------------------------------------------------
     |

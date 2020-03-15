@@ -1,6 +1,6 @@
 {
   "name": "@phased/laravel-mix",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Laravel Mix Plugin for Phased",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "homepage": "",
@@ -20,7 +20,7 @@
     "check": "tsc --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
-    "@phased/types": "^0.3.1",
+    "@phased/types": "^0.4.0",
     "@rollup/plugin-alias": "^3.0.0",
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-node-resolve": "^7.0.0",
@@ -29,12 +29,12 @@
     "rollup-plugin-terser": "^5.2.0"
   },
   "dependencies": {
-    "@phased/routing": "^0.3.1",
-    "@phased/webpack-plugin": "^0.3.1"
+    "@phased/routing": "^0.4.0",
+    "@phased/webpack-plugin": "^0.4.0"
   },
   "peerDependencies": {
-    "@phased/routing": "^0.3.1",
-    "@phased/webpack-plugin": "^0.3.1",
+    "@phased/routing": "^0.4.0",
+    "@phased/webpack-plugin": "^0.4.0",
     "laravel-mix": "^5.0.1"
   }
 }

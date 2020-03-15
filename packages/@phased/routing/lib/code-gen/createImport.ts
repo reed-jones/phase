@@ -7,7 +7,7 @@ export const createImport = (
   return (route: Route): string => {
     const preparedImport = createImport(dynamic, chunkNamePrefix);
     const { name, prefix, componentName, file_path } = route;
-    const webpackChunkName = `${chunkNamePrefix}${prefix}`;
+    const webpackChunkName = [chunkNamePrefix, prefix || name].filter(a => a).join('/');
     const webpackComment = webpackChunkName
       ? `/* webpackChunkName: "${webpackChunkName}" */ `
       : "";
