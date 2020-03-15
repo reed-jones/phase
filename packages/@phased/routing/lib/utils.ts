@@ -56,5 +56,5 @@ export function generateRoutes(options: JSConfiguration): string {
   // generates missing .vue page files from template
   createMissingTemplates(routes);
 
-  return createRoutes(routes, config);
+  return createRoutes(routes, config, options.codeSplit);
 }

@@ -8,8 +8,15 @@
   "main": "dist/phase.cjs.js",
   "module": "dist/phase.esm.js",
   "browser": "dist/phase.umd.js",
-  "directories": { "lib": "lib", "test": "__tests__" },
-  "files": ["dist", "app-client.js", "app-server.js"],
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist",
+    "app-client.js",
+    "app-server.js"
+  ],
   "scripts": {
     "compile": "rollup -c",
     "dev": "rollup -c -w",
@@ -23,7 +30,10 @@
     "@phased/laravel-mix": "^0.3.1",
     "@phased/routing": "^0.3.1",
     "@phased/state": "^0.3.1",
-    "@phased/webpack-plugin": "^0.3.1"
+    "@phased/webpack-plugin": "^0.3.1",
+    "yarn": "^1.22.4"
   },
-  "devDependencies": { "@phased/types": "^0.3.1" }
+  "devDependencies": {
+    "@phased/types": "^0.3.1"
+  }
 }
