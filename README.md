@@ -1,11 +1,11 @@
 # [Phase](https://phased.dev)
 
 ## [Demo](https://github.com/reed-jones/phase-blog-demo)
-Check out the demo app. Deploy a fully configured Phase app in minutes, poke around, change things, view source, have fun!
+Check out the demo. Deploy a fully configured Phase app in minutes, poke around, change things, view source, have fun!
 
 ---
 
-The docs can be found at [phased.dev](https://phased.dev), although Its currently a work in progress. If your having trouble setting Phase up, or if something isn't working as expected, feel free to [open an issue](https://github.com/reed-jones/phase/issues/new).
+This following README can be a little rough around the edges, and is meant more as a quick reference than a guide. There is an ongoing effort to improve the documentation found at [phased.dev](https://phased.dev), which is where you should start if you are new to phase. If your having trouble setting Phase up, or if something isn't working as expected, feel free to [open an issue](https://github.com/reed-jones/phase/issues/new).
 
 ---
 
