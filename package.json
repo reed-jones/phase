@@ -10,16 +10,16 @@
     "@rollup/plugin-node-resolve": "^7.0.0",
     "@rollup/plugin-sucrase": "^3.0.0",
     "@sucrase/jest-plugin": "^2.0.0",
-    "chalk": "^3.0.0",
+    "chalk": "^4.0.0",
     "esm": "^3.2.25",
     "execa": "^4.0.0",
-    "jest": "^25.1.0",
+    "jest": "^26.0.1",
     "lerna": "^3.20.2",
     "minimist": "^1.2.0",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.5",
     "rollup": "^2.0.0",
     "rollup-plugin-terser": "^5.2.0",
-    "tslib": "^1.10.0",
+    "tslib": "^2.0.0",
     "typescript": "^3.7.5"
   },
   "scripts": {
@@ -27,6 +27,5 @@
     "test:php": "vendor/bin/phpunit",
     "test": "yarn test:js && yarn test:php",
     "bump": "node -r esm build/version.js"
-  },
-  "dependencies": {}
+  }
 }

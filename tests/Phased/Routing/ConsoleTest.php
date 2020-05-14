@@ -44,6 +44,7 @@ class ConsoleTest extends TestCase
             [
                 'entry',
                 'state',
+                'routing',
                 'initial_state_key',
                 'initial_state_id',
                 'redirects',
