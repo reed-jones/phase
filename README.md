@@ -1,6 +1,17 @@
 # [Phase](https://phased.dev)
 
-Documentation site can be found at [phased.dev](https://phased.dev), although Its currently a work in progress, so this readme may be more information complete at the moment.
+## [Demo](https://github.com/reed-jones/phase-blog-demo)
+Check out the demo app. Deploy a fully configured Phase app in minutes, poke around, change things, view source, have fun!
+
+---
+
+The docs can be found at [phased.dev](https://phased.dev), although Its currently a work in progress. If your having trouble setting Phase up, or if something isn't working as expected, feel free to [open an issue](https://github.com/reed-jones/phase/issues/new).
+
+---
+
+Contributions welcome! contributions come in all forms, bug reports, questions asked, questions answered, documentation, and of course writing code. If your interested, but not sure where to start, open an issue.
+
+---
 
 ## Why
 Phase aims to integrate Laravel, Vuex, & Vue Router as seamlessly as possible. All phase routes specified in your `routes/web.php` are automatically configured for slick SPA navigation. All configured api calls will automatically be committed into your vuex store. Data loaded through your view controllers is immediately available in the vuex store. No waiting for separate api calls, No `mutation` boilerplate: `state.count = count`. No chance of your vue-router configuration getting out of sync with your web routes. No reason to give up the nice Route -> Controller -> Page view flow.
