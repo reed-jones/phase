@@ -18,7 +18,7 @@
         {!! ssr('js/app-server.js') // App
             ->context('__PHASE_STATE__', Vuex::toArray()) // Phased State
             // If ssr fails, we need a container to render the app client-side
-            ->fallback('<div id="app"></div>')
+            ->fallback('<div id="app" vue-ssr-failed></div>')
             ->render(); !!}
         @if(config('phase.hydrate'))
             @if(config('phase.state')) @vuex @endif

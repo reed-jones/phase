@@ -1,6 +1,6 @@
 <?php
 
-if (! function_exists('array_merge_phase')) {
+if (!function_exists('array_merge_phase')) {
     /**
      * Recursively merge two or more assoc arrays.
      *
@@ -17,9 +17,10 @@ if (! function_exists('array_merge_phase')) {
         }
 
         foreach ($rest as $array) {
-            if (! is_array($array)) {
+            if (!is_array($array)) {
                 $array = [$array];
             }
+
             foreach ($array as $key => $value) {
                 if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
                     $merged[$key] = array_merge_phase($merged[$key], $value);

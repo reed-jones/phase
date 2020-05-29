@@ -10,7 +10,7 @@ use Phased\State\Support\VuexLoader;
 
 class VuexModuleLoaderTest extends TestCase
 {
-    protected function setUp(): void
+    public function setUp(): void
     {
         parent::setUp();
 

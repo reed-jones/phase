@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Orchestra\Testbench\TestCase as Orchestra;
 
-abstract class TestCase extends Orchestra
+class TestCase extends Orchestra
 {
     protected function getPackageProviders($app)
     {
@@ -24,14 +24,15 @@ abstract class TestCase extends Orchestra
         ];
     }
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         Route::group([
             'namespace' => 'Phased\Tests\Routing\Controllers',
-            'middleware' => [], ], function () {
-                Route::phase('/', 'TestController@HelloWorld');
-            });
-        View::addLocation(__DIR__.'/views');
+            'middleware' => [],
+        ], function () {
+            Route::phase('/', 'TestController@HelloWorld');
+        });
+        View::addLocation(__DIR__ . '/views');
     }
 }

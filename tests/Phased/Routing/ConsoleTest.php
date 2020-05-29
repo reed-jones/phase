@@ -1,58 +1,52 @@
 <?php
 
-namespace Phased\Tests\Routing;
-
 use Illuminate\Support\Facades\Artisan;
 
-class ConsoleTest extends TestCase
-{
-    public function test_artisan_command_table()
-    {
-        Artisan::call('phase:routes');
+it('test artisan command table', function () {
+    Artisan::call('phase:routes');
 
-        $resultAsText = Artisan::output();
+    $resultAsText = Artisan::output();
 
-        $this->assertSame(
-            "+--------------+-----+---------------------------+------------+\n".
-            "| Group Prefix | URI | Navigation Name           | Middleware |\n".
-            "+--------------+-----+---------------------------+------------+\n".
-            "|              | /   | TestController@HelloWorld |            |\n".
+    assertSame(
+        "+--------------+-----+---------------------------+------------+\n" .
+            "| Group Prefix | URI | Navigation Name           | Middleware |\n" .
+            "+--------------+-----+---------------------------+------------+\n" .
+            "|              | /   | TestController@HelloWorld |            |\n" .
             "+--------------+-----+---------------------------+------------+\n",
-            $resultAsText);
-    }
+        $resultAsText
+    );
+});
 
-    public function test_artisan_command_json()
-    {
-        Artisan::call('phase:routes --json');
+it('test artisan command json', function () {
+    Artisan::call('phase:routes --json');
 
-        $resultAsText = Artisan::output();
+    $resultAsText = Artisan::output();
 
-        $this->assertSame(
-            '[{"prefix":null,"uri":"\/","name":"TestController@HelloWorld","middleware":""}]'."\n",
-            $resultAsText);
-    }
+    assertSame(
+        '[{"prefix":null,"uri":"\/","name":"TestController@HelloWorld","middleware":""}]' . "\n",
+        $resultAsText
+    );
+});
 
-    public function test_artisan_command_json_config()
-    {
-        Artisan::call('phase:routes --json --config');
+it('test artisan command json config', function () {
+    Artisan::call('phase:routes --json --config');
 
-        $resultAsText = Artisan::output();
+    $resultAsText = Artisan::output();
 
-        $configKeys = array_keys(json_decode($resultAsText, true)['config']);
+    $configKeys = array_keys(json_decode($resultAsText, true)['config']);
 
-        $this->assertSame(
-            [
-                'entry',
-                'state',
-                'routing',
-                'initial_state_key',
-                'initial_state_id',
-                'redirects',
-                'ssr',
-                'hydrate',
-                'assets',
-            ],
-            $configKeys
-        );
-    }
-}
+    assertSame(
+        [
+            'entry',
+            'state',
+            'routing',
+            'initial_state_key',
+            'initial_state_id',
+            'redirects',
+            'ssr',
+            'hydrate',
+            'assets',
+        ],
+        $configKeys
+    );
+});

@@ -5,6 +5,7 @@ namespace Phased\Tests\State;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Phased\State\Facades\Vuex;
 use Phased\State\PhasedStateServiceProvider;
+use PHPUnit\Framework\Constraint\IsIdentical;
 
 class TestCase extends OrchestraTestCase
 {
@@ -16,7 +17,7 @@ class TestCase extends OrchestraTestCase
         parent::setUp();
         // call migrations specific to our tests, e.g. to seed the db
         // the path option should be an absolute path.
-        $this->loadMigrationsFrom(realpath(__DIR__.'/migrations'));
+        $this->loadMigrationsFrom(realpath(__DIR__ . '/migrations'));
     }
 
     /**
@@ -59,11 +60,20 @@ class TestCase extends OrchestraTestCase
         ];
     }
 
-    protected function assertVuex($data)
+    // protected function assertVuex($data)
+    // {
+    //     $this->assertSame(
+    //         Vuex::toArray(),
+    //         $data
+    //     );
+    // }
+
+    public static function assertVuex($data, string $message = ''): void
     {
-        $this->assertSame(
+        static::assertThat(
             Vuex::toArray(),
-            $data
+            new IsIdentical($data),
+            $message
         );
     }
 }
