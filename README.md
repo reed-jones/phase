@@ -1,5 +1,7 @@
 # [Phase](https://phased.dev)
 
+![Build Status](https://app.chipperci.com/projects/9b19fe8f-bd39-4f36-aa2f-f7d313e23b58/status/master) ![Composer Version](https://img.shields.io/packagist/v/phased/phase?label=composer) ![NPM Version](https://img.shields.io/npm/v/@phased/phase)
+
 ## [Demo](https://github.com/reed-jones/phase-blog-demo)
 Check out the demo. Deploy a fully configured Phase app in minutes, poke around, change things, view source, have fun!
 
