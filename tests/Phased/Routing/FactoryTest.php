@@ -75,6 +75,7 @@ it('adds routes to the route array', function () {
 
 it('returns an json vuex response api response', function () {
     assertInstanceOf(JsonResponse::class, Phase::api());
-
     assertEquals(['$vuex' => []], Phase::api()->getData($assoc = true));
 });
+
+it('automatically switches between view and api calls');

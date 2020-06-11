@@ -24,8 +24,10 @@
   },
   "scripts": {
     "test:js": "jest",
-    "test:php": "vendor/bin/phpunit",
+    "test:php": "vendor/bin/pest",
     "test": "yarn test:js && yarn test:php",
-    "bump": "node -r esm build/version.js"
+    "bump": "node -r esm build/version.js",
+    "build": "node -r esm build/build-js.js",
+    "pretest:js": "yarn build"
   }
 }

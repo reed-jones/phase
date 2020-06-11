@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use Phased\Routing\Commands\GeneratePhaseRouter;
 
 it('test artisan command table', function () {
     Artisan::call('phase:routes');
@@ -49,4 +50,17 @@ it('test artisan command json config', function () {
         ],
         $configKeys
     );
+});
+
+it('should output full phase routes', function () {
+    $cmd = app()->make(GeneratePhaseRouter::class);
+
+    assertEquals($cmd->getFormattedRoutes()->toArray(), [
+        [
+            "prefix" => null,
+            "uri" => "/",
+            "name" => "TestController@HelloWorld",
+            "middleware" => ""
+        ]
+    ]);
 });

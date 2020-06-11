@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 class PhaseFactory
 {
-    /** @var array $routes */
+    /** @var array */
     protected $routes = [];
 
     /**
@@ -19,9 +19,8 @@ class PhaseFactory
      *
      * @return void
      */
-    public function addRoute(...$args)
+    public function addRoute($uri, $action)
     {
-        [$uri, $action] = $args;
         array_push($this->routes, [
             'uri' => $uri,
             'action' => $action,
@@ -42,7 +41,8 @@ class PhaseFactory
      * Automatically switches between JSON api response &
      * Blade views for SPA's.
      *
-     * @param mixed $blade string (blade view) | array (json data)
+     * @param string $blade (blade view)
+     * @param array $jsonArgs (json data)
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
@@ -53,6 +53,16 @@ class PhaseFactory
             : view($blade ?? config('phase.entry'));
     }
 
+    /**
+     * Api only calls.
+     *
+     * @param array $data
+     * @param int $status
+     * @param array $headers
+     * @param int $options
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function api(array $data = [], int $status = 200, array $headers = [], int $options = 0): JsonResponse
     {
         $jsonResponse = config('phase.state') ? 'phase' : 'json';

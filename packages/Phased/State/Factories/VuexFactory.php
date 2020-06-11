@@ -179,8 +179,7 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
     /**
      * Creates a new 'Vuex' class for easy $store access.
      *
-     * @deprecated please use state(), module(),
-     * or toVuex() instead
+     * @deprecated please use state(), module(), or toVuex() instead
      *
      * @param Closure $callable
      *
@@ -269,15 +268,15 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
         }
 
         if (! empty($this->_state)) {
-            foreach ($this->_state as $state) {
-                $store['state'] = array_merge_phase($store['state'], $this->generateState($state));
-            }
+            $store['state'] = $this->reduceData($this->_state, $store['state'], function ($acc, $cur) {
+                return array_merge_phase($acc, $this->generateState($cur));
+            });
         }
 
         if (! empty($this->_lazyState)) {
-            foreach ($this->_lazyState as $state) {
-                $store['state'] = array_merge_phase($store['state'], $this->generateLazyState($state));
-            }
+            $store['state'] = $this->reduceData($this->_lazyState, $store['state'], function ($acc, $cur) {
+                return array_merge_phase($acc, $this->generateLazyState($cur));
+            });
         }
 
         if (! empty($this->_modules)) {
@@ -315,6 +314,15 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
         return $store;
     }
 
+    public function reduceData($a, $b, $reduce)
+    {
+        foreach ($a as $state) {
+            $b = $reduce($b, $state);
+        }
+
+        return $b;
+    }
+
     /**
      * dd the current state.
      */
@@ -325,6 +333,8 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
 
     /**
      * Alias for toArray.
+     *
+     * @deprecated
      */
     public function asArray()
     {
@@ -333,6 +343,8 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
 
     /**
      * Alias for toJson.
+     *
+     * @deprecated
      */
     public function asJson($options = 0)
     {
@@ -341,6 +353,8 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
 
     /**
      * Alias for toResponse.
+     *
+     * @deprecated
      */
     public function asResponse()
     {
@@ -382,7 +396,7 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
      * Verifies the supplied state, and normalizes
      * it to its basic callable/arrays roots.
      */
-    protected function verifyState($state)
+    public function verifyState($state)
     {
         if (method_exists($state, 'toArray')) {
             $state = $state->toArray();
@@ -510,26 +524,6 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
                 return $arr;
             }
         }
-    }
-
-    protected function generateMutations($mutation)
-    {
-        return $mutation;
-    }
-
-    protected function generateLazyMutations()
-    {
-        return [];
-    }
-
-    protected function generateActions()
-    {
-        return [];
-    }
-
-    protected function generateLazyActions()
-    {
-        return [];
     }
 
     /**

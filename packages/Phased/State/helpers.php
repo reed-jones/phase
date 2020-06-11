@@ -20,6 +20,7 @@ if (!function_exists('array_merge_phase')) {
             if (!is_array($array)) {
                 $array = [ $array ];
             }
+
             foreach ($array as $key => $value) {
                 if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
                     $merged[$key] = array_merge_phase($merged[$key], $value);

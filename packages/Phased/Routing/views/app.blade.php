@@ -15,19 +15,19 @@
 </head>
  <body>
      @if(config('phase.ssr')) {{-- SSR --}}
-        {!! ssr('js/app-server.js') // App
-            ->context('__PHASE_STATE__', Vuex::toArray()) // Phased State
+        {!! ssr(config('phase.assets.ssr.server')) // App
+            ->context(config('phase.initial_state_key'), Vuex::toArray()) // Phased State
             // If ssr fails, we need a container to render the app client-side
             ->fallback('<div id="app" vue-ssr-failed></div>')
             ->render(); !!}
         @if(config('phase.hydrate'))
             @if(config('phase.state')) @vuex @endif
-            <script defer src="{{ mix('js/app-client.js') }}"></script>
+            <script defer src="{{ mix(config('phase.assets.ssr.client')) }}"></script>
         @endif
     @else {{-- Non-SSR --}}
         <div id="app"></div>{{-- App --}}
         @if(config('phase.state')) @vuex @endif {{-- Phased State --}}
-        <script src="{{ mix('js/app-client.js') }}"></script>{{-- Javascript --}}
+        <script src="{{ mix(config('phase.assets.ssr.client')) }}"></script>{{-- Javascript --}}
     @endif
 </body>
 </html>

@@ -86,5 +86,9 @@ return [
     'assets' => [
         'resources' => resource_path(),
         'public' => public_path(),
+        'ssr' => [
+            'server' => 'js/app-server.js',
+            'client' => 'js/app-client.js'
+        ]
     ],
 ];
