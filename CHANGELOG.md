@@ -7,8 +7,29 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 ## [Planned]
 - add `--model=Users\User --keys=all,active` options to `artisan make:loader` command for increased stub generation usability.
 - add `files: []` watch option for webpack plugin
+- lazily evaluated actions
+- lazily evaluated mutations
 
 ## [Unreleased](https://github.com/reed-jones/phase/compare/v0.4.0...master)
+
+## Added
+- added `Phased/Routing/Commands/GeneratePhaseRouter::getJsonOutput($withConfig)` helper to encode & retrieve output
+- added `phase.assets.ssr.server` & `phase.assets.ssr.client` configuration for js bundles.
+
+## Changed
+- Migrated test suite to use `pest`
+- `Phased/Routing/Commands/GeneratePhaseRouter::getFormattedRoutes()` changed from protected to public
+- `Phased/Routing/Commands/GeneratePhaseRouter::outputTable()` changed from protected to public
+- `Phased/Routing/Commands/GeneratePhaseRouter::outputJson()` changed from protected to public
+- `Phased/Routing/Factories/PhaseFactory::addRoute()` signature changed from variadic `(...$args)` to `($uri, $action)`
+
+## Deprecated
+
+## Removed
+
+## Fixed
+
+## Security
 
 
 ## [v0.4.0](https://github.com/reed-jones/phase/compare/v0.3.0...v0.4.0) - 2020-03-15

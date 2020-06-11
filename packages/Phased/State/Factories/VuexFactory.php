@@ -17,8 +17,6 @@ use Phased\State\Facades\Vuex;
 
 class VuexFactory implements Arrayable, Jsonable, JsonSerializable
 {
-    // use CanRegisterModules,
-
     /**
      * Base (non-namespaced) vuex state.
      *
@@ -316,10 +314,12 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
         return $store;
     }
 
-    public function reduceData($a, $b, $reduce) {
+    public function reduceData($a, $b, $reduce)
+    {
         foreach ($a as $state) {
             $b = $reduce($b, $state);
         }
+
         return $b;
     }
 
@@ -525,26 +525,6 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
             }
         }
     }
-
-    // protected function generateMutations($mutation)
-    // {
-    //     return $mutation;
-    // }
-
-    // protected function generateLazyMutations()
-    // {
-    //     return [];
-    // }
-
-    // protected function generateActions()
-    // {
-    //     return [];
-    // }
-
-    // protected function generateLazyActions()
-    // {
-    //     return [];
-    // }
 
     /**
      * Dispatch an action on the front end.
