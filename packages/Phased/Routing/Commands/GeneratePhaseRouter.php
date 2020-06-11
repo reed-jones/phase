@@ -6,7 +6,6 @@ namespace Phased\Routing\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Routing\Router;
-use Illuminate\Routing\RouteUri;
 use Illuminate\Support\Collection;
 use Phased\Routing\Facades\Phase;
 
@@ -23,18 +22,16 @@ class GeneratePhaseRouter extends Command
      */
     protected $signature = 'phase:routes {--json} {--config}';
 
-    /**
-     * @var \Illuminate\Routing\Router
-     */
+    /** @var \Illuminate\Routing\Router */
     protected $router;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $tableHeaders = ['Group Prefix', 'URI', 'Navigation Name', 'Middleware'];
 
     /**
      * Create a new route command instance.
+     *
+     * @param \Illuminate\Routing\Router $router
      */
     public function __construct(Router $router)
     {
@@ -62,7 +59,7 @@ class GeneratePhaseRouter extends Command
         }
     }
 
-    protected function getFormattedRoutes(): Collection
+    public function getFormattedRoutes(): Collection
     {
         return collect(Phase::getRoutes())->map(function ($route) {
             $name = $this->router->getRoutes()->getByAction($route['action']['controller'])->getName()
@@ -77,21 +74,30 @@ class GeneratePhaseRouter extends Command
         })->sortBy('uri')->values();
     }
 
-    protected function outputJson(): void
+    public function getJsonOutput($withConfig = false)
     {
         $routes = $this->getFormattedRoutes();
 
-        if ($this->option('config')) {
-            $this->line(json_encode([
+        if ($withConfig) {
+            return json_encode([
                 'config' => config('phase'),
                 'routes' => $routes,
-            ]));
-        } else {
-            $this->line(json_encode($routes));
+            ]);
         }
+
+        return json_encode($routes);
     }
 
-    protected function outputTable(): void
+    public function outputJson()
+    {
+        $this->line(
+            $this->getJsonOutput(
+                $this->option('config')
+            )
+        );
+    }
+
+    public function outputTable(): void
     {
         $this->table($this->tableHeaders, $this->getFormattedRoutes());
     }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phased\State\Traits;
 
-use Phased\State\Exceptions\VuexInvalidKeyException;
 use Phased\State\Facades\Vuex;
 
 trait Vuexable

@@ -14,6 +14,9 @@ class VuexResponseMixin
         return $this->phaseResponse();
     }
 
+    /**
+     * Alias for ->phase(..).
+     */
     public function vuex()
     {
         return $this->phaseResponse();

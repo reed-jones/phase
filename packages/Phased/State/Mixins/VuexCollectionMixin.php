@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phased\State\Mixins;
 
-use Phased\State\Exceptions\VuexInvalidKeyException;
 use Phased\State\Facades\Vuex;
 
 class VuexCollectionMixin
