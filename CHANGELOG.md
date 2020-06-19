@@ -15,6 +15,8 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 ## Added
 - added `Phased/Routing/Commands/GeneratePhaseRouter::getJsonOutput($withConfig)` helper to encode & retrieve output
 - added `phase.assets.ssr.server` & `phase.assets.ssr.client` configuration for js bundles.
+- added `Vuex::get`
+- front end state log levels
 
 ## Changed
 - Migrated test suite to use `pest`
@@ -26,6 +28,7 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 ## Deprecated
 
 ## Removed
+- auto axios redirects (301/302) have been removed since they did not work as expected. Plan to be re-implemented
 
 ## Fixed
 
