@@ -314,6 +314,31 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
         return $store;
     }
 
+    public function recursiveGet(array $selectors, array $data) {
+        // Grab the first item
+        $first = array_shift($selectors);
+
+        if (isset($data['state'][$first])) {
+            // return from state if possible
+            return $data['state'][$first];
+        } else if (isset($data['modules'][$first])) {
+            // pass to nested module and check its state
+            return $this->recursiveGet($selectors, $data['modules'][$first]);
+      }
+
+      // all unfound items will happily return null (no errors)
+      return null;
+    }
+
+    /**
+     * Usage: to get this.$store.state.users.active.name
+     * Vuex::get('users.active.name')
+     */
+    public function get(string $selector) {
+        $parts = explode('.', $selector);
+        return $this->recursiveGet($parts, $this->toArray());
+    }
+
     public function reduceData($a, $b, $reduce)
     {
         foreach ($a as $state) {
