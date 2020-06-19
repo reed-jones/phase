@@ -1,76 +1,81 @@
-import { VuexcellentOptions, VuexStore } from "@phased/state";
-import { objectMerge } from "./objectMerge";
+import { VuexcellentOptions, VuexStore, VuexModule } from "@phased/state";
+import { loggingMerge, objectMerge } from "./objectMerge";
 import { mutantGenerator } from "./mutations";
 import { VuexcellentAutoCommitter } from "./committer";
 import { AxiosInstance } from "axios";
+import { createLogger } from './logger'
+
 declare var context: {
-  __PHASE_STATE__: object,
-  axios: AxiosInstance
+  __PHASE_STATE__?: VuexStore
+  axios?: AxiosInstance
 };
+
+declare global {
+  interface Window {
+    __PHASE_STATE__?: VuexStore;
+    axios?: AxiosInstance;
+  }
+}
+
+const isBrowser = typeof window !== 'undefined'
+const globalBase = isBrowser ? window : context;
 
 const defaultOptions = <VuexcellentOptions>{
   generateMutations: true,
   axios: null,
-  mutationPrefix: `X_SET`
+  mutationPrefix: `X_SET`,
+  logLevel: 'emergency',
+  logger: createLogger('emergency')
 };
 
-const isBrowser = typeof window !== 'undefined'
-const isServer = typeof window === 'undefined' && typeof context !== 'undefined'
 
 export const hydrate = (vuexState: VuexStore, options: VuexcellentOptions = defaultOptions) => {
+  let __PHASE_STATE__ = globalBase.__PHASE_STATE__ ?? {}
   options = {
+    axios: globalBase.axios,
     ...defaultOptions,
     ...options
   }
-
-  let INITIAL = isBrowser
-    ? (window.__PHASE_STATE__ || {})
-    : isServer
-      ? (context.__PHASE_STATE__ || {})
-        : {}
+  const logger = options.logger = createLogger(options.logLevel)
+  logger.debug(`[Phase] Initiating Logger: ${options.logLevel}`)
+  logger.debug(`[Phase] Initial Options:`, options)
 
   // PHP Converts the empty array to a... empty array, booo
-  if (Array.isArray(INITIAL) && !INITIAL.length) {
-    INITIAL = {}
+  if (Array.isArray(__PHASE_STATE__) && !__PHASE_STATE__.length) {
+    logger.debug('[Phase] Missing State. Forcing to Initial state to be empty object.')
+    __PHASE_STATE__ = {}
   }
 
   // Currently not running actions/mutations on page load
-  let { mutations, actions, ...phaseState } = <VuexStore>INITIAL
+  const { mutations, actions, ...phaseState } = __PHASE_STATE__
 
   // merge incoming (store) options with window.__PHASE_STATE__
-  const mergedState = <VuexStore>(
-    objectMerge(vuexState, phaseState)
-  );
+  const mergedState = loggingMerge(logger, vuexState, <VuexStore>phaseState);
 
   // generate mutations
   const { createMutant, getMutation } = mutantGenerator(options);
   const newState = options.generateMutations
-    ? <VuexStore>createMutant(mergedState)
+    ? createMutant(mergedState)
     : mergedState;
 
-  // inject VuexcellentAutoCommitter into store.plugins
-  const axios: AxiosInstance | null = options.axios
-    || <AxiosInstance | null>(isBrowser ? (window.axios || null) : (context.axios || null));
+  logger.info(`[Phase] State Merged, Mutations Generated`, newState)
 
-  if (axios && options.generateMutations && isBrowser) {
+  if (options.axios && options.generateMutations && isBrowser) {
     // prepare plugin
-    const VuexcellentPlugin = VuexcellentAutoCommitter(
-      axios,
+    const VuexcellentPlugins = VuexcellentAutoCommitter(
+      options,
       newState,
       getMutation
     );
 
-    // inject plugin
-    newState.plugins = newState.plugins
-      ? [
-        VuexcellentPlugin,
-        ...newState.plugins
-      ] : [
-        VuexcellentPlugin
+    newState.plugins = [
+        // inject plugin
+        ...VuexcellentPlugins,
+        ...(newState.plugins ?? [])
       ];
 
   } else if (options.generateMutations) {
-    console.error(
+    logger.error(
       "[Phase] It appears that auto-mutate could not be initialized.\nAn instance of axios could not be found. Make sure window.axios is available"
     );
   }

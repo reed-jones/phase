@@ -4,8 +4,8 @@ declare module '@phased/state' {
 
     global {
         interface Window {
-            __PHASE_STATE__: object;
-            axios: AxiosInstance;
+            __PHASE_STATE__?: VuexStore;
+            axios?: AxiosInstance;
         }
     }
 
@@ -30,9 +30,38 @@ declare module '@phased/state' {
     }
 
     export interface VuexcellentOptions {
-        generateMutations: boolean,
-        axios: AxiosInstance | null,
+        generateMutations: boolean
+        axios: AxiosInstance | null
         mutationPrefix: string
+        logLevel: keyof ILogLevels
+        logger: IPhaseLogger
+    }
+
+    export interface ILogLevels {
+        debug: string
+        info: string
+        notice: string
+        warning: string
+        error: string
+        critical: string
+        alert: string
+        emergency: string
+    }
+    export interface IExtendedLogLevels extends ILogLevels {
+        raw: string
+    }
+
+    export type PhaseLogger = (...data: any) => void
+    export interface IPhaseLogger extends PhaseLogger {
+        raw: Console
+        debug: (...data:any) => void
+        info: (...data:any) => void
+        notice: (...data:any) => void
+        warning: (...data:any) => void
+        error: (...data:any) => void
+        critical: (...data:any) => void
+        alert: (...data:any) => void
+        emergency: (...data:any) => void
     }
 
 

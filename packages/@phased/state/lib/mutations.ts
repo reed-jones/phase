@@ -1,27 +1,27 @@
 
-import { VuexModule } from '@phased/state'
+import { VuexModule, VuexStore, VuexcellentOptions, IPhaseLogger } from '@phased/state'
 
 /**
  *
- * @param {Object} options Vuexcellent options
- * @param {String} mutationPrefix prefix mutations to avoid namespace collisions
+ * @param {VuexcellentOptions} options Vuexcellent options
  */
-export const mutantGenerator = ({
-  mutationPrefix = "X_SET"
-}: {
-  mutationPrefix?: string;
-} = {}): {
-  createMutant(mod: VuexModule): VuexModule;
+export const mutantGenerator = ({ mutationPrefix = "X_SET", logger }: { mutationPrefix?: string; logger?: IPhaseLogger; } = {}): {
+  createMutant(mod: VuexStore): VuexStore;
   getMutation(key: string, ns?: string | null): string;
 } => {
   /** Retrieves mutation name base on key */
   const getMutation = (key: string, ns: string | null = null): string => {
     if (!key) {
+      logger?.critical('[Phase] Failed to generate mutation', { key, namespace: ns })
       throw "Could not generate proper mutation";
     }
-    return ns
+
+    const namespace = ns
       ? `${ns}/${mutationPrefix}_${key.toUpperCase()}`
       : `${mutationPrefix}_${key.toUpperCase()}`;
+
+    logger?.debug(`[Phase] Namespace generated`, { namespace });
+    return namespace
   };
 
   /** Default mutation. Nukes state and replaces */

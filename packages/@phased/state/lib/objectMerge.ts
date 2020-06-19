@@ -1,3 +1,5 @@
+import { IPhaseLogger } from "@phased/state";
+
 /**
  * Checks if an item is an Object
  *
@@ -38,11 +40,13 @@ const recursiveMerge = (
       }
     });
   } else {
-    console.warn(
-      `[@phased/state] The server side data does not match client side expectations.
-Server: ${JSON.stringify(source)}.
-Client: ${JSON.stringify(target)}`
-    );
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn(
+        `[@phased/state] The server side data does not match client side expectations.
+        Server: ${JSON.stringify(source)}.
+        Client: ${JSON.stringify(target)}`
+      );
+    }
 
     // set the value to match server request
     target = source;
@@ -58,12 +62,14 @@ Client: ${JSON.stringify(target)}`
  *
  * @return {Object}
  */
-export const objectMerge = (...sources: object[]): object => {
-  if (process.env.NODE_ENV !== "production") {
-    if (!sources.every(a => isObject(a))) {
-      console.warn("Invalid arguments supplied. Could not properly merge");
-    }
+export const objectMerge = <T>(...sources: T[]): T => {
+  return (recursiveMerge({}, ...sources) as any) as T;
+};
+
+export const loggingMerge = <T>(logger?: IPhaseLogger, ...sources: T[]): T => {
+  if (!sources.every(a => isObject(a))) {
+    logger?.warning("[Phase] Invalid arguments supplied. Could not properly merge");
   }
 
-  return recursiveMerge({}, ...sources);
-};
+  return objectMerge(...sources);
+}

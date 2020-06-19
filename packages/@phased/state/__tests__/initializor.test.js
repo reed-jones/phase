@@ -81,7 +81,7 @@ beforeEach(function() {
           }
         }
       },
-      { axios }
+      { axios, logLevel: 'emergency' }
     )
   );
 });
