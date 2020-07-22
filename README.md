@@ -18,15 +18,19 @@ Contributions welcome! contributions come in all forms, bug reports, questions a
 ## Why
 Phase aims to integrate Laravel, Vuex, & Vue Router as seamlessly as possible. All phase routes specified in your `routes/web.php` are automatically configured for slick SPA navigation. All configured api calls will automatically be committed into your vuex store. Data loaded through your view controllers is immediately available in the vuex store. No waiting for separate api calls, No `mutation` boilerplate: `state.count = count`. No chance of your vue-router configuration getting out of sync with your web routes. No reason to give up the nice Route -> Controller -> Page view flow.
 
-## Installation
+<details>
+  <summary><h2>Installation</h2></summary>
   - `npm install --save-dev @phased/phase`
   - `composer require phased/routing`
   - `composer require phased/state`
 
   - * Note Currently routing depends on state being installed, but further decoupling is planned so that the two packages may be used independently. State however is standalone at this point and can be used by itself if no SPA routing is required. For this configuration only `npm install @phased/state` & `composer require phased/state` are needed.
+</details>
 
-## Client Setup (Front End)
 
+<details>
+  <summary><h2>Client Setup (Front End)</h2></summary>
+  
 Both state & routing rely on `axios` being globally available, in order to automatically configure the interceptors required. You may do this however you wish, but the standard lines that come with Laravel work just fine.
 ```js
 window.axios = require('axios');
@@ -109,12 +113,16 @@ mix
     .purgeCss()
     .phase()
 ```
+</details>
 
-## Server Setup (Back End)
+<details>
+  <summary><h2>Server Setup (Back End)</h2></summary>
 
 After installing both routing & state components with composer, Phase is ready to roll. No really. Thats all the required setup. For more customization options, a 'phased' config is exposed and can be published. `php artisan vendor:publish --provider="Phased\Routing\PhasedRoutingServiceProvider" --tag="config"`
+</details>
 
-## Routing
+<details>
+  <summary><h2>Routing</h2></summary>
 
 SPA Routing starts with by defining your page routes as 'phase' routes. Traditionally these are placed in `routes/web.php`. In a regular app these would be 'Route::get' routes whose controller returns a view(). In a Phase app, just change it to `Route::phase`, and change your controller so that it returns `Phase::view()`. Modifying the [basic controller laravel example](https://laravel.com/docs/6.x/controllers#basic-controllers):
 ```diff
@@ -154,8 +162,10 @@ And defining the route:
 Now navigating to `/user/{id}` will display `resources/js/pages/UserController/UserProfile.vue`, and the user with id `$id`, will be loaded into your vuex store at `this.$store.state.user`. Creating a second page and navigating between the two using [<router-link>](https://router.vuejs.org/api/#router-link) will automatically handle vuex store updating based on the data loaded in the controller, while using nice SPA page transitions.
 
 To get a list of all registered phase routes, the command `php artisan phase:routes` will list a table similar to `route:list`.
+</details>
 
-## State Management
+<details>
+  <summary><h2>State Management</h2></summary>
 State Management from a Phase app is used through the `Vuex` facade provided, as well as the Collection, and Model Helpers. The Facade contains two primary data loading functions.
 
 ### State
@@ -403,14 +413,23 @@ Vuex::state(function () {
   return ['number' => 5]
 });
 ```
+</details>
 
-## Server Side Rendering
+<details>
+  <summary><h2>Server Side Rendering</h2></summary>
+
 Server side rendering (SSR) is disabled out of the box, due to the fact that writing "universal" or "isomorphic" javascript can be a little more complex than standard Javascript, however there are great resources out there if you are curious: https://ssr.vuejs.org/guide/universal.html . To enable SSR in your Phase app, first add `NODE_PATH=` to your .env with the path to your node binary. Then simply update your `ssr` option in your config to be true. Now when you 'view source' & refresh the page you should see the raw html instead of the standard `<div id="app"></div>`. The other option available is `hydrate`. With this set to true, your vue app will be 'hydrated' with all the interactive elements & components you would expect from a vue app. When set to false, no Javascript is loaded on your page which depending on your goals may or may not be what you are looking for. Although a little out of date, and example of a non-hydrated app (albeit not built with phase) is [Netflix circa 2017](https://jakearchibald.com/2017/netflix-and-react/). Phase attempts to remove the barrier and make SSR easy, however there are a few rules you still need to follow in order to successfully write a universal app. The most important and easy to forget is you can no longer rely on the browser global api to be available. That means when the app is run on the server, there is no `window` or `document`,
+</details>
 
-## Troubleshooting
+<details>
+  <summary><h2>Troubleshooting</h2></summary>
   - `Vuex::dd();` or `dd(Vuex::toArray());` will dump all the currently saved vuex state
   - For Api calls, any mutations will (should) be visible from within the Vue DevTools mutations tab
-
+ </details>
+ 
+ 
+<details>
+  <summary><h2>Example</h2></summary>
 ## Example
 To kick things off with a basic example, lets create a simple controller and load the first page of our new app.
 ```sh
@@ -442,3 +461,4 @@ class PhaseController extends Controller
 ```
 
 Now run laravel-mix and load the page. If all went well, The required .vue files have been generated if they didn't already exist, and the page should load up.
+</details>
