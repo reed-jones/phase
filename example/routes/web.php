@@ -17,5 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::phase('/', 'PublicController@HomePage');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::phase('/login', 'Auth\LoginController@LoginPage');
+Route::phase('/register', 'Auth\RegisterController@RegisterPage');
