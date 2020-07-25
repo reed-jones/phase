@@ -3,7 +3,7 @@ import Vuex, { Store } from 'vuex'
 import { hydrate } from '@phased/state'
 Vue.use(Vuex)
 
-
+// console.log(axios)
 export const store = new Store(hydrate({
     state: {
         count: 0
@@ -12,5 +12,5 @@ export const store = new Store(hydrate({
         increment (state) {
             state.count++
         }
-    }
+    },
 }))

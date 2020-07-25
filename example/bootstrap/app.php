@@ -41,6 +41,9 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+if (isset($_SERVER['HTTP_HOST']) && substr($_SERVER['HTTP_HOST'], 0, 8) === "cypress.") {
+    \Dotenv\Dotenv::createMutable(base_path(), '.env.cypress')->load();
+}
 /*
 |--------------------------------------------------------------------------
 | Return The Application

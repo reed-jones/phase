@@ -46,7 +46,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapTestRoutes();
     }
 
     /**
@@ -76,5 +76,20 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapTestRoutes()
+    {
+        Route::prefix('__testing__')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/test.php'));
     }
 }

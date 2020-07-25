@@ -1,5 +1,5 @@
 import './bootstrap'
-import 'tailwindcss/tailwind.css'
+// import 'tailwindcss/tailwind.css' // Breaks SSR
 import Vue from 'vue'
 import { store } from './store'
 import { router } from './routes'

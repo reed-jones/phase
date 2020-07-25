@@ -7,7 +7,9 @@
 /storage/*.key
 /vendor
 .env
+.env.cypress
 .env.backup
+/database/cypress.sqlite
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
