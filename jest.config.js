@@ -7,5 +7,5 @@ module.exports = {
       "^@/(.*)$": "../lib/$1"
     },
     transformIgnorePatterns: [],
-    testPathIgnorePatterns: ['./__tests__/config'],
+    testPathIgnorePatterns: [ './__tests__/config', 'cypress' ],
   };
