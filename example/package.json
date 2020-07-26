@@ -23,7 +23,9 @@
     },
     "dependencies": {
         "@phased/phase": "^0.4.0",
+        "@tailwindcss/typography": "^0.2.0",
         "@tailwindcss/ui": "^0.4.0",
+        "dayjs": "^1.8.30",
         "tailwindcss": "^1.5.2",
         "vue-router": "^3.3.4",
         "vue-server-renderer": "^2.6.11",

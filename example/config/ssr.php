@@ -4,7 +4,7 @@ return [
     /*
      * Enable or disable the server renderer. Enabled in production by default.
      */
-    'enabled' => env('APP_ENV') === 'production',
+    'enabled' => in_array(env('APP_ENV'), ['production', 'testing']),
 
     /*
      * When server side rendering goes wrong, nothing will be rendered so the

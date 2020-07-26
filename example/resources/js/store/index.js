@@ -5,12 +5,11 @@ Vue.use(Vuex)
 
 // console.log(axios)
 export const store = new Store(hydrate({
-    state: {
-        count: 0
-    },
-    mutations: {
-        increment (state) {
-            state.count++
+    modules: {
+        notices: {
+            state: {
+                all: []
+            }
         }
-    },
+    }
 }))

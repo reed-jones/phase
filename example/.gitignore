@@ -4,10 +4,12 @@
 /public/css
 /public/js
 /public/mix-manifest.json
+/cypress/videos
+/cypress/screenshots
 /storage/*.key
 /vendor
 .env
-.env.cypress
+.env.test
 .env.backup
 /database/cypress.sqlite
 .phpunit.result.cache

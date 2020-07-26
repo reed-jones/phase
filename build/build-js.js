@@ -5,16 +5,8 @@ import minimist from "minimist";
 import chalk from "chalk";
 import path from 'path';
 import execa from 'execa'
+import { packages } from './utils'
 const { parse } = JSON
-
-const packages = [
-    "packages/@phased/types",
-    "packages/@phased/state",
-    "packages/@phased/routing",
-    "packages/@phased/webpack-plugin",
-    "packages/@phased/laravel-mix",
-    "packages/@phased/phase"
-];
 
 packages.forEach(pkg => {
     process.chdir(path.resolve(__dirname, '../', pkg))

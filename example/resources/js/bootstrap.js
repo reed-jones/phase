@@ -1,5 +1,6 @@
 import Vue from 'vue';
-
+import dayjs from 'dayjs'
+Vue.prototype.dayjs = Vue.dayjs = dayjs
 globalThis.__BROWSER__ = typeof window !== 'undefined'
 globalThis.axios = require('axios')
 globalThis.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'

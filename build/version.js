@@ -5,6 +5,7 @@ import minimist from "minimist";
 import chalk from "chalk";
 import path from 'path';
 import execa from 'execa'
+import { packages } from './utils'
 const argv = minimist(process.argv.slice(2));
 
 const VERSION = argv.version;
@@ -13,15 +14,6 @@ if (!argv.version) {
   console.error("A Version is required to match the format '--version 0.0.0'");
   process.exit();
 }
-
-const packages = [
-  "packages/@phased/types",
-  "packages/@phased/state",
-  "packages/@phased/routing",
-  "packages/@phased/webpack-plugin",
-  "packages/@phased/laravel-mix",
-  "packages/@phased/phase"
-];
 
 const versionBump = deps =>
   Object.fromEntries(

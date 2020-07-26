@@ -4,5 +4,6 @@ require("@phased/phase")
 
 mix.phase()
     .options({
+        processCssUrls: false,
         postCss: [tailwindcss('./tailwind.config.js')]
     });

@@ -13,8 +13,6 @@
       </div>
     </div>
 
-{{ isServer ? 'YUP' : 'NOPE' }}
-{{ isServer }}
     <form class="flex flex-col" action="#" method="POST" @submit.prevent="login">
 
       <input type="hidden" name="_token" value="oGalrKS7FNwySJJpxAj7n0cZuxN2hQOKYgFFfnBM">
@@ -27,6 +25,7 @@
           type="email"
           placeholder="you@example.com"
           autocomplete="email"
+          data-cy='email'
           v-model="form.email"
           required
           class="w-full appearance-none rounded p-2 shadow border-2 border-transparent placeholder-gray-500 focus:outline-none focus:border-blue-200"
@@ -42,6 +41,7 @@
             :type="passwordVisible ? 'text' : 'password'"
             :placeholder="passwordVisible ? 'Sup3rT0pS3cr3t123' : '*****************'"
             autocomplete="current-password"
+            data-cy='password'
             v-model="form.password"
             aria-describedby="password-constraints"
             class="w-full appearance-none rounded p-2 shadow border-2 border-transparent placeholder-gray-500 focus:outline-none focus:border-blue-200"
@@ -80,6 +80,7 @@
 
       <button
         id="signin"
+        data-cy='sign-in'
         class="border-2 border-transparent bg-gray-300 hover:bg-gray-400 p-2 mt-8 focus:outline-none focus:border-blue-200">
         Sign in
       </button>

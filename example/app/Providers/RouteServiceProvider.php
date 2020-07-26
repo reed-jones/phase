@@ -87,6 +87,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapTestRoutes()
     {
+        if (config('app.env') !== 'testing') {
+            return;
+        }
+
         Route::prefix('__testing__')
             ->middleware('web')
             ->namespace($this->namespace)

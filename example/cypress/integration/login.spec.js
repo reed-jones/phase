@@ -18,8 +18,8 @@ describe('Login', () => {
         cy.contains('These credentials do not match our records.')
     })
 
-    it('logs in a user', () => {
-        cy.create('App\\User').then(user => {
+    it('redirects to the home page after a user logs in', () => {
+        cy.create('App\\Models\\User').then(user => {
             cy.visit('/login')
 
             cy.get('#email').type(user.email);

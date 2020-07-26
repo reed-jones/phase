@@ -42,8 +42,11 @@ $app->singleton(
 );
 
 if (isset($_SERVER['HTTP_HOST']) && substr($_SERVER['HTTP_HOST'], 0, 8) === "cypress.") {
-    \Dotenv\Dotenv::createMutable(base_path(), '.env.cypress')->load();
+    \Dotenv\Dotenv::createMutable(base_path(), '.env')->load();
+    // Overload testing variables
+    \Dotenv\Dotenv::createMutable(base_path(), '.env.test')->load();
 }
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

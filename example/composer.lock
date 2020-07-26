@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c32ccdf6fd177789b1a6d2342e5d652",
+    "content-hash": "c057e9d25446fd0a2e8da3e252c260e2",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -919,6 +919,71 @@
             "time": "2020-06-16T19:14:01+00:00"
         },
         {
+            "name": "laravel/socialite",
+            "version": "v4.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/socialite.git",
+                "reference": "80951df0d93435b773aa00efe1fad6d5015fac75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/80951df0d93435b773aa00efe1fad6d5015fac75",
+                "reference": "80951df0d93435b773aa00efe1fad6d5015fac75",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "illuminate/http": "~5.7.0|~5.8.0|^6.0|^7.0",
+                "illuminate/support": "~5.7.0|~5.8.0|^6.0|^7.0",
+                "league/oauth1-client": "^1.0",
+                "php": "^7.1.3"
+            },
+            "require-dev": {
+                "illuminate/contracts": "~5.7.0|~5.8.0|^6.0|^7.0",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^3.7|^3.8|^4.0|^5.0",
+                "phpunit/phpunit": "^7.0|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Socialite\\SocialiteServiceProvider"
+                    ],
+                    "aliases": {
+                        "Socialite": "Laravel\\Socialite\\Facades\\Socialite"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Socialite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel wrapper around OAuth 1 & OAuth 2 libraries.",
+            "homepage": "https://laravel.com",
+            "keywords": [
+                "laravel",
+                "oauth"
+            ],
+            "time": "2020-06-03T13:30:03+00:00"
+        },
+        {
             "name": "laravel/tinker",
             "version": "v2.4.1",
             "source": {
@@ -1191,6 +1256,69 @@
             "time": "2020-05-18T15:13:39+00:00"
         },
         {
+            "name": "league/oauth1-client",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/oauth1-client.git",
+                "reference": "fca5f160650cb74d23fc11aa570dd61f86dcf647"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/fca5f160650cb74d23fc11aa570dd61f86dcf647",
+                "reference": "fca5f160650cb74d23fc11aa570dd61f86dcf647",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9",
+                "phpunit/phpunit": "^4.0",
+                "squizlabs/php_codesniffer": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\OAuth1\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Corlett",
+                    "email": "bencorlett@me.com",
+                    "homepage": "http://www.webcomm.com.au",
+                    "role": "Developer"
+                }
+            ],
+            "description": "OAuth 1.0 Client Library",
+            "keywords": [
+                "Authentication",
+                "SSO",
+                "authorization",
+                "bitbucket",
+                "identity",
+                "idp",
+                "oauth",
+                "oauth1",
+                "single sign on",
+                "trello",
+                "tumblr",
+                "twitter"
+            ],
+            "time": "2016-08-17T00:36:58+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "2.1.1",
             "source": {
@@ -1352,16 +1480,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.6.0",
+            "version": "v4.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "c346bbfafe2ff60680258b631afb730d186ed864"
+                "reference": "21dce06dfbf0365c6a7cc8fdbdc995926c6a9300"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c346bbfafe2ff60680258b631afb730d186ed864",
-                "reference": "c346bbfafe2ff60680258b631afb730d186ed864",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/21dce06dfbf0365c6a7cc8fdbdc995926c6a9300",
+                "reference": "21dce06dfbf0365c6a7cc8fdbdc995926c6a9300",
                 "shasum": ""
             },
             "require": {
@@ -1378,7 +1506,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "4.7-dev"
                 }
             },
             "autoload": {
@@ -1400,7 +1528,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-07-02T17:12:47+00:00"
+            "time": "2020-07-25T13:18:53+00:00"
         },
         {
             "name": "opis/closure",
@@ -2459,7 +2587,7 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -2562,16 +2690,16 @@
         },
         {
             "name": "symfony/error-handler",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/error-handler.git",
-                "reference": "7d0b927b9d3dc41d7d46cda38cbfcd20cdcbb896"
+                "reference": "4a0d1673a4731c3cb2dea3580c73a676ecb9ed4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/error-handler/zipball/7d0b927b9d3dc41d7d46cda38cbfcd20cdcbb896",
-                "reference": "7d0b927b9d3dc41d7d46cda38cbfcd20cdcbb896",
+                "url": "https://api.github.com/repos/symfony/error-handler/zipball/4a0d1673a4731c3cb2dea3580c73a676ecb9ed4b",
+                "reference": "4a0d1673a4731c3cb2dea3580c73a676ecb9ed4b",
                 "shasum": ""
             },
             "require": {
@@ -2615,20 +2743,20 @@
             ],
             "description": "Symfony ErrorHandler Component",
             "homepage": "https://symfony.com",
-            "time": "2020-05-30T20:35:19+00:00"
+            "time": "2020-07-23T08:36:24+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "cc0d059e2e997e79ca34125a52f3e33de4424ac7"
+                "reference": "7827d55911f91c070fc293ea51a06eec80797d76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/cc0d059e2e997e79ca34125a52f3e33de4424ac7",
-                "reference": "cc0d059e2e997e79ca34125a52f3e33de4424ac7",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/7827d55911f91c070fc293ea51a06eec80797d76",
+                "reference": "7827d55911f91c070fc293ea51a06eec80797d76",
                 "shasum": ""
             },
             "require": {
@@ -2687,7 +2815,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2020-05-20T17:43:50+00:00"
+            "time": "2020-06-18T18:24:02+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -2753,7 +2881,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -2802,16 +2930,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "f93055171b847915225bd5b0a5792888419d8d75"
+                "reference": "1f0d6627e680591c61e9176f04a0dc887b4e6702"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/f93055171b847915225bd5b0a5792888419d8d75",
-                "reference": "f93055171b847915225bd5b0a5792888419d8d75",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/1f0d6627e680591c61e9176f04a0dc887b4e6702",
+                "reference": "1f0d6627e680591c61e9176f04a0dc887b4e6702",
                 "shasum": ""
             },
             "require": {
@@ -2859,20 +2987,20 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2020-06-15T06:52:54+00:00"
+            "time": "2020-07-23T10:04:31+00:00"
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "a18c27ace1ef344ffcb129a5b089bad7643b387a"
+                "reference": "d6dd8f6420e377970ddad0d6317d4ce4186fc6b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/a18c27ace1ef344ffcb129a5b089bad7643b387a",
-                "reference": "a18c27ace1ef344ffcb129a5b089bad7643b387a",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/d6dd8f6420e377970ddad0d6317d4ce4186fc6b3",
+                "reference": "d6dd8f6420e377970ddad0d6317d4ce4186fc6b3",
                 "shasum": ""
             },
             "require": {
@@ -2958,20 +3086,20 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2020-06-15T13:51:38+00:00"
+            "time": "2020-07-24T04:22:56+00:00"
         },
         {
             "name": "symfony/mime",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "c0c418f05e727606e85b482a8591519c4712cf45"
+                "reference": "149fb0ad35aae3c7637b496b38478797fa6a7ea6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/c0c418f05e727606e85b482a8591519c4712cf45",
-                "reference": "c0c418f05e727606e85b482a8591519c4712cf45",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/149fb0ad35aae3c7637b496b38478797fa6a7ea6",
+                "reference": "149fb0ad35aae3c7637b496b38478797fa6a7ea6",
                 "shasum": ""
             },
             "require": {
@@ -3021,7 +3149,7 @@
                 "mime",
                 "mime-type"
             ],
-            "time": "2020-06-09T15:07:35+00:00"
+            "time": "2020-07-23T10:04:31+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -3665,16 +3793,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "7f6378c1fa2147eeb1b4c385856ce9de0d46ebd1"
+                "reference": "1864216226af21eb76d9477f691e7cbf198e0402"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/7f6378c1fa2147eeb1b4c385856ce9de0d46ebd1",
-                "reference": "7f6378c1fa2147eeb1b4c385856ce9de0d46ebd1",
+                "url": "https://api.github.com/repos/symfony/process/zipball/1864216226af21eb76d9477f691e7cbf198e0402",
+                "reference": "1864216226af21eb76d9477f691e7cbf198e0402",
                 "shasum": ""
             },
             "require": {
@@ -3711,20 +3839,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2020-05-30T20:35:19+00:00"
+            "time": "2020-07-23T08:36:24+00:00"
         },
         {
             "name": "symfony/routing",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "bbd0ba121d623f66d165a55a108008968911f3eb"
+                "reference": "08c9a82f09d12ee048f85e76e0d783f82844eb5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/bbd0ba121d623f66d165a55a108008968911f3eb",
-                "reference": "bbd0ba121d623f66d165a55a108008968911f3eb",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/08c9a82f09d12ee048f85e76e0d783f82844eb5d",
+                "reference": "08c9a82f09d12ee048f85e76e0d783f82844eb5d",
                 "shasum": ""
             },
             "require": {
@@ -3789,7 +3917,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2020-06-10T11:49:58+00:00"
+            "time": "2020-06-18T18:24:02+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -3926,16 +4054,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "d387f07d4c15f9c09439cf3f13ddbe0b2c5e8be2"
+                "reference": "4b9bf719f0fa5b05253c37fc7b335337ec7ec427"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/d387f07d4c15f9c09439cf3f13ddbe0b2c5e8be2",
-                "reference": "d387f07d4c15f9c09439cf3f13ddbe0b2c5e8be2",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/4b9bf719f0fa5b05253c37fc7b335337ec7ec427",
+                "reference": "4b9bf719f0fa5b05253c37fc7b335337ec7ec427",
                 "shasum": ""
             },
             "require": {
@@ -4000,7 +4128,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2020-05-30T20:35:19+00:00"
+            "time": "2020-06-30T17:42:22+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -4065,16 +4193,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v5.1.2",
+            "version": "v5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "46a942903059b0b05e601f00eb64179e05578c0f"
+                "reference": "2ebe1c7bb52052624d6dc1250f4abe525655d75a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/46a942903059b0b05e601f00eb64179e05578c0f",
-                "reference": "46a942903059b0b05e601f00eb64179e05578c0f",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/2ebe1c7bb52052624d6dc1250f4abe525655d75a",
+                "reference": "2ebe1c7bb52052624d6dc1250f4abe525655d75a",
                 "shasum": ""
             },
             "require": {
@@ -4137,7 +4265,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2020-05-30T20:35:19+00:00"
+            "time": "2020-06-24T13:36:18+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -4357,6 +4485,49 @@
                 "instantiate"
             ],
             "time": "2020-05-29T17:27:14+00:00"
+        },
+        {
+            "name": "evenement/evenement",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/igorw/evenement.git",
+                "reference": "531bfb9d15f8aa57454f5f0285b18bec903b8fb7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/igorw/evenement/zipball/531bfb9d15f8aa57454f5f0285b18bec903b8fb7",
+                "reference": "531bfb9d15f8aa57454f5f0285b18bec903b8fb7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Evenement": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Igor Wiedler",
+                    "email": "igor@wiedler.ch"
+                }
+            ],
+            "description": "Événement is a very simple event dispatching library for PHP",
+            "keywords": [
+                "event-dispatcher",
+                "event-emitter"
+            ],
+            "time": "2017-07-23T21:35:13+00:00"
         },
         {
             "name": "facade/flare-client-php",
@@ -4882,38 +5053,32 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v0.2.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "1241e929b1441097c9be2467d2a75c6d2b3e0a84"
+                "reference": "e4e4eb0a577eb3f63bb71f15a67c612c0c545181"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/1241e929b1441097c9be2467d2a75c6d2b3e0a84",
-                "reference": "1241e929b1441097c9be2467d2a75c6d2b3e0a84",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/e4e4eb0a577eb3f63bb71f15a67c612c0c545181",
+                "reference": "e4e4eb0a577eb3f63bb71f15a67c612c0c545181",
                 "shasum": ""
             },
             "require": {
-                "nunomaduro/collision": "^5.0.0-BETA3",
-                "pestphp/pest-plugin": "^0.2",
-                "pestphp/pest-plugin-coverage": "^0.2",
-                "pestphp/pest-plugin-init": "^0.2",
+                "nunomaduro/collision": "^5.0.0-BETA4",
+                "pestphp/pest-plugin": "^0.3",
+                "pestphp/pest-plugin-coverage": "^0.3",
+                "pestphp/pest-plugin-init": "^0.3",
                 "php": "^7.3",
-                "phpunit/phpunit": "^9.1.4",
-                "sebastian/environment": "^5.1"
+                "phpunit/phpunit": "^9.2.6",
+                "sebastian/environment": "^5.1.2"
             },
             "require-dev": {
-                "ergebnis/phpstan-rules": "^0.15.0",
-                "friendsofphp/php-cs-fixer": "^2.16.3",
                 "illuminate/console": "^7.16.1",
                 "illuminate/support": "^7.16.1",
                 "mockery/mockery": "^1.4.0",
-                "phpstan/phpstan": "^0.12.30",
-                "phpstan/phpstan-strict-rules": "^0.12.2",
-                "rector/rector": "^0.7.37",
-                "symfony/var-dumper": "^5.1.2",
-                "thecodingmachine/phpstan-strict-rules": "^0.12.0"
+                "pestphp/pest-dev-tools": "dev-master"
             },
             "bin": [
                 "bin/pest"
@@ -4921,7 +5086,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.2.x-dev"
+                    "dev-master": "0.3.x-dev"
                 },
                 "pest": {
                     "plugins": [
@@ -4940,8 +5105,7 @@
                 },
                 "files": [
                     "src/globals.php",
-                    "src/Pest.php",
-                    "compiled/globals.php"
+                    "src/Pest.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4963,20 +5127,20 @@
                 "testing",
                 "unit"
             ],
-            "time": "2020-07-01T18:26:18+00:00"
+            "time": "2020-07-24T19:54:00+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
-            "version": "v0.2.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin.git",
-                "reference": "99d21abb7b1a44aa26c2416ca729d2a989ee2850"
+                "reference": "b31827e2a542381faa1fb7b14bff9334c837e0b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin/zipball/99d21abb7b1a44aa26c2416ca729d2a989ee2850",
-                "reference": "99d21abb7b1a44aa26c2416ca729d2a989ee2850",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin/zipball/b31827e2a542381faa1fb7b14bff9334c837e0b0",
+                "reference": "b31827e2a542381faa1fb7b14bff9334c837e0b0",
                 "shasum": ""
             },
             "require": {
@@ -4984,17 +5148,17 @@
                 "php": "^7.3"
             },
             "conflict": {
-                "pestphp/pest": "<0.2"
+                "pestphp/pest": "<0.3"
             },
             "require-dev": {
                 "composer/composer": "^1.10",
-                "pestphp/pest": "^0.2",
+                "pestphp/pest": "^0.3",
                 "pestphp/pest-dev-tools": "dev-master"
             },
             "type": "composer-plugin",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.2.x-dev"
+                    "dev-master": "0.3.x-dev"
                 },
                 "class": "Pest\\Plugin\\Manager"
             },
@@ -5018,37 +5182,37 @@
                 "testing",
                 "unit"
             ],
-            "time": "2020-06-16T18:07:24+00:00"
+            "time": "2020-07-24T19:32:21+00:00"
         },
         {
             "name": "pestphp/pest-plugin-coverage",
-            "version": "v0.2.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin-coverage.git",
-                "reference": "aa60bfd07ecfb63d191e70867432892068755426"
+                "reference": "9958ca8a709d26e93b8da96b88ba2889f39931b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-coverage/zipball/aa60bfd07ecfb63d191e70867432892068755426",
-                "reference": "aa60bfd07ecfb63d191e70867432892068755426",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-coverage/zipball/9958ca8a709d26e93b8da96b88ba2889f39931b1",
+                "reference": "9958ca8a709d26e93b8da96b88ba2889f39931b1",
                 "shasum": ""
             },
             "require": {
-                "pestphp/pest-plugin": "^0.2",
+                "pestphp/pest-plugin": "^0.3",
                 "php": "^7.3"
             },
             "conflict": {
-                "pestphp/pest": "<0.2"
+                "pestphp/pest": "<0.3"
             },
             "require-dev": {
-                "pestphp/pest": "^0.2",
+                "pestphp/pest": "^0.3",
                 "pestphp/pest-dev-tools": "dev-master"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.2.x-dev"
+                    "dev-master": "0.3.x-dev"
                 },
                 "pest": {
                     "plugins": [
@@ -5076,37 +5240,37 @@
                 "testing",
                 "unit"
             ],
-            "time": "2020-07-18T19:16:10+00:00"
+            "time": "2020-07-24T19:31:51+00:00"
         },
         {
             "name": "pestphp/pest-plugin-init",
-            "version": "v0.2.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin-init.git",
-                "reference": "718771dbfcc5bb8ceca238c4754dbc7bfdcb1b09"
+                "reference": "1449ef648aa8abcfb8c8595a70ba41ecdf6c9743"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-init/zipball/718771dbfcc5bb8ceca238c4754dbc7bfdcb1b09",
-                "reference": "718771dbfcc5bb8ceca238c4754dbc7bfdcb1b09",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-init/zipball/1449ef648aa8abcfb8c8595a70ba41ecdf6c9743",
+                "reference": "1449ef648aa8abcfb8c8595a70ba41ecdf6c9743",
                 "shasum": ""
             },
             "require": {
-                "pestphp/pest-plugin": "^0.2",
+                "pestphp/pest-plugin": "^0.3",
                 "php": "^7.3"
             },
             "conflict": {
-                "pestphp/pest": "<0.2.3"
+                "pestphp/pest": "<0.3"
             },
             "require-dev": {
-                "pestphp/pest": "^0.2",
+                "pestphp/pest": "^0.3",
                 "pestphp/pest-dev-tools": "dev-master"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.2.x-dev"
+                    "dev-master": "0.3.x-dev"
                 },
                 "pest": {
                     "plugins": [
@@ -5134,35 +5298,35 @@
                 "testing",
                 "unit"
             ],
-            "time": "2020-07-01T18:35:16+00:00"
+            "time": "2020-07-24T19:34:37+00:00"
         },
         {
             "name": "pestphp/pest-plugin-laravel",
-            "version": "v0.2.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin-laravel.git",
-                "reference": "a7d44316eda40be56465d34cb457953e508f4161"
+                "reference": "f9109a20691c51faec5d4b43a00bd001ec5e3079"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-laravel/zipball/a7d44316eda40be56465d34cb457953e508f4161",
-                "reference": "a7d44316eda40be56465d34cb457953e508f4161",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-laravel/zipball/f9109a20691c51faec5d4b43a00bd001ec5e3079",
+                "reference": "f9109a20691c51faec5d4b43a00bd001ec5e3079",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^7.0",
-                "pestphp/pest": "^0.2",
+                "laravel/framework": "^7.0|^8.0",
+                "pestphp/pest": "^0.3",
                 "php": "^7.3"
             },
             "require-dev": {
-                "orchestra/testbench": "^5.2",
+                "orchestra/testbench": "^5.2|^6.0",
                 "pestphp/pest-dev-tools": "dev-master"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.2.x-dev"
+                    "dev-master": "0.3.x-dev"
                 }
             },
             "autoload": {
@@ -5187,7 +5351,99 @@
                 "testing",
                 "unit"
             ],
-            "time": "2020-06-11T18:44:12+00:00"
+            "time": "2020-07-24T19:52:58+00:00"
+        },
+        {
+            "name": "pestphp/pest-plugin-watch",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pestphp/pest-plugin-watch.git",
+                "reference": "d0b38499ce9fa4b26400a3590c587dcd81d55c7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-watch/zipball/d0b38499ce9fa4b26400a3590c587dcd81d55c7c",
+                "reference": "d0b38499ce9fa4b26400a3590c587dcd81d55c7c",
+                "shasum": ""
+            },
+            "require": {
+                "pestphp/pest-plugin": "^0.2",
+                "php": "^7.3",
+                "react/child-process": "^0.6.1",
+                "react/event-loop": "^1.1"
+            },
+            "conflict": {
+                "evenement/evenement": "^1.0",
+                "pestphp/pest": "<0.3"
+            },
+            "require-dev": {
+                "pestphp/pest": "^0.3",
+                "pestphp/pest-dev-tools": "dev-master"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3.x-dev"
+                },
+                "pest": {
+                    "plugins": [
+                        "Pest\\Watch\\Plugin"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pest\\Watch\\": "src/"
+                }
+            },
+            "scripts": {
+                "lint": [
+                    "rector process src && php-cs-fixer fix -v"
+                ],
+                "test:lint": [
+                    "php-cs-fixer fix -v --dry-run && rector process src --dry-run"
+                ],
+                "test:types": [
+                    "phpstan analyse --ansi"
+                ],
+                "test:unit": [
+                    "pest --colors=always"
+                ],
+                "test": [
+                    "@test:lint",
+                    "@test:types",
+                    "@test:unit"
+                ],
+                "prep": [
+                    "composer lint && composer test"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caneco",
+                    "email": "caneco@me.com"
+                }
+            ],
+            "description": "The Pest Watch Plugin",
+            "keywords": [
+                "framework",
+                "pest",
+                "php",
+                "plugin",
+                "test",
+                "testing",
+                "unit",
+                "watch"
+            ],
+            "support": {
+                "source": "https://github.com/pestphp/pest-plugin-watch/tree/master",
+                "issues": "https://github.com/pestphp/pest-plugin-watch/issues"
+            },
+            "time": "2020-07-24T19:34:08+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -5901,6 +6157,137 @@
                 "xunit"
             ],
             "time": "2020-07-13T17:55:55+00:00"
+        },
+        {
+            "name": "react/child-process",
+            "version": "v0.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/child-process.git",
+                "reference": "6895afa583d51dc10a4b9e93cd3bce17b3b77ac3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/child-process/zipball/6895afa583d51dc10a4b9e93cd3bce17b3b77ac3",
+                "reference": "6895afa583d51dc10a4b9e93cd3bce17b3b77ac3",
+                "shasum": ""
+            },
+            "require": {
+                "evenement/evenement": "^3.0 || ^2.0 || ^1.0",
+                "php": ">=5.3.0",
+                "react/event-loop": "^1.0 || ^0.5 || ^0.4 || ^0.3.5",
+                "react/stream": "^1.0 || ^0.7.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0 || ^6.4 || ^5.7 || ^4.8.35",
+                "react/socket": "^1.0",
+                "sebastian/environment": "^3.0 || ^2.0 || ^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "React\\ChildProcess\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Event-driven library for executing child processes with ReactPHP.",
+            "keywords": [
+                "event-driven",
+                "process",
+                "reactphp"
+            ],
+            "time": "2019-02-15T13:48:16+00:00"
+        },
+        {
+            "name": "react/event-loop",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/event-loop.git",
+                "reference": "6d24de090cd59cfc830263cfba965be77b563c13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/event-loop/zipball/6d24de090cd59cfc830263cfba965be77b563c13",
+                "reference": "6d24de090cd59cfc830263cfba965be77b563c13",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0 || ^6.4 || ^5.7 || ^4.8.35"
+            },
+            "suggest": {
+                "ext-event": "~1.0 for ExtEventLoop",
+                "ext-pcntl": "For signal handling support when using the StreamSelectLoop",
+                "ext-uv": "* for ExtUvLoop"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "React\\EventLoop\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "ReactPHP's core reactor event loop that libraries can use for evented I/O.",
+            "keywords": [
+                "asynchronous",
+                "event-loop"
+            ],
+            "time": "2020-01-01T18:39:52+00:00"
+        },
+        {
+            "name": "react/stream",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/stream.git",
+                "reference": "7c02b510ee3f582c810aeccd3a197b9c2f52ff1a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/stream/zipball/7c02b510ee3f582c810aeccd3a197b9c2f52ff1a",
+                "reference": "7c02b510ee3f582c810aeccd3a197b9c2f52ff1a",
+                "shasum": ""
+            },
+            "require": {
+                "evenement/evenement": "^3.0 || ^2.0 || ^1.0",
+                "php": ">=5.3.8",
+                "react/event-loop": "^1.0 || ^0.5 || ^0.4 || ^0.3.5"
+            },
+            "require-dev": {
+                "clue/stream-filter": "~1.2",
+                "phpunit/phpunit": "^7.0 || ^6.4 || ^5.7 || ^4.8.35"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "React\\Stream\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Event-driven readable and writable streams for non-blocking I/O in ReactPHP",
+            "keywords": [
+                "event-driven",
+                "io",
+                "non-blocking",
+                "pipe",
+                "reactphp",
+                "readable",
+                "stream",
+                "writable"
+            ],
+            "time": "2020-05-04T10:17:57+00:00"
         },
         {
             "name": "scrivo/highlight.php",
@@ -6725,9 +7112,39 @@
             "time": "2020-07-08T17:02:28+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "0.3.0",
+            "alias_normalized": "0.3.0.0",
+            "version": "9999999-dev",
+            "package": "pestphp/pest"
+        },
+        {
+            "alias": "0.3.0",
+            "alias_normalized": "0.3.0.0",
+            "version": "9999999-dev",
+            "package": "pestphp/pest-plugin-laravel"
+        },
+        {
+            "alias": "0.2.1",
+            "alias_normalized": "0.2.1.0",
+            "version": "9999999-dev",
+            "package": "pestphp/pest-plugin"
+        },
+        {
+            "alias": "0.3.0",
+            "alias_normalized": "0.3.0.0",
+            "version": "9999999-dev",
+            "package": "pestphp/pest-plugin-watch"
+        }
+    ],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "pestphp/pest": 20,
+        "pestphp/pest-plugin-laravel": 20,
+        "pestphp/pest-plugin": 20,
+        "pestphp/pest-plugin-watch": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
