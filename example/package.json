@@ -22,8 +22,9 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@j0nz/nifty-layouts": "^1.0.0",
         "@phased/phase": "^0.4.0",
-        "@tailwindcss/typography": "^0.2.0",
+        "@tailwindcss/typography": "file:../../tailwindcss-typography",
         "@tailwindcss/ui": "^0.4.0",
         "dayjs": "^1.8.30",
         "tailwindcss": "^1.5.2",
