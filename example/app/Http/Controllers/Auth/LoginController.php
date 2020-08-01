@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Artisan;
 use Phased\Routing\Facades\Phase;
+use Phased\State\Facades\Vuex;
 
 class LoginController extends Controller
 {
@@ -38,6 +39,11 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function authenticated() {
+        Vuex::load("user", "profile");
+        return response()->vuex();
     }
 
     public function LoginPage()

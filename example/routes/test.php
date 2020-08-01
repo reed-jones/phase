@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /** Creates a user & will log in */
-Route::get('login', fn () => auth()->login(factory(User::class)->create(request()->all())));
+Route::get('login', function() {
+    return tap(factory(User::class)->create(request()->all()), fn ($user) => auth()->login($user));
+});
 
 /** Creates a new model with the given attributes */
 Route::post('create', fn () => factory(request()->input('model'))->create(request()->input('attributes', [])));

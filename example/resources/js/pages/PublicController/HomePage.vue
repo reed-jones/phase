@@ -1,14 +1,16 @@
 <template>
-<div class="prose mx-auto py-8">
-  <h1 class="text-center py-8">Notices</h1>
-  <article class="flex flex-wrap items-center justify-center">
+<div class="mx-auto py-8">
+  <div class="prose mx-auto">
+    <h1 class="text-center py-8">Notices</h1>
+  </div>
+  <article class="flex flex-wrap items-center justify-center max-w-2xl mx-auto">
     <section
       v-for="notice in $store.state.notices.all.data"
       :key="notice.all"
        class="shadow-2xl mx-4 my-12 p-4 bg-gray-100 w-full">
-      <div class="text-xl text-gray-900">{{ notice.title }}</div>
+      <h2 class="font-medium  my-4 text-xl text-gray-900">{{ notice.title }}</h2>
       <div class="text-gray-500 flex justify-between">
-        <div class="flex flex-col">
+        <div class="flex flex-col my-4">
           <div>{{ notice.user.name }}</div>
           <a class="" v-if="notice.user.email" data-cy="contact-email" :href="`mailto:${notice.user.email}`">{{ notice.user.email }}</a>
           <a class="" v-if="notice.user.phone" data-cy="contact-phone" :href="`tel:${notice.user.phone}`">{{ notice.user.phone }}</a>

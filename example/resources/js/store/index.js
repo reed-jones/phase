@@ -6,9 +6,17 @@ Vue.use(Vuex)
 // console.log(axios)
 export const store = new Store(hydrate({
     modules: {
-        notices: {
+        user: {
+            namespaced: true,
             state: {
-                all: []
+                profile: null,
+                counter: null
+            }
+        },
+        notices: {
+            namespaced: true,
+            state: {
+                all: null
             }
         }
     }

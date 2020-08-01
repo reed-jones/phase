@@ -20,6 +20,10 @@ describe('Login', () => {
 
     it('redirects to the home page after a user logs in', () => {
         cy.create('App\\Models\\User').then(user => {
+            cy.get('[data-cy=navbar-home]').should('exist');
+            cy.get('[data-cy=navbar-login]').should('not.exist');
+            cy.get('[data-cy=navbar-logout]').should('not.exist');
+
             cy.visit('/login')
 
             cy.get('#email').type(user.email);
@@ -27,7 +31,10 @@ describe('Login', () => {
             cy.get('button').contains('Sign in').click()
 
             cy.url().should('include', '/home');
-            cy.contains("Welcome to: HomeController@DashboardPage")
+            cy.contains(`Welcome ${user.name}`)
+
+            cy.get('[data-cy=navbar-login]').should('not.exist');
+            cy.get('[data-cy=navbar-logout]').should('exist');
         })
     })
 })

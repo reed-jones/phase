@@ -35,7 +35,7 @@ Cypress.Commands.add('create', (model, attributes = {}) => {
 
 // Log in as a new user
 Cypress.Commands.add('login', (attributes = {}) => {
-    return cy.request(`/__testing__/login`, attributes);
+    return cy.request(`/__testing__/login`, attributes).its('body');
 })
 
 Cypress.Commands.add('csrfToken', () => {

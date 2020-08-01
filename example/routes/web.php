@@ -21,6 +21,8 @@ Route::phase('/login', 'Auth\LoginController@LoginPage');
 Route::phase('/register', 'Auth\RegisterController@RegisterPage');
 Route::phase('/home', 'HomeController@DashboardPage');
 
+Route::post('/counter/increment/{number}', 'CounterController@increment');
+Route::post('/counter/decrement/{number}', 'CounterController@decrement');
 
 // function findRouteByAction($action) {
 //     $router = App::make('router');
