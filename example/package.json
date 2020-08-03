@@ -1,5 +1,7 @@
 {
     "private": true,
+    "name": "phase-example-app",
+    "version": "0.5.0",
     "scripts": {
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -8,7 +10,8 @@
         "cypress": "cypress",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "sync": "npx install-local ../packages/@phased/{types,state,routing,webpack-plugin,laravel-mix,phase}"
     },
     "devDependencies": {
         "axios": "^0.19",
@@ -23,7 +26,12 @@
     },
     "dependencies": {
         "@j0nz/nifty-layouts": "^1.0.0",
-        "@phased/phase": "^0.4.0",
+        "@phased/laravel-mix": "file:../packages/@phased/laravel-mix",
+        "@phased/routing": "file:../packages/@phased/routing",
+        "@phased/phase": "file:../packages/@phased/phase",
+        "@phased/state": "file:../packages/@phased/state",
+        "@phased/types": "file:../packages/@phased/types",
+        "@phased/webpack-plugin": "file:../packages/@phased/webpack-plugin",
         "@tailwindcss/typography": "^0.2.0",
         "@tailwindcss/ui": "^0.4.0",
         "dayjs": "^1.8.30",

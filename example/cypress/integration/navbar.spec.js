@@ -10,6 +10,7 @@ describe("Navbar", () => {
     })
 
     it("Shows a logout link on the home page when logged in", () => {
+        cy.login()
         cy.visit('/')
         cy.get('[data-cy=navbar-login]').should('not.exist')
         cy.get('[data-cy=navbar-logout]').click()

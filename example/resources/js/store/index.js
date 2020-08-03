@@ -20,4 +20,4 @@ export const store = new Store(hydrate({
             }
         }
     }
-}))
+}, { logLevel: 'debug' }))

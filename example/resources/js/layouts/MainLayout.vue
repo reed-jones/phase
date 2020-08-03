@@ -9,15 +9,26 @@
             Login
         </RouterLink>
 
-        <RouterLink
-            class="px-8 py-4 hover:bg-gray-100"
-            :to="{ name: 'Auth/LoginController@LoginPage'}"
-            v-if="$store.state.user.profile"
-            data-cy="navbar-logout">
-            Logout
-        </RouterLink>
+        <template v-if="$store.state.user.profile">
+            <a class="px-8 py-4 hover:bg-gray-100" href="/logout"
+                data-cy="navbar-logout"
+                @click.prevent="logout">
+                Logout
+            </a>
+        </template>
     </nav>
 
     <slot />
 </main>
 </template>
+
+<script>
+export default {
+    methods: {
+        async logout() {
+            await axios.post('/logout')
+            this.$router.push('/')
+        }
+    }
+}
+</script>

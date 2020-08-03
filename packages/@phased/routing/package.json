@@ -1,6 +1,6 @@
 {
   "name": "@phased/routing",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Auto SPA configuration focused on Laravel apps",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "bugs": "https://github.com/reed-jones/phase/issues",
@@ -28,26 +28,20 @@
     "check": "tsc --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
-    "@types/fs-extra": "^8.0.1",
+    "@types/fs-extra": "^9.0.1",
     "@types/lodash.merge": "^4.6.6",
-    "@types/prettier": "^1.19.0",
+    "@types/prettier": "^2.0.0",
     "@types/webpack": "^4.41.2",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9.0.0",
     "laravel-mix": "^5.0.1",
     "resolve-url-loader": "^3.1.0",
     "sass": "^1.25.0",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^9.0.2",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.41.5"
   },
   "dependencies": {
-    "@types/prettier": "^2.0.0",
-    "fs-extra": "^9.0.0",
     "lodash.merge": "^4.6.2",
     "prettier": "^2.0.5"
-  },
-  "peerDependencies": {
-    "laravel-mix": "^5.0.1",
-    "prettier": "^1.19.1"
   }
 }

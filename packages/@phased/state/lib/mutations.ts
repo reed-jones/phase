@@ -21,6 +21,7 @@ export const mutantGenerator = ({ mutationPrefix = "X_SET", logger }: { mutation
       : `${mutationPrefix}_${key.toUpperCase()}`;
 
     logger?.debug(`[Phase] Namespace generated`, { namespace });
+
     return namespace
   };
 

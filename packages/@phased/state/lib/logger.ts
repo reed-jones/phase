@@ -21,8 +21,8 @@ export const createLogger = (logLevel: keyof ILogLevels): IPhaseLogger => {
     const logger = <IPhaseLogger>new Proxy(console.log, {
         get(target, prop: keyof IExtendedLogLevels) {
             return (...args: any): any => {
-                if (process.env.NODE_ENV === 'production') {
-                    // noop in production
+                if (!__BROWSER__ || process.env.NODE_ENV === 'production') {
+                    // noop in production/server-side
                     return () => { };
                 }
 

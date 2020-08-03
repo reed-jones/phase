@@ -1,7 +1,7 @@
 import sucrase from "@rollup/plugin-sucrase";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
-// import { terser } from "rollup-plugin-terser";
+import { terser } from "rollup-plugin-terser";
 import alias from "@rollup/plugin-alias";
 import pkg from "./package.json";
 
@@ -58,7 +58,7 @@ export default [
         }
       }),
 
-      // production && terser()
+      production && terser()
     ]
   }
 ];

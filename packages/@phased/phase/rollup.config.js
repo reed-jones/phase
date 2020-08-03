@@ -58,7 +58,7 @@ export default [
         transforms: ["typescript"]
       }),
 
-      commonjs({ namedExports: { "fs-extra": ["outputFileSync"] } }),
+      commonjs(),
 
       production && terser()
     ]

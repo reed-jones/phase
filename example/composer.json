@@ -11,6 +11,18 @@
         {
             "type": "vcs",
             "url": "https://github.com/pestphp/pest-plugin-watch.git"
+        },
+        {
+            "type": "path",
+            "url": "../packages/Phased/Routing"
+        },
+        {
+            "type": "path",
+            "url": "../packages/Phased/State"
+        },
+        {
+            "type": "path",
+            "url": "../packages/Phased/Phase"
         }
     ],
     "require": {
@@ -23,7 +35,9 @@
         "laravel/socialite": "^4.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
-        "phased/phase": "^0.4.0"
+        "phased/phase": "*",
+        "phased/routing": "*",
+        "phased/state": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

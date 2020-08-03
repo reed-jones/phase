@@ -46,6 +46,12 @@ class LoginController extends Controller
         return response()->vuex();
     }
 
+    protected function loggedOut()
+    {
+        Vuex::load("user", "profile");
+        return response()->vuex();
+    }
+
     public function LoginPage()
     {
         return Phase::view();
