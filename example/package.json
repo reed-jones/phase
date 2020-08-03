@@ -12,7 +12,7 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "sync": "npx install-local ../packages/@phased/{types,state,routing,webpack-plugin,laravel-mix,phase}",
-        "rebuild:phase": "cd ../ && yarn build",
+        "rebuild:phase": "cd ../ && yarn build && cd ./example || cd ./example",
         "postinstall": "npm run sync",
         "predev": "npm run sync",
         "prewatch": "npm run sync",
