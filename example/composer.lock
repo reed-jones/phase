@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c057e9d25446fd0a2e8da3e252c260e2",
+    "content-hash": "0e548529b00fe0cc34cb0b338ed16c20",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -703,16 +703,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v7.21.0",
+            "version": "v7.22.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "3ccdb116524de408fdc00715b6f06a1031ddace9"
+                "reference": "30e851a2b3a2af73fba0b7f4fa22b04260db98e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/3ccdb116524de408fdc00715b6f06a1031ddace9",
-                "reference": "3ccdb116524de408fdc00715b6f06a1031ddace9",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/30e851a2b3a2af73fba0b7f4fa22b04260db98e7",
+                "reference": "30e851a2b3a2af73fba0b7f4fa22b04260db98e7",
                 "shasum": ""
             },
             "require": {
@@ -856,7 +856,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-07-21T14:26:42+00:00"
+            "time": "2020-07-27T18:25:06+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -1173,16 +1173,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.69",
+            "version": "1.0.70",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "7106f78428a344bc4f643c233a94e48795f10967"
+                "reference": "585824702f534f8d3cf7fab7225e8466cc4b7493"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/7106f78428a344bc4f643c233a94e48795f10967",
-                "reference": "7106f78428a344bc4f643c233a94e48795f10967",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/585824702f534f8d3cf7fab7225e8466cc4b7493",
+                "reference": "585824702f534f8d3cf7fab7225e8466cc4b7493",
                 "shasum": ""
             },
             "require": {
@@ -1193,7 +1193,7 @@
                 "league/flysystem-sftp": "<1.0.6"
             },
             "require-dev": {
-                "phpspec/phpspec": "^3.4",
+                "phpspec/phpspec": "^3.4 || ^4.0 || ^5.0 || ^6.0",
                 "phpunit/phpunit": "^5.7.26"
             },
             "suggest": {
@@ -1253,7 +1253,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2020-05-18T15:13:39+00:00"
+            "time": "2020-07-26T07:20:36+00:00"
         },
         {
             "name": "league/oauth1-client",
@@ -1401,16 +1401,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.36.1",
+            "version": "2.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "ee7378a36cc62952100e718bcc58be4c7210e55f"
+                "reference": "1f61206de973d67f36ce50f041c792ddac663c3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/ee7378a36cc62952100e718bcc58be4c7210e55f",
-                "reference": "ee7378a36cc62952100e718bcc58be4c7210e55f",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/1f61206de973d67f36ce50f041c792ddac663c3e",
+                "reference": "1f61206de973d67f36ce50f041c792ddac663c3e",
                 "shasum": ""
             },
             "require": {
@@ -1476,7 +1476,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2020-07-04T12:29:56+00:00"
+            "time": "2020-07-28T06:04:54+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -1638,17 +1638,11 @@
         },
         {
             "name": "phased/phase",
-            "version": "v0.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/reed-jones/phase-phase-php.git",
-                "reference": "a025f0183338cc9906b2c8a4fdc9df28f17de91d"
-            },
+            "version": "dev-master",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/reed-jones/phase-phase-php/zipball/a025f0183338cc9906b2c8a4fdc9df28f17de91d",
-                "reference": "a025f0183338cc9906b2c8a4fdc9df28f17de91d",
-                "shasum": ""
+                "type": "path",
+                "url": "../packages/Phased/Phase",
+                "reference": "66118360920f03e01c491ea9920cb736128e4177"
             },
             "require": {
                 "phased/routing": "^0.4",
@@ -1667,7 +1661,6 @@
                     "Phased\\Phase\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "ISC"
             ],
@@ -1677,22 +1670,15 @@
                     "email": "reedjones@reedjones.com"
                 }
             ],
-            "description": "Phase meta package",
-            "time": "2020-03-15T19:00:45+00:00"
+            "description": "Phase meta package"
         },
         {
             "name": "phased/routing",
-            "version": "v0.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/reed-jones/phase-routing-php.git",
-                "reference": "ba3b29be7dee58825d13655fb0024e1c2bc142fa"
-            },
+            "version": "dev-master",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/reed-jones/phase-routing-php/zipball/ba3b29be7dee58825d13655fb0024e1c2bc142fa",
-                "reference": "ba3b29be7dee58825d13655fb0024e1c2bc142fa",
-                "shasum": ""
+                "type": "path",
+                "url": "../packages/Phased/Routing",
+                "reference": "3a5a1d6734c95f13f2b0f388684a5bbe3014807b"
             },
             "require": {
                 "php": "^7.2"
@@ -1719,7 +1705,6 @@
                     "helpers.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "ISC"
             ],
@@ -1729,22 +1714,15 @@
                     "email": "reedjones@reedjones.com"
                 }
             ],
-            "description": "Transparent Vue <-> Laravel Integration",
-            "time": "2020-03-15T18:07:34+00:00"
+            "description": "Transparent Vue <-> Laravel Integration"
         },
         {
             "name": "phased/state",
-            "version": "v0.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/reed-jones/phase-state-php.git",
-                "reference": "d384ea4b53d3c43660a5762d8216ce976faacb2f"
-            },
+            "version": "dev-master",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/reed-jones/phase-state-php/zipball/d384ea4b53d3c43660a5762d8216ce976faacb2f",
-                "reference": "d384ea4b53d3c43660a5762d8216ce976faacb2f",
-                "shasum": ""
+                "type": "path",
+                "url": "../packages/Phased/State",
+                "reference": "b83e91579d60c65b58a19ec7268ff3261b76bc5f"
             },
             "require": {
                 "php": "^7.2"
@@ -1771,7 +1749,6 @@
                     "helpers.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "ISC"
             ],
@@ -1781,8 +1758,7 @@
                     "email": "reedjones@reedjones.com"
                 }
             ],
-            "description": "Magic Data Loading. Laravel <-> Vuex Syncing",
-            "time": "2020-03-01T17:02:26+00:00"
+            "description": "Magic Data Loading. Laravel <-> Vuex Syncing"
         },
         {
             "name": "phpoption/phpoption",
@@ -2254,16 +2230,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.0.1",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "ba8fff1d3abb8bb4d35a135ed22a31c6ef3ede3d"
+                "reference": "988dbefc7878d0a35f12afb4df1f7dd0bd153c43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/ba8fff1d3abb8bb4d35a135ed22a31c6ef3ede3d",
-                "reference": "ba8fff1d3abb8bb4d35a135ed22a31c6ef3ede3d",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/988dbefc7878d0a35f12afb4df1f7dd0bd153c43",
+                "reference": "988dbefc7878d0a35f12afb4df1f7dd0bd153c43",
                 "shasum": ""
             },
             "require": {
@@ -2278,7 +2254,7 @@
             },
             "require-dev": {
                 "codeception/aspect-mock": "^3",
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2 || ^0.7.0",
                 "doctrine/annotations": "^1.8",
                 "goaop/framework": "^2",
                 "mockery/mockery": "^1.3",
@@ -2287,8 +2263,8 @@
                 "php-mock/php-mock-mockery": "^1.3",
                 "php-mock/php-mock-phpunit": "^2.5",
                 "php-parallel-lint/php-parallel-lint": "^1.1",
+                "phpbench/phpbench": "^0.17.1",
                 "phpstan/extension-installer": "^1.0",
-                "phpstan/phpdoc-parser": "0.4.3",
                 "phpstan/phpstan": "^0.12",
                 "phpstan/phpstan-mockery": "^0.12",
                 "phpstan/phpstan-phpunit": "^0.12",
@@ -2331,7 +2307,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2020-03-29T20:13:32+00:00"
+            "time": "2020-07-28T16:51:01+00:00"
         },
         {
             "name": "spatie/laravel-server-side-rendering",
@@ -4587,16 +4563,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "2.3.3",
+            "version": "2.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "cc7df15806aad8a9915148ea4daf7f0dd0be45b5"
+                "reference": "58dc4a8df3d41174c677a370b6779b694e4539e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/cc7df15806aad8a9915148ea4daf7f0dd0be45b5",
-                "reference": "cc7df15806aad8a9915148ea4daf7f0dd0be45b5",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/58dc4a8df3d41174c677a370b6779b694e4539e7",
+                "reference": "58dc4a8df3d41174c677a370b6779b694e4539e7",
                 "shasum": ""
             },
             "require": {
@@ -4655,7 +4631,7 @@
                 "laravel",
                 "page"
             ],
-            "time": "2020-07-14T11:34:42+00:00"
+            "time": "2020-08-01T21:20:01+00:00"
         },
         {
             "name": "facade/ignition-contracts",
@@ -5057,12 +5033,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "e4e4eb0a577eb3f63bb71f15a67c612c0c545181"
+                "reference": "330dafa2943ab0762775a8a250a968f5576556cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/e4e4eb0a577eb3f63bb71f15a67c612c0c545181",
-                "reference": "e4e4eb0a577eb3f63bb71f15a67c612c0c545181",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/330dafa2943ab0762775a8a250a968f5576556cb",
+                "reference": "330dafa2943ab0762775a8a250a968f5576556cb",
                 "shasum": ""
             },
             "require": {
@@ -5127,7 +5103,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2020-07-24T19:54:00+00:00"
+            "time": "2020-08-02T21:53:32+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
@@ -7114,6 +7090,18 @@
     ],
     "aliases": [
         {
+            "alias": "0.4.1",
+            "alias_normalized": "0.4.1.0",
+            "version": "9999999-dev",
+            "package": "phased/routing"
+        },
+        {
+            "alias": "0.4.1",
+            "alias_normalized": "0.4.1.0",
+            "version": "9999999-dev",
+            "package": "phased/state"
+        },
+        {
             "alias": "0.3.0",
             "alias_normalized": "0.3.0.0",
             "version": "9999999-dev",
@@ -7140,6 +7128,8 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "phased/routing": 20,
+        "phased/state": 20,
         "pestphp/pest": 20,
         "pestphp/pest-plugin-laravel": 20,
         "pestphp/pest-plugin": 20,

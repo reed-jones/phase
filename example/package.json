@@ -11,7 +11,12 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "sync": "npx install-local ../packages/@phased/{types,state,routing,webpack-plugin,laravel-mix,phase}"
+        "sync": "npx install-local ../packages/@phased/{types,state,routing,webpack-plugin,laravel-mix,phase}",
+        "rebuild:phase": "cd ../ && yarn build",
+        "postinstall": "npm run sync",
+        "predev": "npm run sync",
+        "prewatch": "npm run sync",
+        "prehot": "npm run sync"
     },
     "devDependencies": {
         "axios": "^0.19",

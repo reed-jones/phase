@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="$store.state.user.profile">
   <h1 class="text-center text-4xl mb-4">Welcome {{ $store.state.user.profile.name }}</h1>
 
   <div class="flex items-center justify-center">

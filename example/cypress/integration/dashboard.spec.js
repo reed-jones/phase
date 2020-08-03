@@ -1,6 +1,13 @@
 describe('Dashboard', () => {
-    it('should not allow guests to view the dashboard', () => {
+    it.only('should redirect guests away from protected routes on direct entry', () => {
         cy.visit('/home')
+            .url().should('include', '/login')
+    })
+    it.only('should redirect guests away from protected routes on SPA entry', () => {
+        cy.visit('/')
+        cy.get('[data-cy=navbar-dashboard]').click()
+        cy.get('[data-cy=navbar-dashboard]').click()
+        cy.get('[data-cy=navbar-dashboard]').click()
             .url().should('include', '/login')
     })
 

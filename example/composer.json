@@ -36,8 +36,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "phased/phase": "*",
-        "phased/routing": "*",
-        "phased/state": "*"
+        "phased/routing": "dev-master as 0.4.1",
+        "phased/state": "dev-master as 0.4.1"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
