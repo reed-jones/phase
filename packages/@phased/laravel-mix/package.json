@@ -4,6 +4,7 @@
   "description": "Laravel Mix Plugin for Phased",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "bugs": "https://github.com/reed-jones/phase/issues",
+  "funding": "https://github.com/reed-jones/phase?sponsor=1",
   "homepage": "https://phased.dev",
   "repository": "github:reed-jones/phase",
   "license": "ISC",
@@ -24,19 +25,10 @@
   "devDependencies": {
     "@phased/types": "^0.4.0",
     "@rollup/plugin-alias": "^3.0.0",
-    "@rollup/plugin-commonjs": "^11.0.1",
-    "@rollup/plugin-node-resolve": "^7.0.0",
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
     "@rollup/plugin-sucrase": "^3.0.0",
     "laravel-mix": "^5.0.1",
-    "rollup-plugin-terser": "^5.2.0"
-  },
-  "dependencies": {
-    "@phased/routing": "^0.4.0",
-    "@phased/webpack-plugin": "^0.4.0"
-  },
-  "peerDependencies": {
-    "@phased/routing": "^0.4.0",
-    "@phased/webpack-plugin": "^0.4.0",
-    "laravel-mix": "^5.0.1"
+    "rollup-plugin-terser": "^6.1.0"
   }
 }

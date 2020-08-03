@@ -8,7 +8,7 @@ export default [
       outputs.cjs(pkg),
       outputs.esm(pkg)
     ],
-    external: Object.keys(pkg.peerDependencies),
+    external: ['axios', 'vue', 'vuex'],
     plugins: [
       plugins.alias,
       plugins.resolve,

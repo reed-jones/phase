@@ -41,7 +41,7 @@ export default [
         //
       }),
 
-      production && terser()
+      // production && terser()
     ]
   }
 ];

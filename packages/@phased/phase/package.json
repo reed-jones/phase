@@ -4,21 +4,15 @@
   "description": "Auto SPA configuration focused on Laravel apps",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "bugs": "https://github.com/reed-jones/phase/issues",
+  "funding": "https://github.com/reed-jones/phase?sponsor=1",
   "homepage": "https://phased.dev",
   "repository": "github:reed-jones/phase",
   "license": "ISC",
   "main": "dist/phase.cjs.js",
   "module": "dist/phase.esm.js",
   "browser": "dist/phase.umd.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "dist",
-    "app-client.js",
-    "app-server.js"
-  ],
+  "directories": { "lib": "lib", "test": "__tests__" },
+  "files": ["dist", "app-client.js", "app-server.js"],
   "scripts": {
     "compile": "rollup -c",
     "dev": "rollup -c -w",
@@ -28,16 +22,12 @@
     "types": "tsc",
     "check": "tsc --noEmit --emitDeclarationOnly false"
   },
-  "dependencies": {
+  "dependencies": { "vue-server-renderer": "^2.6.11" },
+  "devDependencies": {
+    "@phased/state": "^0.4.0",
+    "@phased/types": "^0.4.0",
     "@phased/laravel-mix": "^0.4.0",
     "@phased/routing": "^0.4.0",
-    "@phased/state": "^0.4.0",
     "@phased/webpack-plugin": "^0.4.0"
-  },
-  "devDependencies": {
-    "@phased/types": "^0.4.0"
-  },
-  "optionalDependencies": {
-    "vue-server-renderer": "^2.6.11"
   }
 }

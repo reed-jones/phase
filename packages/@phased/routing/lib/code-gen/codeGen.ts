@@ -10,16 +10,11 @@ export const codeGen = (
     `${imports}
 
 const redirects = ${JSON.stringify(config.redirects)}
-
-// Keep track of the previous URL, to avoid double fetching data
-let lastPath;
+const __DEV__ = process.env.NODE_ENV !== 'production'
 
 const phaseBeforeEnter = async (to, from, next) => {
   try {
-    if (from.name && !from.query.phase && lastPath !== to.fullPath) {
-
-      // update last url pointer
-      lastPath = to.fullPath;
+    if (from.name) {
 
       // retrieve data from controller. 'phase: true' breaks browser caching so going back won't display json
       const { request } = await axios.get(to.fullPath, { params: { phase: true }})
@@ -29,77 +24,33 @@ const phaseBeforeEnter = async (to, from, next) => {
 
       // follow redirects (if any)
       if (to.path !== finalUrl) {
-        return next({
-          path: finalUrl
-        })
+        if (__DEV__) { console.warn('[Phase] axios request followed redirect.') }
+        return next({ path: finalUrl })
       }
     }
 
     // proceed to next page as usual
     return next()
   } catch (err) {
+
     const status = err && err.response && err.response.status
+
     if (status && redirects[status]) {
+
+      if (__DEV__) { console.warn(\`[Phase] Phase redirect configured. Status code \${status} redirects to \${redirects[status]}\`) }
+
       return next({
         name: redirects[status],
         query: { redirect: to.fullPath }
       })
     }
 
-    if (process.env.NODE_ENV !== 'production') {
-      console.error(err)
-    }
+    if (__DEV__) { console.error(err) }
     return next()
   }
 }
 
-const routes = [${routes}];
-
-export const followAllRedirects = theRouter => {
-  if (typeof window === 'undefined') return;
-
-  axios.interceptors.request.use(
-      config => {
-        config.redirect = config.redirect !== false
-        if (config.redirect) {
-          if (!config.params) {
-            config.params = {}
-          }
-          config.params['phase'] = true
-        }
-        return config
-      },
-      error => Promise.reject(error)
-  );
-
-  allowRedirects(theRouter)
-}
-
-export const allowRedirects = theRouter => {
-  if (typeof window === 'undefined') return;
-
-  axios.interceptors.response.use(
-      response => {
-          const startUrl = window.location.pathname;
-          const finalUrl = new URL(response.request.responseURL).pathname
-
-          if (response.config.redirect && startUrl !== finalUrl && routes.some(r => r.path === finalUrl)) {
-
-              // update last url pointer
-              lastPath = finalUrl
-
-              theRouter.push({
-                  path: finalUrl,
-              })
-          }
-
-          return response;
-      },
-      error => Promise.reject(error)
-  );
-}
-
-export default routes;
+export default [${routes}];
 `,
     { parser: "babel" }
   );

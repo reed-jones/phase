@@ -1,0 +1,48 @@
+{
+    "private": true,
+    "name": "phase-example-app",
+    "version": "0.5.0",
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "cypress": "cypress",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "sync": "npx install-local ../packages/@phased/{types,state,routing,webpack-plugin,laravel-mix,phase}",
+        "rebuild:phase": "cd ../ && yarn build && cd ./example || cd ./example",
+        "postinstall": "npm run sync",
+        "predev": "npm run sync",
+        "prewatch": "npm run sync",
+        "prehot": "npm run sync"
+    },
+    "devDependencies": {
+        "axios": "^0.19",
+        "cross-env": "^7.0",
+        "cypress": "^4.11.0",
+        "laravel-mix": "^5.0.1",
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.20.1",
+        "sass-loader": "^8.0.0",
+        "vue": "^2.5.17",
+        "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "@j0nz/nifty-layouts": "^1.0.0",
+        "@phased/laravel-mix": "file:../packages/@phased/laravel-mix",
+        "@phased/routing": "file:../packages/@phased/routing",
+        "@phased/phase": "file:../packages/@phased/phase",
+        "@phased/state": "file:../packages/@phased/state",
+        "@phased/types": "file:../packages/@phased/types",
+        "@phased/webpack-plugin": "file:../packages/@phased/webpack-plugin",
+        "@tailwindcss/typography": "^0.2.0",
+        "@tailwindcss/ui": "^0.4.0",
+        "dayjs": "^1.8.30",
+        "tailwindcss": "^1.5.2",
+        "vue-router": "^3.3.4",
+        "vue-server-renderer": "^2.6.11",
+        "vuex": "^3.5.1"
+    }
+}

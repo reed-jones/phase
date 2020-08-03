@@ -12,27 +12,30 @@ declare var context: {
 
 declare global {
   interface Window {
-    __PHASE_STATE__?: VuexStore;
-    axios?: AxiosInstance;
   }
 }
 
-const isBrowser = typeof window !== 'undefined'
-const globalBase = isBrowser ? window : context;
+declare global {
+    var __BROWSER__: boolean
+    var __PHASE_STATE__: VuexStore
+    var axios: AxiosInstance
+}
+
+globalThis.__BROWSER__ = typeof window !== 'undefined'
+const isServer = typeof context !== 'undefined'
+const globalBase = isServer ? context : globalThis
 
 const defaultOptions = <VuexcellentOptions>{
   generateMutations: true,
-  axios: null,
+  axios: globalBase.axios,
   mutationPrefix: `X_SET`,
   logLevel: 'emergency',
   logger: createLogger('emergency')
 };
 
-
 export const hydrate = (vuexState: VuexStore, options: VuexcellentOptions = defaultOptions) => {
   let __PHASE_STATE__ = globalBase.__PHASE_STATE__ ?? {}
   options = {
-    axios: globalBase.axios,
     ...defaultOptions,
     ...options
   }
@@ -60,7 +63,7 @@ export const hydrate = (vuexState: VuexStore, options: VuexcellentOptions = defa
 
   logger.info(`[Phase] State Merged, Mutations Generated`, newState)
 
-  if (options.axios && options.generateMutations && isBrowser) {
+  if (options.axios && options.generateMutations && __BROWSER__) {
     // prepare plugin
     const VuexcellentPlugins = VuexcellentAutoCommitter(
       options,

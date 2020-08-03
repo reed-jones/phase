@@ -139,6 +139,5 @@ const autoMutateInterceptor = (
       );
     }
 
-
     return response;
   };

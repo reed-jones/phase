@@ -20,7 +20,7 @@ it('merges both default & stub configs', function () {
     $sass = config('phase.assets.sass'); // from config.stub.php
     $public = config('phase.assets.public'); // from config.defaults.php
 
-    assertEquals($sass, ['sass/app.scss']);
+    assertEquals($sass, []);
     assertEquals($public, public_path());
 });
 

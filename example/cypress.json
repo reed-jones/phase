@@ -1,0 +1,5 @@
+{
+    "nodeVersion": "system",
+    "baseUrl": "http://cypress.phase-example.local.test",
+    "chromeWebSecurity": false
+}

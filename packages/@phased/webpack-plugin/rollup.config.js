@@ -18,7 +18,6 @@ const externals = {
     "path",
     "fs",
     "child_process",
-    "@phased/routing",
     "os",
     "assert",
     "events",
@@ -70,7 +69,8 @@ export default [
       outputs.esm(pkg)
     ],
     external: [
-      ...Object.keys(pkg.peerDependencies),
+      '@phased/routing',
+      'webpack',
       ...externals.node
     ],
     plugins: [
@@ -78,7 +78,7 @@ export default [
       plugins.resolve,
       plugins.sucrase,
       plugins.commonjs,
-      // plugins.terser
+      plugins.terser
     ]
   }
 ];
