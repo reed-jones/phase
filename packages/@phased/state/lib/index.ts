@@ -11,11 +11,6 @@ declare var context: {
 };
 
 declare global {
-  interface Window {
-  }
-}
-
-declare global {
     var __BROWSER__: boolean
     var __PHASE_STATE__: VuexStore
     var axios: AxiosInstance

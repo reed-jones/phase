@@ -9,6 +9,7 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 - add `files: []` watch option for webpack plugin
 - lazily evaluated actions
 - lazily evaluated mutations
+-
 
 ## [Unreleased](https://github.com/reed-jones/phase/compare/v0.4.0...master)
 
@@ -16,7 +17,14 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 - added `Phased/Routing/Commands/GeneratePhaseRouter::getJsonOutput($withConfig)` helper to encode & retrieve output
 - added `phase.assets.ssr.server` & `phase.assets.ssr.client` configuration for js bundles.
 - added `Vuex::get`
-- front end state log levels
+- Front end log levels. passing `{ logLevel: 'debug' }` as the options to the hydrate method, for example will enable the most verbose logging.
+- 'example' app with cypress/pest test suite, tailwindcss, laravel auth
+- Added gzipped filesize output to buildscript
+- removed default stylesheet `sass/app.scss` from config
+- helper functions added to example app such as 'resolve route by phase name' (phaseRoute `example/app/helpers.php`)
+- added `vue-ssr-failed` attribute to blade file when an error occurs during rendering
+- [experimental] added `Phased/State/Factories/VuexFactory::get(...)` method to access previously saved state.
+- Migrated test suite to use PestPHP & Cypress (for browser based tests)
 
 ## Changed
 - Migrated test suite to use `pest`
@@ -26,9 +34,10 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 - `Phased/Routing/Factories/PhaseFactory::addRoute()` signature changed from variadic `(...$args)` to `($uri, $action)`
 
 ## Deprecated
+- Automatic axios redirects. This may be revived in a future release.
 
 ## Removed
-- auto axios redirects (301/302) have been removed since they did not work as expected. Plan to be re-implemented
+- auto axios redirects (301/302) have been removed. For direct entry redirects (301/302) the standard laravel redirects can be used. For SPA redirects, these must by manually set using vue-router.
 
 ## Fixed
 

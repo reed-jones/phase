@@ -3,7 +3,7 @@
  * A whole bunch of silly hacks
  */
 
-if (!function_exists('accessProtected')) {
+if (!function_exists('access_protected')) {
     // access protected property
     function access_protected($obj, $prop) {
         $reflection = new ReflectionClass($obj);
