@@ -1,6 +1,6 @@
 {
   "name": "@phased/phase",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Auto SPA configuration focused on Laravel apps",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "bugs": "https://github.com/reed-jones/phase/issues",
@@ -22,8 +22,8 @@
     "types": "tsc",
     "check": "tsc --noEmit --emitDeclarationOnly false"
   },
-  "dependencies": { "vue-server-renderer": "^2.6.11" },
-  "devDependencies": {
+  "dependencies": {
+    "vue-server-renderer": "^2.6.11",
     "@phased/state": "^0.5.0",
     "@phased/types": "^0.5.0",
     "@phased/laravel-mix": "^0.5.0",
