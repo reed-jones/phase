@@ -11,7 +11,21 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 - lazily evaluated mutations
 -
 
-## [Unreleased](https://github.com/reed-jones/phase/compare/v0.4.0...master)
+## [Unreleased](https://github.com/reed-jones/phase/compare/v0.5.0...master)
+
+## Added
+
+## Changed
+
+## Deprecated
+
+## Removed
+
+## Fixed
+
+## Security
+
+## [v0.5.0](https://github.com/reed-jones/phase/compare/v0.4.0...v0.5.0) - 2020-08-03
 
 ## Added
 - added `Phased/Routing/Commands/GeneratePhaseRouter::getJsonOutput($withConfig)` helper to encode & retrieve output
