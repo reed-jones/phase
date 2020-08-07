@@ -20,6 +20,14 @@ class CreateTestbenchUsersTable extends Migration
             $table->string('email')->nullable();
             $table->timestamps();
         });
+        Schema::create('posts', function ($table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->unsignedBigInteger('user_id');
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+        });
 
         $now = Carbon::now();
 
@@ -33,6 +41,14 @@ class CreateTestbenchUsersTable extends Migration
         DB::table('users')->insert([
             'email' => 'test@example.com',
             'name' => 'Test User',
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+
+
+        DB::table('posts')->insert([
+            'title' => 'First Great Post',
+            'user_id' => 1,
             'created_at' => $now,
             'updated_at' => $now,
         ]);

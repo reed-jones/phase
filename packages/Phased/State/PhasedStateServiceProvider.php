@@ -26,8 +26,8 @@ class PhasedStateServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        App::singleton(VuexFactory::class, function () {
-            return new VuexFactory;
+        App::singleton(VuexFactory::class, function ($app) {
+            return new VuexFactory($app);
         });
     }
 

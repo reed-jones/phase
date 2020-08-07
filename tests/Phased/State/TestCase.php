@@ -60,14 +60,6 @@ class TestCase extends OrchestraTestCase
         ];
     }
 
-    // protected function assertVuex($data)
-    // {
-    //     $this->assertSame(
-    //         Vuex::toArray(),
-    //         $data
-    //     );
-    // }
-
     public static function assertVuex($data, string $message = ''): void
     {
         static::assertThat(

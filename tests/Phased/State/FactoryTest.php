@@ -16,7 +16,7 @@ it('outputs stored data as an array');
 
 it('outputs stored data as a json string');
 
-if('outputs stored data as a (json) http response');
+it('outputs stored data as a (json) http response');
 
 it('converts itself into a json serializable array');
 

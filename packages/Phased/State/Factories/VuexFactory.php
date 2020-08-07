@@ -5,79 +5,57 @@ declare(strict_types=1);
 namespace Phased\State\Factories;
 
 use Closure;
+use Illuminate\Container\Container;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use JsonSerializable;
 use Phased\State\Exceptions\VuexInvalidKeyException;
 use Phased\State\Exceptions\VuexInvalidModuleException;
 use Phased\State\Exceptions\VuexInvalidStateException;
 use Phased\State\Facades\Vuex;
+use Phased\State\Traits\VuexFactoryDependencyInjection;
 
 class VuexFactory implements Arrayable, Jsonable, JsonSerializable
 {
-    /**
-     * Base (non-namespaced) vuex state.
-     *
-     * @var array
-     */
-    protected $_state = [];
+    use VuexFactoryDependencyInjection;
+
+    protected $container;
+
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+    }
 
     /**
-     * Base (non-namespaced) lazily evaluated vuex state.
-     *
-     * @var array
+     * @var array Base (non-namespaced) vuex state.
+     * @var array Base (non-namespaced) lazily evaluated vuex state.
      */
-    protected $_lazyState = [];
+    protected $_state = [],
+        $_lazyState = [];
 
     /**
-     * Vuex modules.
-     *
-     * @var array
+     * @var array Vuex modules.
+     * @var array Lazily evaluated Vuex modules.
      */
-    protected $_modules = [];
+    protected $_modules = [],
+        $_lazyModules = [];
 
     /**
-     * Lazily evaluated Vuex modules.
-     *
-     * @var array
+     * @var array Mutations to be committed.
+     * @var array Lazy Evaluated mutations to be committed.
      */
-    protected $_lazyModules = [];
+    protected $_mutations = [],
+        $_lazyMutations = [];
 
     /**
-     * Mutations to be committed.
-     *
-     * @var array
+     * @var array Actions to be dispatched.
+     * @var array Lazily Evaluated actions to be dispatched.
      */
-    protected $_mutations = [];
+    protected $_actions = [],
+        $_lazyActions = [];
 
-    /**
-     * Lazy Evaluated mutations to be committed.
-     *
-     * @var array
-     */
-    protected $_lazyMutations = [];
-
-    /**
-     * Actions to be dispatched.
-     *
-     * @var array
-     */
-    protected $_actions = [];
-
-    /**
-     * Lazily Evaluated actions to be dispatched.
-     *
-     * @var array
-     */
-    protected $_lazyActions = [];
-
-    /**
-     * Registered Classes for vuex ModuleLoaders.
-     *
-     * @var array
-     */
+    /** @var array Registered Classes for vuex ModuleLoaders. */
     protected $registeredMappings = [];
 
     /**
@@ -91,7 +69,7 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
                 ->mapWithKeys(function ($location) {
                     $loader = new $location;
 
-                    App::singleton($location, function () use ($loader) {
+                    $this->container->singleton($location, function () use ($loader) {
                         return $loader;
                     });
 
@@ -108,28 +86,41 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
 
     /**
      * ModuleLoader Load Function.
+     * @param string $namespace
+     * @param string|array $keys
+     * @param mixed $args
+     * @return $this
      */
-    public function load($namespace, $keys, ...$args)
+    public function load(string $namespace, $keys, ...$args)
     {
-        $this->loadModule($namespace, false, $keys, $args);
+        $this->loadModule($namespace, $keys, $args, false);
 
         return $this;
     }
 
     /**
      * ModuleLoader LazyLoad Function.
+     * @param string $namespace
+     * @param string|array $keys
+     * @param mixed $args
+     * @return $this
      */
     public function lazyLoad($namespace, $keys, ...$args)
     {
-        $this->loadModule($namespace, true, $keys, $args);
+        $this->loadModule($namespace, $keys, $args, true);
 
         return $this;
     }
 
     /**
      * Internal Module Loader Function.
+     * @param string $namespace
+     * @param string|array $keys
+     * @param array $args
+     * @param bool $lazy
+     * @return $this
      */
-    protected function loadModule($namespace, $lazy, $keys, $args)
+    protected function loadModule(string $namespace, $keys, array $args, bool $lazy)
     {
         if (is_string($keys)) {
             $keys = [$keys => $args];
@@ -143,7 +134,8 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
             throw new VuexInvalidKeyException('Invalid keys were passed to Vuex::load.');
         }
 
-        $moduleLoader = App::make($this->registeredMappings[$namespace]['class']);
+        // $moduleLoader = $this->registeredMappings[$namespace]['class'];
+        $moduleLoader = $this->container->make($this->registeredMappings[$namespace]['class']);
 
         collect($keys)
             ->mapWithKeys(function ($value, $key) {
@@ -158,19 +150,21 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
                     $args = [$args];
                 }
 
+                $params = $this->resolveClassMethodDependencies( $args, $moduleLoader, $key );
+
                 if ($lazy) {
                     Vuex::module(
                         $namespace,
                         [
-                            $key => function () use ($moduleLoader, $key, $args) {
-                                return $moduleLoader->{$key}(...$args);
+                            $key => function () use ($moduleLoader, $key, $params) {
+                                return $moduleLoader->{$key}(...array_values($params));
                             },
                        ]
                     );
                 } else {
                     Vuex::module(
                         $namespace,
-                        [$key => $moduleLoader->{$key}(...$args)]
+                        [$key => $moduleLoader->{$key}(...array_values($params))]
                     );
                 }
             });
@@ -178,11 +172,8 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
 
     /**
      * Creates a new 'Vuex' class for easy $store access.
-     *
      * @deprecated please use state(), module(), or toVuex() instead
-     *
      * @param Closure $callable
-     *
      * @return void
      */
     public function store(Closure $closure)
@@ -199,9 +190,7 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
 
     /**
      * Sets or adds to the base vuex state.
-     *
      * @param \Illuminate\Support\Collection|array $state
-     *
      * @return void
      */
     public function state($state)
@@ -219,10 +208,8 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
 
     /**
      * Creates or Updates a new vuex module.
-     *
      * @param string $namespace
      * @param \Illuminate\Support\Collection|array $state
-     *
      * @return void
      */
     public function module(string $namespace, $state)
@@ -244,7 +231,6 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
 
     /**
      * Returns the currently saved data as an array.
-     *
      * @return array
      */
     public function toArray()

@@ -14,6 +14,7 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 ## [Unreleased](https://github.com/reed-jones/phase/compare/v0.5.0...master)
 
 ## Added
+- Added Dependency Injection for `Vuex::load` & `Vuex::lazyLoad`
 
 ## Changed
 
