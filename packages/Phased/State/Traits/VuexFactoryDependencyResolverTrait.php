@@ -2,37 +2,25 @@
 
 namespace Phased\State\Traits;
 
-use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Routing\RouteDependencyResolverTrait;
 use Phased\State\Exceptions\VuexMissingRequiredParameter;
 use ReflectionFunctionAbstract;
-use ReflectionMethod;
 use ReflectionParameter;
 
 /**
  * Modified from Laravel's Route Resolver
- *
  * https://github.com/laravel/framework/blob/6.x/src/Illuminate/Routing/RouteDependencyResolverTrait.php
+ *
+ * TODO: Will need to update 'transformDependency' as outlined here. this will require a bump in the minimum Laravel version
+ * but will help prepare for php 8.0 https://github.com/laravel/framework/pull/33039
  */
-trait VuexFactoryDependencyInjection
+trait VuexFactoryDependencyResolverTrait
 {
     /**
-     * Resolve the object method's type-hinted dependencies.
-     *
-     * @param  array  $parameters
-     * @param  object  $instance
-     * @param  string  $method
-     * @return array
+     * Extends Laravel's Route Model binding/dependency injection
      */
-    protected function resolveClassMethodDependencies(array $parameters, $instance, $method)
-    {
-        if (! method_exists($instance, $method)) {
-            return $parameters;
-        }
-
-        return $this->resolveMethodDependencies(
-            $parameters, new ReflectionMethod($instance, $method)
-        );
-    }
+    use RouteDependencyResolverTrait;
 
     /**
      * Resolve the given method's type-hinted dependencies.
@@ -85,9 +73,11 @@ trait VuexFactoryDependencyInjection
                 throw new VuexMissingRequiredParameter("Missing required parameter {$parameter->getName()}");
             }
 
-            if(method_exists($class->name, 'getRouteKeyName')) {
-                $maybeModel = new $class->name;
-                return $maybeModel->where($maybeModel->getRouteKeyName(), $parameters[$parameter->getName()])->firstOrFail();
+            if(class_exists($class->name)) {
+                $model = new $class->name;
+                if ($model instanceof Model) {
+                    return $model->resolveRouteBinding($parameters[$parameter->getName()]);
+                }
             }
         }
 
@@ -95,21 +85,10 @@ trait VuexFactoryDependencyInjection
     }
 
     /**
-     * Determine if an object of the given class is in a list of parameters.
-     *
-     * @param  string  $class
-     * @param  array  $parameters
-     * @return bool
-     */
-    protected function alreadyInParameters($class, array $parameters)
-    {
-        return ! is_null(Arr::first($parameters, function ($value) use ($class) {
-            return $value instanceof $class;
-        }));
-    }
-
-    /**
      * Splice the given value into the parameter list.
+     *
+     * Overridden from RouteDependencyResolverTrait to allow 'count' arguemnt
+     * to allow for variadic arguments
      *
      * @param  array  $parameters
      * @param  string  $offset

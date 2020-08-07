@@ -14,11 +14,11 @@ use Phased\State\Exceptions\VuexInvalidKeyException;
 use Phased\State\Exceptions\VuexInvalidModuleException;
 use Phased\State\Exceptions\VuexInvalidStateException;
 use Phased\State\Facades\Vuex;
-use Phased\State\Traits\VuexFactoryDependencyInjection;
+use Phased\State\Traits\VuexFactoryDependencyResolverTrait;
 
 class VuexFactory implements Arrayable, Jsonable, JsonSerializable
 {
-    use VuexFactoryDependencyInjection;
+    use VuexFactoryDependencyResolverTrait;
 
     protected $container;
 

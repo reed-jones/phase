@@ -157,17 +157,20 @@ it('allows full model instead of dependency injection', function () {
         ],
     ]);
 
-    $this->assertVuex(
-        ['modules' => [
-            'example' => ['state' => [ 'blog' => [
-                    'user' => [ 'id' => 2, 'name' => 'Test User' ],
-                    'post' => [ 'id' => 1, 'title' => 'First Great Post', 'user_id' => '1' ],
-                    'url' => '/',
-                    'number' => 5
+    $this->assertVuex([
+        'modules' => [
+            'example' => [
+                'state' => [
+                    'blog' => [
+                        'user' => [ 'id' => 2, 'name' => 'Test User' ],
+                        'post' => [ 'id' => 1, 'title' => 'First Great Post', 'user_id' => '1' ],
+                        'url' => '/',
+                        'number' => 5
+                    ]
                 ]
-            ]],
-        ]]
-    );
+            ],
+        ]
+    ]);
 });
 
 
