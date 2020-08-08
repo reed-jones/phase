@@ -19,7 +19,15 @@ beforeEach(function() {
       app: {
         modules: {
           user: {
-            state: { isAdmin: true }
+            modules: {
+              test: {
+                modules: {
+                  deep: {
+                    state: { isAdmin: true }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -29,6 +37,7 @@ beforeEach(function() {
   store = new Vuex.Store(
     hydrate(
       {
+        state: { number: 0 },
         modules: {
           anonymous: {
             state: {
@@ -39,7 +48,20 @@ beforeEach(function() {
           app: {
             namespaced: true,
             modules: {
-              user: { namespaced: true }
+              user: {
+                namespaced: true,
+                modules: {
+                  test: {
+                    namespaced: true,
+                    modules: {
+                      deep: {
+                        namespaced: true,
+                        state: { }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -74,7 +96,7 @@ describe("axios - testing the interceptor", () => {
     expect(store.state.anonymous.whoKnows).toEqual(true);
   });
 
-  it("it updates the base state", () => {
+  it("it updates the base state set via the server", () => {
     // starts out as expected
     expect(store.state.appName).toEqual("Testing");
 
@@ -86,19 +108,45 @@ describe("axios - testing the interceptor", () => {
     expect(store.state.appName).toEqual("New Name");
   });
 
-  it("it updates the nested modules", () => {
+  it("it updates the base state set via the client", () => {
     // starts out as expected
-    expect(store.state.app.user.isAdmin).toEqual(true);
+    expect(store.state.number).toEqual(0);
+
+    // fulfilled, or rejected (for errors) here
+    axios.interceptors.response.handlers[0].fulfilled({
+      data: { $vuex: { state: { number: 5 } } }
+    });
+
+    expect(store.state.number).toEqual(5);
+  });
+
+  it("it updates the deeply nested modules", () => {
+    // starts out as expected
+    expect(store.state.app.user.test.deep.isAdmin).toEqual(true);
 
     // fulfilled, or rejected (for errors) here
     axios.interceptors.response.handlers[0].fulfilled({
       data: {
         $vuex: {
-          modules: { app: { modules: { user: { state: { isAdmin: false } } } } }
+          modules: {
+            app: {
+              modules: {
+                user: {
+                  modules: {
+                    test: {
+                      modules: {
+                        deep: { state: { isAdmin: false } }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     });
 
-    expect(store.state.app.user.isAdmin).toEqual(false);
+    expect(store.state.app.user.test.deep.isAdmin).toEqual(false);
   });
 });
