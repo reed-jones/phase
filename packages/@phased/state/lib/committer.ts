@@ -78,7 +78,7 @@ const autoCommitData = (
       });
 
       if (Object.keys(data.modules || {}).length) {
-        commitModules(data.modules, name);
+        commitModules(data.modules, fullName);
       }
     });
   };
