@@ -5,6 +5,8 @@
     "packages/@phased/*"
   ],
   "devDependencies": {
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
     "@rollup/plugin-alias": "^3.0.0",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
@@ -15,6 +17,7 @@
     "esm": "^3.2.25",
     "execa": "^4.0.0",
     "gzip-size": "^5.1.1",
+    "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lerna": "^3.20.2",
     "minimist": "^1.2.0",
@@ -32,5 +35,10 @@
     "bump": "node -r esm build/version.js",
     "build": "node -r esm build/build-js.js",
     "pretest:js": "yarn build"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
