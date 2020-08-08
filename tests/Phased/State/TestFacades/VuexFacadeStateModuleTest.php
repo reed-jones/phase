@@ -57,7 +57,7 @@ class VuexFacadeStateModuleTest extends TestCase
 
     public function test_vuex_nested_modules()
     {
-        $namespace = 'app/tests';
+        $namespace = 'app/tests/neat/great';
         $data = ['works' => 'true'];
 
         Vuex::module($namespace, $data);
@@ -68,7 +68,13 @@ class VuexFacadeStateModuleTest extends TestCase
                 'app' => [
                     'modules' => [
                         'tests' => [
-                            'state' => $data,
+                            'modules' => [
+                                'neat' => [
+                                    'modules' => [
+                                        'great' => [ 'state' => $data ]
+                                    ]
+                                ]
+                            ]
                         ],
                     ],
                 ],

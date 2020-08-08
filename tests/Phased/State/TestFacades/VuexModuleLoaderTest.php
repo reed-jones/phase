@@ -143,7 +143,7 @@ it('uses dependency injection (missing param exception)', function () {
     $this->expectException(VuexMissingRequiredParameter::class);
 
     Vuex::load('example', [
-        'blog' => ['user' => 2],
+        'blog' => [ 'user' => 2 ],
     ]);
 });
 
