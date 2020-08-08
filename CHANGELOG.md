@@ -23,6 +23,7 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 ## Removed
 
 ## Fixed
+- Fixed deeply nested modules weren't properly merged in axios interceptors (#10)
 
 ## Security
 
@@ -53,11 +54,6 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 
 ## Removed
 - auto axios redirects (301/302) have been removed. For direct entry redirects (301/302) the standard laravel redirects can be used. For SPA redirects, these must by manually set using vue-router.
-
-## Fixed
-
-## Security
-
 
 ## [v0.4.0](https://github.com/reed-jones/phase/compare/v0.3.0...v0.4.0) - 2020-03-15
 ### Added
