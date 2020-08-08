@@ -9,7 +9,7 @@ class CounterController extends Controller
 {
     public function increment($number) {
         // Set the vuex state using the 'VuexLoaders'
-        Vuex::load('user', [  'counter' => $number + 1 ]);
+        Vuex::load('user', [ 'counter' => $number + 1 ]);
 
         // ->vuex() is just an alias of ->phase()
         return response()->vuex();
