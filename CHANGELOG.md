@@ -11,10 +11,9 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 - lazily evaluated mutations
 -
 
-## [Unreleased](https://github.com/reed-jones/phase/compare/v0.5.0...master)
+## [Unreleased](https://github.com/reed-jones/phase/compare/v0.6.0...master)
 
 ## Added
-- Added Dependency Injection for `Vuex::load` & `Vuex::lazyLoad`
 
 ## Changed
 
@@ -23,9 +22,16 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 ## Removed
 
 ## Fixed
-- Fixed deeply nested modules weren't properly merged in axios interceptors (#10)
 
 ## Security
+
+## [v0.6.0](https://github.com/reed-jones/phase/compare/v0.5.0...v0.6.0) - 2020-08-08
+
+## Added
+- Added Dependency Injection for `Vuex::load` & `Vuex::lazyLoad`
+
+## Fixed
+- Fixed deeply nested modules weren't properly merged in axios interceptors (#10)
 
 ## [v0.5.0](https://github.com/reed-jones/phase/compare/v0.4.0...v0.5.0) - 2020-08-03
 

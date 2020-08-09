@@ -1,6 +1,6 @@
 {
   "name": "@phased/phase",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Auto SPA configuration focused on Laravel apps",
   "author": "Reed Jones <reedjones@reedjones.com>",
   "bugs": "https://github.com/reed-jones/phase/issues",
@@ -24,10 +24,10 @@
   },
   "dependencies": {
     "vue-server-renderer": "^2.6.11",
-    "@phased/state": "^0.5.0",
-    "@phased/types": "^0.5.0",
-    "@phased/laravel-mix": "^0.5.0",
-    "@phased/routing": "^0.5.0",
-    "@phased/webpack-plugin": "^0.5.0"
+    "@phased/state": "^0.6.0",
+    "@phased/types": "^0.6.0",
+    "@phased/laravel-mix": "^0.6.0",
+    "@phased/routing": "^0.6.0",
+    "@phased/webpack-plugin": "^0.6.0"
   }
 }

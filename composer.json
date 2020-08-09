@@ -1,5 +1,5 @@
 {
-    "name": "phased/phase",
+    "name": "phased/core",
     "description": "",
     "require": {
         "php": "^7.2",

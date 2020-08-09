@@ -22,8 +22,8 @@
     "require": {
         "php": "^7.2",
         "spatie/laravel-server-side-rendering": "^1.4.1",
-        "phased/routing": "^0.5",
-        "phased/state": "^0.5"
+        "phased/routing": "self.version",
+        "phased/state": "self.version"
     },
     "config": {
         "sort-packages": true
