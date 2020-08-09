@@ -77,6 +77,7 @@ it('complex modules, with and without arguments', function () {
 
     Vuex::load('example', [
         'sum' => [1, 2, 3, 4, 5, 10],
+        'number' => 15,
         'test',
         'auth'
     ]);
@@ -85,6 +86,7 @@ it('complex modules, with and without arguments', function () {
         ['modules' => [
             'example' => ['state' => [
                 'sum' => 25,
+                'number' => 15,
                 'test' => 'this is good',
                 'auth' => User::first()->toArray()
             ]],
@@ -230,6 +232,10 @@ class ExampleModuleLoader extends VuexLoader
         }
 
         return $total;
+    }
+
+    public function number($num) {
+        return $num;
     }
 }
 

@@ -46,9 +46,10 @@ trait VuexFactoryDependencyResolverTrait
                 $this->spliceIntoParameters($resolvedParameters, $key, $values, count($values) - 1);
             } else if (isset($parameters[$parameter->getName()])) {
                 $this->spliceIntoParameters($resolvedParameters, $key, [$parameters[$parameter->getName()]]);
+            } else if (isset($parameters[$parameter->getPosition()]))  {
+                $this->spliceIntoParameters($resolvedParameters, $key, [$parameters[$parameter->getPosition()]]);
             }
         }
-
         return $resolvedParameters;
     }
 
