@@ -1,6 +1,6 @@
 {
     "name": "phased/routing",
-    "description": "Transparent Vue <-> Laravel Integration",
+    "description": "Generates Vue Router configuration from your Laravel routes",
     "type": "library",
     "license": "ISC",
     "authors": [

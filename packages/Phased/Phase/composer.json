@@ -1,6 +1,6 @@
 {
     "name": "phased/phase",
-    "description": "Phase meta package",
+    "description": "Automatic Vue<->Laravel SPA adapter",
     "type": "library",
     "license": "ISC",
     "authors": [
