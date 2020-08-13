@@ -20,59 +20,63 @@ const parseChangelog = line => {
 }
 
 async function generateChangelog() {
-    const releaseData = await fetch('https://api.github.com/repos/reed-jones/phase/releases')
-    const release = await releaseData.json()
-    release.sort((a,b) => semver.compare(b.tag_name, a.tag_name))
-    const [latest, previous] = release // todo sort by version
+
+    const sections = []
+
+    const releaseData = await fetch('https://api.github.com/repos/reed-jones/phase/releases/latest')
+    const { tag_name } = await releaseData.json()
     
-    let { tag_name: latest_tag_name } = latest
-    let { tag_name: previous_tag_name } = previous
-    if (latest.draft) {
-        return;
-    }
     const tagData = await fetch('https://api.github.com/repos/reed-jones/phase/tags');
     const tags = await tagData.json()
     tags.sort((a,b) => semver.compare(b.name, a.name))
 
-  const log = execSync(`git log --pretty=format:"[%h] %s (%an <%ae>)" ${previous_tag_name}...${latest_tag_name}`)
+  const log = execSync(`git log --pretty=format:"[%h] %s (%an <%ae>)" ${tag_name}...HEAD`)
       .toString()
       .trim()
       .split('\n')
       .map(parseChangelog)
       .filter(line => line && !line.change.startsWith('wip') && (!line.scope || !line.scope.includes('release')))
       .sort((a,b) => a.type.localeCompare(b.type))
-      .map(line => `[${line.hash}]: **${line.type}${line.scope ? `(_${line.scope}_)` : ''}**: ${line.change} - (${line.author})`)
-      .join('\n') || 'NO CHANGES DETECTED';
+      .map(line => `[${line.hash}]: **${line.type}${line.scope ? `(**_${line.scope}_**)` : ''}**: ${line.change} - (${line.author})`)
+      .join('\n') || 'No notable changes tracked';
 
 
-  console.log(`Notable changes since the last stable release (${previous_tag_name}):`);
-  console.log(`\n${log}\n`)
+  sections.push(`## Notable changes since the last stable release (${tag_name}):`);
+  sections.push(`\n${log}\n`)
 
 
   const pkgs =
     Array.from(
       new Set(
-        execSync(`git diff --name-only ${previous_tag_name}...${latest_tag_name}`)
+        execSync(
+            `git diff --name-only ${tag_name}...HEAD packages ':(exclude)*/package.json' ':(exclude)*/composer.json' ':(exclude)*/__tests__/*'`
+        )
           .toString()
           .trim()
           .split('\n')
-          .filter(line => line.startsWith('packages/'))
           .map(line => ({ base: line.split('/')[1], package: line.split('/')[2] }))
           .map(pkg => {
               const file = `./packages/${pkg.base}/${pkg.package}/package.json`
+              const isForNpm = existsSync(file)
+              const version = isForNpm
+                ? require(join('..', file)).version
+                : tags[0].name.replace(/^v/, '')
 
               return {
-                ...pkg, 
-                version: existsSync(file) ? require(join('..', file)).version : tags[0].name.replace(/^v/, '')
+                ...pkg,
+                version,
+                manager: isForNpm ? 'npm' : 'composer'
             }
           })
-          .map(pkg => `${pkg.base}/${pkg.package}@${pkg.version}`.toLowerCase())
+          .map(pkg => `[${`_${pkg.manager}_`.padEnd(10, ' ')}] **${pkg.base}/${pkg.package}**@_${pkg.version}_`.toLowerCase())
           .filter(s => Boolean(s))
       )
     )
 
-    console.log('Packages updated in this release')
-    console.log(`\n${pkgs.join('\n')}\n`)
+    sections.push('## Packages updated in this release')
+    sections.push(`\n${pkgs.join('\n')}\n`)
+
+    console.log(sections.join('\n'))
 }
 
 generateChangelog()

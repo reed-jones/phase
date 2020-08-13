@@ -4,38 +4,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 As of version v1.0.0, this project as a whole will adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), however individual components may get bumped in order to maintain version sync with their peers. Until v1.0.0 is reached, minor version (0.X.0) updates may include breaking changes, however this will be avoided where possible and clearly documented if it occurs.
 
-## [Planned]
-- add `--model=Users\User --keys=all,active` options to `artisan make:loader` command for increased stub generation usability.
-- add `files: []` watch option for webpack plugin
-- lazily evaluated actions
-- lazily evaluated mutations
--
-
 ## [Unreleased](https://github.com/reed-jones/phase/compare/v0.6.0...master)
 
-## Added
+### Added
 
-## Changed
+### Changed
 
-## Deprecated
+### Deprecated
 
-## Removed
+### Removed
 
-## Fixed
+### Fixed
 
-## Security
+### Security
 
 ## [v0.6.0](https://github.com/reed-jones/phase/compare/v0.5.0...v0.6.0) - 2020-08-08
 
-## Added
+### Added
 - Added Dependency Injection for `Vuex::load` & `Vuex::lazyLoad`
 
-## Fixed
+### Fixed
 - Fixed deeply nested modules weren't properly merged in axios interceptors (#10)
 
 ## [v0.5.0](https://github.com/reed-jones/phase/compare/v0.4.0...v0.5.0) - 2020-08-03
 
-## Added
+### Added
 - added `Phased/Routing/Commands/GeneratePhaseRouter::getJsonOutput($withConfig)` helper to encode & retrieve output
 - added `phase.assets.ssr.server` & `phase.assets.ssr.client` configuration for js bundles.
 - added `Vuex::get`
@@ -48,17 +41,17 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 - [experimental] added `Phased/State/Factories/VuexFactory::get(...)` method to access previously saved state.
 - Migrated test suite to use PestPHP & Cypress (for browser based tests)
 
-## Changed
+### Changed
 - Migrated test suite to use `pest`
 - `Phased/Routing/Commands/GeneratePhaseRouter::getFormattedRoutes()` changed from protected to public
 - `Phased/Routing/Commands/GeneratePhaseRouter::outputTable()` changed from protected to public
 - `Phased/Routing/Commands/GeneratePhaseRouter::outputJson()` changed from protected to public
 - `Phased/Routing/Factories/PhaseFactory::addRoute()` signature changed from variadic `(...$args)` to `($uri, $action)`
 
-## Deprecated
+### Deprecated
 - Automatic axios redirects. This may be revived in a future release.
 
-## Removed
+### Removed
 - auto axios redirects (301/302) have been removed. For direct entry redirects (301/302) the standard laravel redirects can be used. For SPA redirects, these must by manually set using vue-router.
 
 ## [v0.4.0](https://github.com/reed-jones/phase/compare/v0.3.0...v0.4.0) - 2020-03-15
