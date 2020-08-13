@@ -21,10 +21,12 @@
     "jest": "^26.0.1",
     "lerna": "^3.20.2",
     "minimist": "^1.2.0",
+    "node-fetch": "^2.6.0",
     "prettier": "^2.0.5",
     "pretty-bytes": "^5.3.0",
     "rollup": "^2.0.0",
     "rollup-plugin-terser": "^6.1.0",
+    "semver": "^7.3.2",
     "tslib": "^2.0.0",
     "typescript": "^3.7.5"
   },
@@ -33,6 +35,7 @@
     "test:php": "vendor/bin/pest",
     "test": "yarn test:js && yarn test:php",
     "bump": "node -r esm build/version.js",
+    "notes": "node -r esm build/release-notes.js",
     "build": "node -r esm build/build-js.js",
     "pretest:js": "yarn build"
   },

@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 import { readFileSync, existsSync } from "fs";
-import prettier from "prettier";
-import minimist from "minimist";
 import chalk from "chalk";
 import path from 'path';
 import execa from 'execa'
