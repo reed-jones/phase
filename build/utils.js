@@ -32,12 +32,12 @@ export function parseChangelogLine(line) {
 export function acceptableLines(line) {
   if (!line) return false;
   if (line.change.startsWith("wip")) return false;
-  if (!line.scope || !line.scope.includes("release")) return true;
-  return false;
+  if (line.scope && line.scope.includes("release")) return false;
+  return true;
 }
 
 export function formatLine(line) {
-  return `[${line.hash}]: **${line.type}${
+  return `- [${line.hash}]: **${line.type}${
     line.scope ? `(**_${line.scope}_**)` : ""
   }**: ${line.change} - (${line.author})`;
 }
@@ -58,7 +58,7 @@ export function formatDiff(tag) {
     manager: isForNpm ? "npm" : "composer",
   }
 
-  return `[${`_${pkg.manager}_`.padEnd(10, " ")}] **${pkg.base}/${
+  return `- _[${`${pkg.manager}`.padEnd(8, " ")}]_ **${pkg.base}/${
     pkg.package
   }**@_${pkg.version}_`.toLowerCase();
   }

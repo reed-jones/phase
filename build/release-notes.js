@@ -17,7 +17,7 @@ async function generateChangelog() {
       .map(parseChangelogLine)
       .filter(acceptableLines)
       .map(formatLine)
-      .join("\n") || "No notable changes tracked";
+      .join("\n") || "No notable commits tracked";
 
   const pkgs = [
     ...new Set(
@@ -32,7 +32,7 @@ async function generateChangelog() {
         .map(formatDiff(tag))
         .filter(Boolean)
     ),
-  ];
+  ].join("\n");
 
   const date = new Date
   const formattedDate = `${date.getFullYear()}-${`${date.getMonth() + 1}`.padStart(2, '0')}-${`${date.getDate()}`.padStart(2, '0')}`;
@@ -44,7 +44,7 @@ async function generateChangelog() {
     `\n${log}`,
     `\n`,
     "## Packages updated in this release",
-    `\n${pkgs.join("\n")}\n`,
+    `\n${pkgs}\n`,
   ].join("\n");
 
   return createRelease(tag.name, body)
