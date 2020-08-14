@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 As of version v1.0.0, this project as a whole will adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), however individual components may get bumped in order to maintain version sync with their peers. Until v1.0.0 is reached, minor version (0.X.0) updates may include breaking changes, however this will be avoided where possible and clearly documented if it occurs.
 
-## [Unreleased](https://github.com/reed-jones/phase/compare/v0.6.0...master)
+## [Unreleased](https://github.com/reed-jones/phase/compare/v0.6.1...master)
 
 ### Added
 
@@ -17,6 +17,14 @@ As of version v1.0.0, this project as a whole will adhere to [Semantic Versionin
 ### Fixed
 
 ### Security
+
+## [v0.6.1](https://github.com/reed-jones/phase/compare/v0.6.0...v0.6.1) - 2020-08-13
+
+### Added
+- Added changelog/release note generator script
+
+### Fixed
+- Fixed an issue with route-model binding in ModuleLoaders failing if no typehint provided (phased/state)
 
 ## [v0.6.0](https://github.com/reed-jones/phase/compare/v0.5.0...v0.6.0) - 2020-08-08
 

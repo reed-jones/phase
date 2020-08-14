@@ -1,6 +1,11 @@
 {
     "name": "phased/core",
     "description": "",
+    "homepage": "https://phased.dev",
+    "support": {
+        "issues": "https://github.com/reed-jones/phase/issues",
+        "source": "https://github.com/reed-jones/phase"
+    },
     "require": {
         "php": "^7.2",
         "spatie/laravel-server-side-rendering": "^1.3"

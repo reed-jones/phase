@@ -3,6 +3,11 @@
     "description": "Magic Data Loading. Laravel <-> Vuex Syncing",
     "type": "library",
     "license": "ISC",
+    "homepage": "https://phased.dev",
+    "support": {
+        "issues": "https://github.com/reed-jones/phase/issues",
+        "source": "https://github.com/reed-jones/phase"
+    },
     "authors": [
         {
             "name": "Reed Jones",
