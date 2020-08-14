@@ -14,6 +14,7 @@
     "@sucrase/jest-plugin": "^2.0.0",
     "brotli-size": "^4.0.0",
     "chalk": "^4.0.0",
+    "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "execa": "^4.0.0",
     "gzip-size": "^5.1.1",
@@ -35,7 +36,7 @@
     "test:php": "vendor/bin/pest",
     "test": "yarn test:js && yarn test:php",
     "bump": "node -r esm build/version.js",
-    "notes": "node -r esm build/release-notes.js",
+    "notes": "node -r esm -r dotenv/config build/release-notes.js",
     "build": "node -r esm build/build-js.js",
     "pretest:js": "yarn build"
   },
