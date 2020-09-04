@@ -22,7 +22,7 @@ export async function createRelease(version, body) {
         draft: false,
         prerelease: false,
         body
-      }
+    }
 
 	const response = await fetch('https://api.github.com/repos/reed-jones/phase/releases', {
 		method: 'post',

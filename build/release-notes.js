@@ -48,7 +48,6 @@ async function generateChangelog() {
   ].join("\n");
 
   return createRelease(tag.name, body)
-  // return body
 }
 
 generateChangelog()
