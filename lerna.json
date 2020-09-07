@@ -1,8 +1,0 @@
-{
-  "packages": [
-    "packages/@phased/*"
-  ],
-  "npmClient": "yarn",
-  "useWorkspaces": true,
-  "version": "0.1.0"
-}

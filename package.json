@@ -20,7 +20,6 @@
     "gzip-size": "^5.1.1",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
-    "lerna": "^3.20.2",
     "minimist": "^1.2.0",
     "node-fetch": "^2.6.0",
     "prettier": "^2.0.5",
@@ -38,11 +37,15 @@
     "bump": "node -r esm build/version.js",
     "notes": "node -r esm -r dotenv/config build/release-notes.js",
     "build": "node -r esm build/build-js.js",
+    "watch": "node -r esm build/watch-js.js",
     "pretest:js": "yarn build"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "dependencies": {
+    "ora": "^5.0.0"
   }
 }
