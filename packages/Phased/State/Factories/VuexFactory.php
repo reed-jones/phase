@@ -409,7 +409,7 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
      */
     public function verifyState($state)
     {
-        if (method_exists($state, 'toArray')) {
+        if (is_object($state) && method_exists($state, 'toArray')) {
             $state = $state->toArray();
         } elseif (is_array($state)) {
             $state = collect($state)->toArray();
@@ -418,7 +418,7 @@ class VuexFactory implements Arrayable, Jsonable, JsonSerializable
         }
 
         foreach ($state as $key => $value) {
-            if (method_exists($value, 'toArray')) {
+            if (is_object($value) && method_exists($value, 'toArray')) {
                 $state[$key] = $value->toArray();
             }
         }
